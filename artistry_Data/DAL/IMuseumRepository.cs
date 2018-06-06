@@ -9,6 +9,7 @@ namespace artistry_Data.DAL
     public interface IMuseumRepository:IDisposable
     {
         List<Museums> GetMuseums();
+        List<Museums> GetMuseumsByType(int typeId);
         List<Museums> Search(string search);
         Museums GetMuseum(int museumId);
         Museums GetMuseumByAccId(int Id);

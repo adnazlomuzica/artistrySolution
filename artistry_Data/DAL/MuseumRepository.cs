@@ -21,6 +21,11 @@ namespace artistry_Data.DAL
             return context.Museums.Include(x => x.User).Include(x=>x.MuseumType).OrderBy(x=>x.Name.Trim()).ToList();
         }
 
+        public List<Museums> GetMuseumsByType(int typeId)
+        {
+            return context.Museums.Include(x => x.User).Include(x => x.MuseumType).Where(x=>x.MuseumTypeId==typeId).OrderBy(x => x.Name.Trim()).ToList();
+        }
+
         public Museums GetMuseum(int museumId)
         {
             return context.Museums.Include(x=>x.User).Include(x => x.MuseumType).Where(x => x.Id == museumId).SingleOrDefault();

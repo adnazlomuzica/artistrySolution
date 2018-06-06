@@ -23,7 +23,7 @@ namespace artistry_Data.DAL
             List<Messages> messages = new List<Messages>();
             foreach (var x in model)
             {
-                if (!messages.Any(y => (y.SenderId == x.SenderId || y.SenderId==x.ReceiverId) && (y.ReceiverId==x.SenderId || y.ReceiverId==x.ReceiverId)))
+                if (!messages.Any(y => (y.SenderId == x.SenderId || y.SenderId==x.ReceiverId) && (y.ReceiverId==x.SenderId || y.ReceiverId==x.ReceiverId)) || messages.Count()==0)
                     messages.Add(x);
             }
 

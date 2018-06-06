@@ -8,6 +8,7 @@ namespace artistry_Data.DAL
 {
     public interface IArtworkRepository:IDisposable
     {
+        List<Artworks> GetArtworksByMuseum(int id);
         void InsertArtwork(Artworks artwork);
         void Save();
     }

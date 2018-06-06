@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace artistry_Data.DAL
 {
@@ -15,6 +16,10 @@ namespace artistry_Data.DAL
             this.context = context;
         }
 
+        public List<Artworks> GetArtworksByMuseum(int id)
+        {
+            return context.Artworks.Include(x => x.Artist).Include(x => x.ArtworkType).Include(x => x.Country).Include(x => x.Material).Include(x => x.Museum).Include(x => x.Style).Where(x => x.MuseumId == id).ToList();
+        }
         public void InsertArtwork(Artworks artwork)
         {
             context.Artworks.Add(artwork);

@@ -24,6 +24,8 @@ namespace artistry_Web.Areas.Moderator.Controllers
         private readonly IMaterialRepository materialRepository;
         private readonly IArtistRepository artistRepository;
         private readonly IMuseumRepository museumRepository;
+        private readonly ILikesRepository likesRepository;
+        private readonly IImageRepository imageRepository;
 
         public ArtworkController(Context context)
         {
@@ -34,10 +36,35 @@ namespace artistry_Web.Areas.Moderator.Controllers
             this.materialRepository = new MaterialRepository(context);
             this.artistRepository = new ArtistRepository(context);
             this.museumRepository = new MuseumRepository(context);
+            this.likesRepository = new LikesRepository(context);
+            this.imageRepository = new ImageRepository(context);
         }
+
+        [HttpGet("Index")]
         public IActionResult Index()
         {
-            return View();
+            int id = Autentification.GetLoggedUser(HttpContext).Id;
+            Museums m = museumRepository.GetMuseumByAccId(id);
+
+            List<Artworks> model = artworkRepository.GetArtworksByMuseum(m.Id);
+
+            List<ArtworkInfoVM> list = new List<ArtworkInfoVM>();
+
+            foreach(Artworks x in model)
+            {
+                ArtworkInfoVM vm = new ArtworkInfoVM();
+                vm.Id = x.Id;
+                vm.Artist = x.Artist.Name;
+                vm.ArtistId = x.ArtistId;
+                vm.Likes = likesRepository.GetLikes(x.Id);
+                vm.Name = x.Name;
+                vm.Image = imageRepository.GetArtworkImage(x.Id);
+                vm.ImageId = vm.Image.Id;
+
+                list.Add(vm);
+            }
+
+            return View("Index", list);
         }
 
         [HttpGet("Add")]

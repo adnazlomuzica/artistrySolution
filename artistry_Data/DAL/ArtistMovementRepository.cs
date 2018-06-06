@@ -36,6 +36,11 @@ namespace artistry_Data.DAL
             context.Entry(artistMovements).State = EntityState.Modified;
         }
 
+        public void DeleteArtistMovement(ArtistMovements artistMovements)
+        {
+            context.ArtistMovements.Remove(artistMovements);
+        }
+
         public void Save()
         {
             context.SaveChanges();

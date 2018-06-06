@@ -12,6 +12,7 @@ namespace artistry_Data.DAL
         IEnumerable<ArtistMovements> GetArtistMovementsByArtist(int id);
         void InsertArtistMovement(ArtistMovements artistMovements);
         void UpdateArtistMovement(ArtistMovements artistMovements);
+        void DeleteArtistMovement(ArtistMovements artistMovements);
         void Save();
     }
 }
