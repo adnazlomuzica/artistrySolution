@@ -34,6 +34,7 @@ namespace artistry_Data.Context
         public DbSet<AppLogs> AppLogs { get; set; }
         public DbSet<Artists> Artists { get; set; }
         public DbSet<ArtistMovements> ArtistMovements { get; set; }
+        public DbSet<Artworks> Artworks { get; set; }
         public DbSet<ArtworkTypes> ArtworkTypes { get; set; }
         public DbSet<Countries> Countries { get; set; }
         public DbSet<Currencies> Currencies { get; set; }
