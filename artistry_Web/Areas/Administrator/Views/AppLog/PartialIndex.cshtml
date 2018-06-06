@@ -1,0 +1,36 @@
+﻿@model IEnumerable<artistry_Data.Models.AppLogs>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@if (Model.Count() != 0)
+{
+    @foreach (var item in Model)
+    {
+        if (item.Level == "Error")
+        {
+        <a asp-controller="AppLog" asp-action="Index" class="btn border-danger text-danger btn-flat btn-rounded btn-icon btn-sm" style="float:left;"><i class="icon-cross2"></i></a>
+
+        <span class="media-body" style="overflow:hidden; margin-left:20px;text-align:start;vertical-align:middle;">
+            @item.Exception.ToString()
+
+            @if (item.Logged.Date == DateTime.Now.Date)
+            {
+                <span class="media-annotation">@item.Logged.ToShortTimeString()</span>
+            }
+            else
+            {
+                <span class="media-annotation">@item.Logged.ToString("dd/MM/yyyy")</span>
+            }
+        </span>
+
+        <div class="list-group-divider"></div>
+            }
+        }
+    }
+else
+{
+    <div class="media-body" style="text-align:center;">
+        There is no new errors.
+    </div>
+}
+
+

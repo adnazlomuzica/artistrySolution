@@ -1,0 +1,22 @@
+﻿@model artistry_Web.Areas.Administrator.ViewModels.ImageVM
+
+<link href="~/css/fancybox-style.css" rel="stylesheet" type="text/css" />
+@foreach (var item in Model.Images)
+{
+    <a rel="group1" href="@Url.Action("RenderImage", new { id=item.Id})"><img src="@Url.Action("RenderThumb", new { id=item.Id})" class="image-thumb" alt="" /></a>
+}
+
+
+<script>
+    $(document).ready(function () {
+
+        /* This is basic - uses default settings */
+
+        $("a[rel=group1]").fancybox({
+            'type': 'image',
+            'transitionIn': 'none',
+            'transitionOut': 'none'
+        });
+
+    });
+</script>

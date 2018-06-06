@@ -1,0 +1,93 @@
+﻿@model artistry_Web.ViewModels.LoginVM
+
+@{
+    Layout = null;
+    string error_msg = (string)TempData["Error"];
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Artistry</title>
+    <link rel="icon" href="~/icon-a.png">
+
+    <!-- Global stylesheets -->
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css" runat="server">
+        <link href="~/assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css" runat="server">
+        <link href="~/assets/css/bootstrap.css" rel="stylesheet" type="text/css" runat="server">
+        <link href="~/assets/css/core.css" rel="stylesheet" type="text/css" runat="server">
+        <link href="~/assets/css/components.css" rel="stylesheet" type="text/css" runat="server">
+        <link href="~/assets/css/colors.css" rel="stylesheet" type="text/css" runat="server">
+        <link href="~/css/style.css" rel="stylesheet" type="text/css" runat="server">
+        <link href="https://fonts.googleapis.com/css?family=Dosis|Maven+Pro|Nanum+Gothic|Poiret+One|Raleway|Titillium+Web" rel="stylesheet" runat="server">
+    <!-- /global stylesheets -->
+    <!-- Core JS files -->
+    <script type="text/javascript" src="~/assets/js/plugins/loaders/pace.min.js" runat="server"></script>
+    <script type="text/javascript" src="~/assets/js/core/libraries/jquery.min.js" runat="server"></script>
+    <script type="text/javascript" src="~/assets/js/core/libraries/bootstrap.min.js" runat="server"></script>
+    <script type="text/javascript" src="~/assets/js/plugins/loaders/blockui.min.js" runat="server"></script>
+    <!-- /core JS files -->
+    <!-- Theme JS files -->
+    <script type="text/javascript" src="~/assets/js/plugins/visualization/d3/d3.min.js" runat="server"></script>
+    <script type="text/javascript" src="~/assets/js/plugins/visualization/d3/d3_tooltip.js" runat="server"></script>
+    <script type="text/javascript" src="~/assets/js/plugins/forms/styling/switchery.min.js" runat="server"></script>
+    <script type="text/javascript" src="~/assets/js/plugins/forms/styling/uniform.min.js" runat="server"></script>
+    <script type="text/javascript" src="~/assets/js/plugins/forms/selects/bootstrap_multiselect.js" runat="server"></script>
+    <script type="text/javascript" src="~/assets/js/plugins/ui/moment/moment.min.js" runat="server"></script>
+    <script type="text/javascript" src="~/assets/js/plugins/pickers/daterangepicker.js" runat="server"></script>
+    <script type="text/javascript" src="~/assets/js/core/app.js" runat="server"></script>
+
+    <!-- /theme JS files -->
+</head>
+<body>
+    <div class="container-div">
+        <div class="col-md-2"></div>
+        <div class="col-md-5 data-div">
+            <h2>Sign in to continue</h2>
+            <form asp-action="Login">
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <div class="input-group  input-field">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-user"></span>
+                        </div>
+                        <input asp-for="Username" class="form-control" type="text" placeholder="Username" />
+                        <span asp-validation-for="Username" class="text-danger"></span>
+                    </div>
+                    <div class="input-group  input-field">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-lock"></span>
+                        </div>
+                        <input asp-for="Password" class="form-control" type="password" placeholder="Password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <input type="submit" class="form-control btn btn-danger btn-submit" value="Login" />
+                    <div class="link-field">
+                        <a asp-controller="User" asp-action="Register" class="btn btn-link">Don't have an account? Register here</a>
+                    </div>
+                </div>
+            </form>
+            @if (error_msg != null)
+            {
+                <br />
+                <div class="alert alert-danger">
+                    @error_msg
+                </div>
+            }
+
+        </div>
+        <div class="col-md-5 logo-div">
+            <p class="logo">artistry</p>
+            <p class="subtitle">EXPLORE THE WORLD OF ART</p>
+        </div>
+    </div>
+
+    <div class="footer text-muted" style="margin-top:50px;padding-top:50px;position:absolute;width:100%;bottom:15px;">
+        <p class="text-center" style="text-align:center;">Copyright &copy; 2018. <a href="@Url.Action("Index", "Home")">artistry</a></p>
+    </div>
+
+</body>
+</html>

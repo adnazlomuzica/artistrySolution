@@ -1,0 +1,105 @@
+﻿@model IEnumerable<artistry_Data.Models.Messages>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{var user = ViewData["User"] as int?;}
+
+@if (Model.Count() != 0)
+{
+    @foreach (var item in Model)
+    {
+        <div class="media-left">
+            <img src="~/assets/images/placeholder.jpg" class="img-circle img-sm" alt="">
+        </div>
+
+        @if (item.SenderId == user)
+        {
+            <div class="media-body" data-id="@item.SenderId" id="message_details">
+                <a href="#" class="media-heading">
+                    <span class="text-semibold">@item.Receiver.Username</span>
+                    @if (!item.Seen)
+                    {
+                        @if (item.Date.Date == DateTime.Now.Date)
+                        {
+                            <span class="media-annotation pull-right text-semibold">@item.Date.ToShortTimeString()</span>
+                        }
+                        else
+                        {
+                            <span class="media-annotation pull-right text-semibold">@item.Date.ToString("dd/MM")</span>
+                        }
+                        <br /> <span class="text-muted text-semibold">@item.Text</span>
+                    }
+                    else
+                    {
+                        <span class="text-semibold">@item.Sender.Username</span>
+                        @if (item.Date.Date == DateTime.Now.Date)
+                        {
+                            <span class="media-annotation pull-right">@item.Date.ToShortTimeString()</span>
+                        }
+                        else
+                        {
+                            <span class="media-annotation pull-right">@item.Date.ToString("dd/MM")</span>
+                        }
+                        <br /> <span class="text-muted">@item.Text</span>
+                    }
+                </a>
+            </div>
+        }
+
+        else
+        {
+            <div class="media-body" data-id="@item.SenderId" id="message_details">
+                <a href="#" class="media-heading">
+                    @if (!item.Seen)
+                    {
+                        <span class="text-bold">@item.Sender.Username</span>
+                        @if (item.Date.Date == DateTime.Now.Date)
+                        {
+                            <span class="media-annotation pull-right text-semibold">@item.Date.ToShortTimeString()</span>
+                        }
+                        else
+                        {
+                            <span class="media-annotation pull-right text-semibold">@item.Date.ToString("dd/MM")</span>
+                        }
+                        <br /> <span class="text-muted text-semibold">@item.Text</span>
+
+                    }
+                    else
+                    {
+                        <span class="text-semibold">@item.Sender.Username</span>
+                        @if (item.Date.Date == DateTime.Now.Date)
+                        {
+                            <span class="media-annotation pull-right">@item.Date.ToShortTimeString()</span>
+                        }
+                        else
+                        {
+                            <span class="media-annotation pull-right">@item.Date.ToString("dd/MM")</span>
+                        }
+                        <br /> <span class="text-muted">@item.Text</span>
+                    }
+                </a>
+            </div>
+        }
+        <div class="list-group-divider"></div>
+    }
+}
+else
+{
+    <div class="media-body" style="text-align:center;">
+        There is no new messages.
+    </div>
+}
+
+<script>
+    $('#message_details').click(function () {
+        var $buttonClicked = $(this);
+        var ID = $(this).attr('data-id');
+        var targeturl = '/Administrator/Message/Details?id=' + ID;
+        $.ajax({
+            type: 'GET',
+            url: targeturl,
+            success: function (partialView) {
+                $('#messages-place').html(partialView);
+                $('#messages-place').show();
+            }
+        });
+    });
+</script>

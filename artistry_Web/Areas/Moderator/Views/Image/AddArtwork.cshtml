@@ -1,0 +1,75 @@
+﻿@model artistry_Data.Models.Images
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div class="page-header page-header-default">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Images</span></h4>
+        </div>
+        <div class="heading-elements">
+            <div class="heading-btn-group">
+                <a asp-controller="Image" asp-action="AddArtwork" asp-route-id="@Model.ArtworkId" class="btn btn-link btn-float has-text add-type"><i class="icon-image2 text-primary"></i><span>Gallery</span></a>
+            </div>
+        </div>
+    </div>
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a asp-controller="Home" asp-action="Index"><i class="icon-home2 position-left"></i> Home</a></li>
+            <li class="active"><a asp-controller="Artwork" asp-action="Index">Artworks</a></li>
+            <li class="active"><a asp-controller="Image" asp-action="Add">Add photos</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="content" style="padding-top:0px;padding-bottom:0;" id="closePanel1">
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <h5 class="panel-title">New</h5>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-toggle="collapse" data-target="#collapsePanel1" class="icon-arrow-down12"></a></li>
+                    <li><a data-close="close" data-target="#closePanel1" class="icon-cross3"></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="panel-body" id="collapsePanel1">
+            <form asp-controller="Image" asp-action="SaveArtwork" enctype="multipart/form-data">
+                <input type="hidden" asp-for="ArtworkId" />
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <label>Caption</label>
+                            <input type="text" asp-for="Caption" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <div class="uploader">
+                                <input type="file" name="imagefile" class="file-styled" required />
+                                <span class="filename" style="user-select: none;">No file selected</span>
+                                <span class="action btn btn-default" style="user-select: none;">Choose File</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <input asp-for="Primary" type="checkbox" class="checkbox checker control-primary styled" />
+                            <label style="margin-left:10px;margin-top:10px;">Primary photo</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-right">
+                    <button type="submit" class="btn btn-primary">Save <i class="icon-arrow-right14 position-right"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

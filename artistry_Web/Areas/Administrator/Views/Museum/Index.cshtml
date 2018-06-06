@@ -1,0 +1,129 @@
+﻿@model IEnumerable<artistry_Data.Models.Museums>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{ string search = "";}
+
+
+<div class="page-header page-header-default">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Museums</span></h4>
+        </div>
+        <div class="heading-elements">
+            <div class="heading-btn-group">
+                <a asp-controller="Museum" asp-action="Add" class="btn btn-link btn-float has-text add-museum"><i class="icon-plus-circle2 text-primary"></i><span>Add</span></a>
+            </div>
+        </div>
+    </div>
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a asp-controller="Home" asp-action="Index"><i class="icon-home2 position-left"></i> Home</a></li>
+            <li class="active"><a asp-controller="Museum" asp-action="Index">Museums</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="content" style="padding-bottom:0px;" id="closePanel">
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <h5 class="panel-title">Museums</h5>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-toggle="collapse" data-target="#collapsePanel" class="icon-arrow-down12"></a></li>
+                    <li><a data-close="close" data-target="#closePanel" class="icon-cross3"></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="collapsePanel">
+            <form asp-action="Search" style="display:inline;" method="get">
+                <div class="input-group  input-field" style="margin-left:20px;">
+                    <div class="input-group-addon">
+                        <span class="fa fa-search"></span>
+                    </div>
+                    <input asp-for="@search" type="search" class="form-control" placeholder="Search.." style="width:20%;float:left;" />
+                    <input type="submit" class="btn btn-default" value="Search" style="float:right;margin-right:73%;" />
+                </div>
+            </form>
+            <br /><br /><hr />
+            <table class="table datatable-show-all">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Museum type</th>
+                        <th>Username</th>
+                        <th>Registration date</th>
+                        <th>Active</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.MuseumType.Name</td>
+                            <td>@item.User.Username</td>
+                            <td>@item.User.RegistrationDate.ToString("dd/MM/yyyy")</td>
+                            @if (item.User.Active)
+                            {
+                                <td><p class="text-success">ACTIVE</p></td>
+                            }
+                            else
+                            {
+                                <td><p class="text-danger">INACTIVE</p></td>
+                            }
+                            <td class="text-center">
+                                <ul class="icons-list">
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            <i class="icon-menu9"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-right" id="delete-link">
+                                            <li><a href="#" data-ID="@item.Id" class="details"><i class="icon-file-text"></i>Details</a></li>
+                                            <li><a asp-controller="Museum" asp-action="GetMuseum" asp-route-id="@item.Id" data-id="@item.Id" class="edit"><i class="icon-pencil"></i>Edit</a></li>
+
+                                            @if (item.User.Active)
+                                            {
+                                                <li><a data-toggle="modal" data-deactivate="@item.Id" data-target="#exampleModal" class="deactivate-link"><i class="icon-user-minus"></i>Deactivate</a></li>
+                                            }
+                                            else
+                                            {
+                                                <li><a data-toggle="modal" data-activate="@item.Id" class="activate-link"><i class="icon-user-check"></i>Activate</a></li>
+                                            }
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    }
+            </table>
+        </div>
+    </div>
+</div>
+<div id="details"></div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Warning</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Are you sure you want to deactivate this museum?</div>
+            <div class="modal-footer">
+                <button class="btn btn-default deactivate-museum">YES</button>
+                <button class="btn btn-default" type="button" data-dismiss="modal">NO</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>

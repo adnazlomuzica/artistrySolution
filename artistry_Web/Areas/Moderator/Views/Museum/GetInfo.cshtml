@@ -1,0 +1,13 @@
+﻿@model artistry_Data.Models.Museums
+
+<span class="media-heading text-semibold">@Model.Name</span>
+<div class="text-size-mini text-muted">
+  
+    @if (Model.Address != null)
+    {
+    <i class="icon-pin text-size-small"></i>
+
+    }
+     &nbsp; @Model.Address
+   
+</div>

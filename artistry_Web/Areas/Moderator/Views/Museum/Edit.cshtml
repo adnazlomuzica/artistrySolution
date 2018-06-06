@@ -1,0 +1,253 @@
+﻿@model artistry_Web.Areas.Moderator.ViewModels.MuseumVM
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<style>
+    /* Always set the map height explicitly to define the size of the div
+        * element that contains the map. */
+    .container #map {
+        height: 50%;
+    }
+    /* Optional: Makes the sample page fill the window. */
+
+</style>
+
+<script>
+    var map;
+    function initMap(a, b) {
+        if (a != null && b != null) {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: a, lng: b },
+                zoom: 16
+            });
+            var marker = new google.maps.Marker({
+                position: { lat: a, lng: b }, map: map
+            });
+        }
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        $("#button").click(function () {
+            $("html, body").delay(200).animate({
+                scrollTop: $('#ajax-result').offset().top
+            }, 2000);
+        });
+    });
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDm-SN4z3W_YbR2XcbJrNtfOo3z63VoKA&callback=initMap" async defer></script>
+
+<div class="page-header page-header-default">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Museum</span></h4>
+        </div>
+        <div class="heading-elements">
+            <div class="heading-btn-group">
+                <a asp-controller="Image" asp-action="Add" asp-route-id="@Model.Id" class="btn btn-link btn-float has-text"><i class="icon-image2 text-primary"></i><span>Gallery</span></a>
+                <a asp-controller="WorkingHours" asp-action="Add" asp-route-id="@Model.Id" class="btn btn-link btn-float has-text"><i class="icon-alarm text-primary"></i><span>Working hours</span></a>
+            </div>
+        </div>
+    </div>
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a asp-controller="Home" asp-action="Index"><i class="icon-home2 position-left"></i> Home</a></li>
+            <li class="active"><a asp-controller="Museum" asp-action="GetMuseum">Edit</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="content" style="padding-bottom:0px;">
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <h6 class="panel-title">Edit</h6>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="collapse" href="#collapsePanel1"></a></li>
+                    <li><a data-action="close" href="#reloadPanel1"></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="panel-body" id="collapsePanel1 reloadPanel1">
+            <form asp-action="Edit" role="form">
+                @Html.AntiForgeryToken()
+                <input asp-for="Id" type="hidden" />
+                <input asp-for="UserId" type="hidden" />
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Name</label>
+                            <input asp-for="Name" type="text" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Museum type</label>
+                            <select asp-for="MuseumTypeId" asp-items="Model.MuseumTypes" class="form-control"></select>
+                            <span asp-validation-for="MuseumTypeId" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Username</label>
+                            <input asp-for="Username" type="text" class="form-control" readonly="readonly" />
+                        </div>
+                        <div class="col-md-6">
+                            <label>Registration date</label>
+                            <input asp-for="RegistrationDate" type="text" class="form-control" readonly="readonly" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Email</label>
+                            <input asp-for="Email" type="email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Phone</label>
+                            <input asp-for="Phone" type="text" class="form-control" />
+                            <span asp-validation-for="Phone" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Year</label>
+                            <input asp-for="Year" type="text" class="form-control" />
+                            <span asp-validation-for="Year" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Address</label>
+                                    <input asp-for="Address" type="text" class="form-control" id="formatted-address Address"/>
+                                    <span asp-validation-for="Address" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Tickets selling</label>
+                            <input asp-for="TicketSelling" type="checkbox" class="checkbox" />
+                            <span asp-validation-for="TicketSelling" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-3">
+                            <label>Mobile application</label>
+                            <input asp-for="QrScanning" type="checkbox" class="checkbox" />
+                            <span asp-validation-for="QrScanning" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Description</label>
+                            <textarea asp-for="Description" rows="9" class="form-control"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" asp-for="Longitude" id="Longitude"/>
+                <input type="hidden" asp-for="Latitude" id="Latitude"/>
+                <div class="text-right">
+                    <button type="submit" class="btn btn-primary">Save <i class="icon-arrow-right14 position-right"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <h6 class="panel-title">Location</h6>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="collapse" href="#collapsePanel1"></a></li>
+                    <li><a data-action="close" href="#reloadPanel1"></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="panel-body" id="collapsePanel1 reloadPanel1">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form id="location-form">
+                            <label>Address: </label>
+                            <input type="text" id="location-input" class="form-control form-control-sm">
+                            <br>
+                        </form>
+                        <div class="text-right">
+                            <button type="submit" id="search" class="btn btn-primary" onclick="geocode();">Search <i class="icon-search4 position-right"></i></button>
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="margin-top:20px;">
+                        <div id="map" style="height:400px;width:100%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var lat;
+    var lng;
+    var locationForm = document.getElementById('#location-form');
+    function geocode() {
+
+        var location = document.getElementById('#location-input').value;
+        axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+            params: {
+                address: location,
+                key: 'AIzaSyABtZFoMj-bHpjcx4TJobEl_yY_pfWnMnY'
+            }
+        })
+            .then(function (response) {
+                // Log full response
+                console.log(response);
+
+                // Formatted Address
+                var formattedAddress = response.data.results[0].formatted_address;
+                document.getElementById('#Address').value = formattedAddress;
+                var formattedAddressOutput = `
+                                            <ul class="list-group">
+                                            <li class="list-group-item">${formattedAddress}</li>
+                                            </ul>
+                                             `;
+
+                // Address Components
+                var addressComponents = response.data.results[0].address_components;
+                var addressComponentsOutput = '<ul class="list-group">';
+
+                // Geometry
+                lat = response.data.results[0].geometry.location.lat;
+                document.getElementById('#Latitude').value = lat;
+                lng = response.data.results[0].geometry.location.lng;
+                document.getElementById('#Longitude').value = lng;
+                initMap(lat, lng);
+
+
+                // Output to app
+                document.getElementById('#formatted-address').innerHTML = formattedAddressOutput;
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    $(document).ready(function () {
+        if (lat != null && lng != null) {
+            lat = parseFloat(document.getElementById('Latitude').value);
+            lng = parseFloat(document.getElementById('Longitude').value);
+            initMap(lat, lng);
+        }
+    });
+</script>
