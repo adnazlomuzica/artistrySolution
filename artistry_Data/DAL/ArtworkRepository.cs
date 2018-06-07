@@ -20,9 +20,30 @@ namespace artistry_Data.DAL
         {
             return context.Artworks.Include(x => x.Artist).Include(x => x.ArtworkType).Include(x => x.Country).Include(x => x.Material).Include(x => x.Museum).Include(x => x.Style).Where(x => x.MuseumId == id).ToList();
         }
+
+        public List<Artworks> GetArtworksByArtist(int id)
+        {
+            return context.Artworks.Include(x => x.Artist).Include(x => x.ArtworkType).Include(x => x.Country).Include(x => x.Material).Include(x => x.Museum).Include(x => x.Style).Where(x => x.ArtistId == id).ToList();
+        }
+
+        public List<Artworks> Search(string search, int id)
+        {
+            return context.Artworks.Include(x => x.Artist).Include(x => x.ArtworkType).Include(x => x.Country).Include(x => x.Material).Include(x => x.Museum).Include(x => x.Style).Where(x => x.Name.Contains(search.Trim()) && x.MuseumId==id).ToList();
+        }
+
+        public Artworks GetArtworkById(int id)
+        {
+            return context.Artworks.Include(x => x.Artist).Include(x => x.ArtworkType).Include(x => x.Country).Include(x => x.Material).Include(x => x.Museum).Include(x => x.Style).Where(x=>x.Id==id).SingleOrDefault();
+        }
+
         public void InsertArtwork(Artworks artwork)
         {
             context.Artworks.Add(artwork);
+        }
+
+        public void UpdateArtwork(Artworks artwork)
+        {
+            context.Entry(artwork).State = EntityState.Modified;
         }
 
         public void Save()

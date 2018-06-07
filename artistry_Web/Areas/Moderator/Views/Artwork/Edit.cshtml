@@ -9,6 +9,15 @@
         <div class="heading-elements">
             <div class="heading-btn-group">
                 <a asp-controller="Image" asp-action="AddArtwork" asp-route-id="@Model.Id" class="btn btn-link btn-float has-text"><i class="icon-image2 text-primary"></i><span>Gallery</span></a>
+
+                @if (Model.Active)
+                {
+                    <a asp-controller="Artwork" asp-action="Deactivate" asp-route-id="@Model.Id" class="btn btn-link btn-float has-text"><i class="icon-subtract text-primary"></i><span>Deactivate</span></a>
+                }
+                else
+                {
+                    <a asp-controller="Artwork" asp-action="Activate" asp-route-id="@Model.Id" class="btn btn-link btn-float has-text"><i class="icon-add text-primary"></i><span>Activate</span></a>
+                }
             </div>
         </div>
     </div>
@@ -23,7 +32,7 @@
 <div class="content" style="padding-bottom:0px;">
     <div class="panel panel-flat">
         <div class="panel-heading">
-            <h6 class="panel-title">Add</h6>
+            <h6 class="panel-title">Edit</h6>
             <div class="heading-elements">
                 <ul class="icons-list">
                     <li><a data-action="collapse" href="#collapsePanel1"></a></li>
@@ -32,7 +41,7 @@
             </div>
         </div>
         <div class="panel-body" id="collapsePanel1 reloadPanel1">
-            <form asp-action="Save" role="form">
+            <form asp-action="Edit" role="form">
                 @Html.AntiForgeryToken()
                 <input asp-for="Id" type="hidden" />
                 <input asp-for="MuseumId" type="hidden" />

@@ -36,10 +36,7 @@ namespace artistry_Web.Areas.Administrator.Controllers
         {
             IEnumerable<Artists> artists = artistRepository.GetArtists();
             List<ArtistInfoVM> model = new List<ArtistInfoVM>();
-
-            try
-            {
-                foreach (Artists a in artists)
+            foreach (Artists a in artists)
                 {
                     ArtistInfoVM vm = new ArtistInfoVM();
 
@@ -51,11 +48,8 @@ namespace artistry_Web.Areas.Administrator.Controllers
                     vm.Styles = artistmovementRepository.GetArtistMovementsByArtist(a.Id);
                     model.Add(vm);
                 }
-            }
-            catch(Exception ex)
-            {
-
-            }
+            
+          
             return View("Index", model);
         }
 

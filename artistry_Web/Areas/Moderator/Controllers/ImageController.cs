@@ -9,6 +9,7 @@ using artistry_Web.Helper;
 using Microsoft.AspNetCore.Mvc;
 using System.Drawing;
 using Microsoft.AspNetCore.Http;
+using artistry_Web.Areas.Administrator.ViewModels;
 
 namespace artistry_Web.Areas.Moderator.Controllers
 {
@@ -23,9 +24,20 @@ namespace artistry_Web.Areas.Moderator.Controllers
         {
             this.imageRepository = new ImageRepository(context);
         }
-        public IActionResult Index()
+        [HttpGet("Index")]
+        public PartialViewResult Index(int id)
         {
-            return View();
+            IEnumerable<Images> images = imageRepository.GetArtistImages(id);
+            ImageVM model = new ImageVM();
+
+            model.Images = images.Select(y => new ImageIndexVM
+            {
+                Caption = y.Caption,
+                Id = y.Id
+            }).ToList();
+            model.ArtistId = id;
+
+            return PartialView("PartialIndex", model);
         }
 
         [HttpGet("RenderImage")]
@@ -54,6 +66,7 @@ namespace artistry_Web.Areas.Moderator.Controllers
             Images model = new Images();
             model.MuseumId = id;
 
+            
             return View(model);
         }
 
@@ -81,6 +94,19 @@ namespace artistry_Web.Areas.Moderator.Controllers
             i.ImageThumb = ImageHelper.imageToByteArray(ImageHelper.ResizeImage(Image.FromStream(imagefile.OpenReadStream(), true, true), 150, 150));
             i.Image = ImageHelper.imageToByteArray(Image.FromStream(imagefile.OpenReadStream(), true, true));
 
+            IEnumerable<Images> images = imageRepository.GetMuseumImages(Convert.ToInt32(i.MuseumId));
+
+            if (images.Where(x => x.Primary == true).Count() == 0)
+            {
+                i.Primary = true;
+            }
+            if(images.Where(x=>x.Primary).Count()>0 && i.Primary)
+            {
+                Images img = images.Where(x => x.Primary).SingleOrDefault();
+                img.Primary = false;
+                imageRepository.UpdateImage(img);
+            }
+
             imageRepository.InsertImage(i);
             imageRepository.Save();
 
@@ -101,6 +127,19 @@ namespace artistry_Web.Areas.Moderator.Controllers
             i.Primary = image.Primary;
             i.ImageThumb = ImageHelper.imageToByteArray(ImageHelper.ResizeImage(Image.FromStream(imagefile.OpenReadStream(), true, true), 150, 150));
             i.Image = ImageHelper.imageToByteArray(Image.FromStream(imagefile.OpenReadStream(), true, true));
+
+            IEnumerable<Images> images = imageRepository.GetArtworkImages(Convert.ToInt32(i.ArtworkId));
+
+            if (images.Where(x => x.Primary == true).Count() == 0)
+            {
+                i.Primary = true;
+            }
+            if (images.Where(x => x.Primary).Count() > 0 && i.Primary)
+            {
+                Images img = images.Where(x => x.Primary).SingleOrDefault();
+                img.Primary = false;
+                imageRepository.UpdateImage(img);
+            }
 
             imageRepository.InsertImage(i);
             imageRepository.Save();

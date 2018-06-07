@@ -85,6 +85,19 @@ namespace artistry_Web.Areas.Administrator.Controllers
             i.ImageThumb = ImageHelper.imageToByteArray(ImageHelper.ResizeImage(Image.FromStream(imagefile.OpenReadStream(), true, true), 150, 150));
             i.Image = ImageHelper.imageToByteArray(Image.FromStream(imagefile.OpenReadStream(), true, true));
 
+            IEnumerable<Images> images = imageRepository.GetArtistImages(Convert.ToInt32(i.ArtistId));
+
+            if (images.Where(x => x.Primary == true).Count() == 0)
+            {
+                i.Primary = true;
+            }
+            if (images.Where(x => x.Primary).Count() > 0 && i.Primary)
+            {
+                Images img = images.Where(x => x.Primary).SingleOrDefault();
+                img.Primary = false;
+                imageRepository.UpdateImage(img);
+            }
+
             imageRepository.InsertImage(i);
             imageRepository.Save();
 
