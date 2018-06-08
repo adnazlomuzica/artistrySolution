@@ -31,6 +31,11 @@ namespace artistry_Data.DAL
             return context.Images.Where(x => x.ArtworkId == id).ToList();
         }
 
+        public IEnumerable<Images> GetNewsImages(int id)
+        {
+            return context.Images.Where(x => x.NewsId == id).ToList();
+        }
+
         public Images GetArtworkImage(int id)
         {
             return context.Images.Where(x => x.ArtworkId == id && x.Primary).SingleOrDefault();
@@ -39,6 +44,11 @@ namespace artistry_Data.DAL
         public Images GetArtistImage(int id)
         {
             return context.Images.Where(x => x.ArtistId == id && x.Primary).SingleOrDefault();
+        }
+
+        public Images GetNewsImage(int id)
+        {
+            return context.Images.Where(x => x.NewsId == id && x.Primary).SingleOrDefault();
         }
 
         public async Task<Images> GetImageById(int id)

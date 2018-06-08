@@ -11,9 +11,10 @@ using System;
 namespace artistry_Data.Migrations
 {
     [DbContext(typeof(Context.Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20180607222901_TwentiethFifthMigration")]
+    partial class TwentiethFifthMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

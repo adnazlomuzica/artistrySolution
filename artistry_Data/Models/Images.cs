@@ -18,5 +18,7 @@ namespace artistry_Data.Models
         public virtual Artists Artist { get; set; }
         public int? ArtworkId { get; set; }
         public virtual Artworks Artwork { get; set; }
+        public int? NewsId { get; set; }
+        public virtual News News { get; set; }
     }
 }

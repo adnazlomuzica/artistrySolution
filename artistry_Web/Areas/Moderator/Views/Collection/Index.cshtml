@@ -1,0 +1,80 @@
+﻿@model List<artistry_Data.Models.Collections>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<style>
+    img {
+        max-width: 100%;
+        width: 100%;
+        object-fit: contain;
+        height: 50%;
+    }
+
+    .border {
+        max-height: 100%;
+    }
+
+    .news {
+        height:auto;
+    }
+</style>
+
+<div class="page-header page-header-default">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Collections</span></h4>
+        </div>
+        <div class="heading-elements">
+            <div class="heading-btn-group">
+                <a asp-controller="Collection" asp-action="AddImage" class="btn btn-link btn-float has-text"><i class="icon-plus-circle2 text-primary"></i><span>Add</span></a>
+            </div>
+        </div>
+    </div>
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a asp-controller="Home" asp-action="Index"><i class="icon-home2 position-left"></i> Home</a></li>
+            <li class="active"><a asp-controller="Collection" asp-action="Index">Collections</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="content" style="padding-bottom:0px;" id="closePanel">
+    <div class="row">
+        @foreach (var x in Model)
+        {
+            <div class="col-md-4">
+                <a asp-action="Details" asp-route-id="@x.Id">
+                    <div class="panel panel-flat news" style="color:#000;">
+                        <div class="panel-body" id="collapsePanel1 reloadPanel1">
+                            <div class="border">
+                                <div class="image">
+                                    @if (x.Image != null)
+                                    {
+                                        <img src="@Url.Action("RenderImage", "Image", new { id = x.ImageId })" class="image-thumb" alt="" />
+                                    }
+                                    else
+                                    {
+                                        <img src="~/assets/images/placeholder.jpg" class="image-thumb" alt="" />
+                                    }
+                                </div>
+                                <div class="information" style="font-size:15px;margin-top:10px;padding-top:10px;color:#000;">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <span class="text-bold" style="text-align:center; font-size:17px;">@x.Name</span>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top:5px;">
+                                        <div class="col-md-12">
+                                            <span class="text-muted">
+                                                @x.Description ...
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+</div>

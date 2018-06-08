@@ -16,7 +16,7 @@ namespace artistry_Web.Areas.Moderator.ViewModels
         public string Country { get; set; }
         public IEnumerable<ArtistMovements> Styles { get; set; }
         public IEnumerable<Artworks> Artworks { get; set; }
-        public int ImageId { get; set; }
+        public int? ImageId { get; set; }
         public Images Image { get; set; }
     }
 }

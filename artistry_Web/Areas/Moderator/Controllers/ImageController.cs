@@ -79,6 +79,15 @@ namespace artistry_Web.Areas.Moderator.Controllers
             return View(model);
         }
 
+        [HttpGet("AddNews")]
+        public IActionResult Addnews(int id)
+        {
+            Images model = new Images();
+            model.NewsId = id;
+
+            return View(model);
+        }
+
         [HttpPost("Save")]
         public IActionResult Save(Images image, IFormFile imagefile)
         {
@@ -145,6 +154,40 @@ namespace artistry_Web.Areas.Moderator.Controllers
             imageRepository.Save();
 
             return RedirectToAction("AddArtwork", new { id = i.ArtworkId });
+        }
+
+        [HttpPost("SaveNews")]
+        public IActionResult SaveNews(Images image, IFormFile imagefile)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("AddNews", image);
+            }
+
+            Images i = new Images();
+            i.Caption = image.Caption;
+            i.NewsId = image.NewsId;
+            i.Primary = image.Primary;
+            i.ImageThumb = ImageHelper.imageToByteArray(ImageHelper.ResizeImage(Image.FromStream(imagefile.OpenReadStream(), true, true), 150, 150));
+            i.Image = ImageHelper.imageToByteArray(Image.FromStream(imagefile.OpenReadStream(), true, true));
+
+            IEnumerable<Images> images = imageRepository.GetNewsImages(Convert.ToInt32(i.NewsId));
+
+            if (images.Where(x => x.Primary == true).Count() == 0)
+            {
+                i.Primary = true;
+            }
+            if (images.Where(x => x.Primary).Count() > 0 && i.Primary)
+            {
+                Images img = images.Where(x => x.Primary).SingleOrDefault();
+                img.Primary = false;
+                imageRepository.UpdateImage(img);
+            }
+
+            imageRepository.InsertImage(i);
+            imageRepository.Save();
+
+            return RedirectToAction("AddNews", new { id = i.NewsId });
         }
     }
 }

@@ -1,0 +1,65 @@
+﻿@model artistry_Data.Models.Collections
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div class="page-header page-header-default">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Collections</span></h4>
+        </div>
+        <div class="heading-elements">
+            <div class="heading-btn-group">
+                <a asp-controller="Collection" asp-action="EditImage" asp-route-id="@Model.ImageId" class="btn btn-link btn-float has-text"><i class="icon-image5 text-primary"></i><span>Edit image</span></a>
+            </div>
+        </div>
+    </div>
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a asp-controller="Home" asp-action="Index"><i class="icon-home2 position-left"></i> Home</a></li>
+            <li class="active"><a asp-controller="Collection" asp-action="Index">Collections</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="content" style="padding-bottom:0px;">
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <h6 class="panel-title">Edit</h6>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="collapse" href="#collapsePanel1"></a></li>
+                    <li><a data-action="close" href="#reloadPanel1"></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="panel-body" id="collapsePanel1 reloadPanel1">
+            <form asp-action="Edit" enctype="multipart/form-data">
+                @Html.AntiForgeryToken()
+                <input asp-for="Id" type="hidden" />
+                <input asp-for="MuseumId" type="hidden" />
+                <input asp-for="ImageId" type="hidden" />
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Name</label>
+                            <input asp-for="Name" type="text" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Description</label>
+                            <textarea asp-for="Description" rows="6" class="form-control"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <button type="submit" class="btn btn-primary">Save <i class="icon-arrow-right14 position-right"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

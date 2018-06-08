@@ -11,9 +11,10 @@ using System;
 namespace artistry_Data.Migrations
 {
     [DbContext(typeof(Context.Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20180607212605_TwentiethFourthMigration")]
+    partial class TwentiethFourthMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -277,28 +278,6 @@ namespace artistry_Data.Migrations
                     b.HasIndex("CountryId");
 
                     b.ToTable("Currencies");
-                });
-
-            modelBuilder.Entity("artistry_Data.Models.Events", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Description");
-
-                    b.Property<DateTime>("EndTime");
-
-                    b.Property<int>("MuseumId");
-
-                    b.Property<DateTime>("StartDate");
-
-                    b.Property<string>("Title");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MuseumId");
-
-                    b.ToTable("Events");
                 });
 
             modelBuilder.Entity("artistry_Data.Models.Images", b =>
@@ -652,14 +631,6 @@ namespace artistry_Data.Migrations
                     b.HasOne("artistry_Data.Models.Countries", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("artistry_Data.Models.Events", b =>
-                {
-                    b.HasOne("artistry_Data.Models.Museums", "Museum")
-                        .WithMany()
-                        .HasForeignKey("MuseumId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

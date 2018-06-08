@@ -16,7 +16,7 @@
         <ul class="breadcrumb">
             <li><a asp-controller="Home" asp-action="Index"><i class="icon-home2 position-left"></i> Home</a></li>
             <li class="active"><a asp-controller="Artwork" asp-action="Index">Artworks</a></li>
-            <li class="active"><a asp-controller="Image" asp-action="Add">Add photos</a></li>
+            <li class="active"><a asp-controller="Image" asp-action="AddArtwork">Add photos</a></li>
         </ul>
     </div>
 </div>
@@ -61,7 +61,7 @@
                         <div class="col-md-3"></div>
                         <div class="col-md-6">
                             <input asp-for="Primary" type="checkbox" class="checkbox checker control-primary styled" />
-                            <label style="margin-left:10px;margin-top:10px;">Primary photo</label>
+                            <label style="margin-left:10px;">Primary photo</label>
                         </div>
                     </div>
                 </div>

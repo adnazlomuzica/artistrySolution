@@ -11,9 +11,10 @@ using System;
 namespace artistry_Data.Migrations
 {
     [DbContext(typeof(Context.Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20180607132845_TwentiethSecondMigration")]
+    partial class TwentiethSecondMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -125,24 +126,6 @@ namespace artistry_Data.Migrations
                     b.ToTable("Artists");
                 });
 
-            modelBuilder.Entity("artistry_Data.Models.ArtworkCollections", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("ArtworkId");
-
-                    b.Property<int>("CollectionId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ArtworkId");
-
-                    b.HasIndex("CollectionId");
-
-                    b.ToTable("ArtworkCollections");
-                });
-
             modelBuilder.Entity("artistry_Data.Models.Artworks", b =>
                 {
                     b.Property<int>("Id")
@@ -223,32 +206,6 @@ namespace artistry_Data.Migrations
                     b.ToTable("Clients");
                 });
 
-            modelBuilder.Entity("artistry_Data.Models.Collections", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("Active");
-
-                    b.Property<string>("Description")
-                        .IsRequired();
-
-                    b.Property<int>("ImageId");
-
-                    b.Property<int>("MuseumId");
-
-                    b.Property<string>("Name")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ImageId");
-
-                    b.HasIndex("MuseumId");
-
-                    b.ToTable("Collections");
-                });
-
             modelBuilder.Entity("artistry_Data.Models.Countries", b =>
                 {
                     b.Property<int>("Id")
@@ -277,28 +234,6 @@ namespace artistry_Data.Migrations
                     b.HasIndex("CountryId");
 
                     b.ToTable("Currencies");
-                });
-
-            modelBuilder.Entity("artistry_Data.Models.Events", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Description");
-
-                    b.Property<DateTime>("EndTime");
-
-                    b.Property<int>("MuseumId");
-
-                    b.Property<DateTime>("StartDate");
-
-                    b.Property<string>("Title");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MuseumId");
-
-                    b.ToTable("Events");
                 });
 
             modelBuilder.Entity("artistry_Data.Models.Images", b =>
@@ -455,14 +390,11 @@ namespace artistry_Data.Migrations
 
                     b.Property<int>("MuseumId");
 
-                    b.Property<string>("SubTitle")
-                        .IsRequired();
+                    b.Property<string>("SubTitle");
 
-                    b.Property<string>("Text")
-                        .IsRequired();
+                    b.Property<string>("Text");
 
-                    b.Property<string>("Title")
-                        .IsRequired();
+                    b.Property<string>("Title");
 
                     b.HasKey("Id");
 
@@ -580,19 +512,6 @@ namespace artistry_Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("artistry_Data.Models.ArtworkCollections", b =>
-                {
-                    b.HasOne("artistry_Data.Models.Artworks", "Artwork")
-                        .WithMany()
-                        .HasForeignKey("ArtworkId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("artistry_Data.Models.Collections", "Collection")
-                        .WithMany()
-                        .HasForeignKey("CollectionId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("artistry_Data.Models.Artworks", b =>
                 {
                     b.HasOne("artistry_Data.Models.Artists", "Artist")
@@ -634,32 +553,11 @@ namespace artistry_Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("artistry_Data.Models.Collections", b =>
-                {
-                    b.HasOne("artistry_Data.Models.Images", "Image")
-                        .WithMany()
-                        .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("artistry_Data.Models.Museums", "Museum")
-                        .WithMany()
-                        .HasForeignKey("MuseumId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("artistry_Data.Models.Currencies", b =>
                 {
                     b.HasOne("artistry_Data.Models.Countries", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("artistry_Data.Models.Events", b =>
-                {
-                    b.HasOne("artistry_Data.Models.Museums", "Museum")
-                        .WithMany()
-                        .HasForeignKey("MuseumId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -680,8 +578,7 @@ namespace artistry_Data.Migrations
 
                     b.HasOne("artistry_Data.Models.News", "News")
                         .WithMany()
-                        .HasForeignKey("NewsId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("NewsId");
                 });
 
             modelBuilder.Entity("artistry_Data.Models.Likes", b =>

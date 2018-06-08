@@ -11,8 +11,10 @@ namespace artistry_Data.DAL
         IEnumerable<Images> GetArtistImages(int id);
         IEnumerable<Images> GetMuseumImages(int id);
         IEnumerable<Images> GetArtworkImages(int id);
+        IEnumerable<Images> GetNewsImages(int id);
         Images GetArtworkImage(int id);
         Images GetArtistImage(int id);
+        Images GetNewsImage(int id);
         Task<Images> GetImageById(int id);
         Images GetImage(int id);
         void InsertImage(Images image);
