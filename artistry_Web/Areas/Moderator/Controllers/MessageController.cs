@@ -70,9 +70,22 @@ namespace artistry_Web.Areas.Moderator.Controllers
             messageRepository.Save();
 
             model.Reply = new Messages();
-            model.SenderId = id;
-            model.ReceiverId = userId;
+            Messages mess = message.Take(1).SingleOrDefault();
+            int senderId = Convert.ToInt32(mess.SenderId);
+            int receiverId = Convert.ToInt32(mess.ReceiverId);
 
+            if (receiverId == userId)
+            {
+                model.ReceiverId = userId;
+                model.SenderId = id;
+            }
+            else
+            {
+                model.ReceiverId = id;
+                model.SenderId = userId;
+            }
+
+            ViewData["userId"] = userId;
             return PartialView("Details", model);
         }
 

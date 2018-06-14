@@ -2,11 +2,10 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <style>
-    img {
+   .image img {
         max-width: 100%;
         width: 100%;
         object-fit: contain;
-        height: 50%;
     }
 
     .border {
@@ -43,17 +42,17 @@
         {
             <div class="col-md-4">
                 <a asp-action="Details" asp-route-id="@x.Id">
-                    <div class="panel panel-flat news" style="color:#000;">
-                        <div class="panel-body" id="collapsePanel1 reloadPanel1">
+                    <div class="panel panel-flat news" style="color:#000;min-height:350px;margin-bottom:15px;overflow:auto;">
+                        <div class="panel-body">
                             <div class="border">
                                 <div class="image">
                                     @if (x.Image != null)
                                     {
-                                        <img src="@Url.Action("RenderImage", "Image", new { id = x.ImageId })" class="image-thumb" alt="" />
+                                        <img src="@Url.Action("RenderImage", "Image", new { id = x.ImageId })" class="image-thumb" alt="" width="200" height="200"/>
                                     }
                                     else
                                     {
-                                        <img src="~/assets/images/placeholder.jpg" class="image-thumb" alt="" />
+                                        <img src="~/assets/images/placeholder.jpg" class="image-thumb" alt="" width="200" height="200" />
                                     }
                                 </div>
                                 <div class="information" style="font-size:15px;margin-top:10px;padding-top:10px;color:#000;">

@@ -31,7 +31,7 @@ namespace artistry_Web.Controllers
 
             Administrators admin = db.Administrators.SingleOrDefault(x => x.UserId == u.Id);
             Museums museum = db.Museums.SingleOrDefault(x => x.UserId == u.Id);
-            //Clients client = db.Clients.SingleOrDefault(x => x.UserId == u.Id); 
+            Clients client = db.Clients.SingleOrDefault(x => x.UserId == u.Id);
 
             if (admin != null)
             {
@@ -45,9 +45,8 @@ namespace artistry_Web.Controllers
 
             else
             {
-                return RedirectToAction("Index", "Home", new { area = "Client" });
+                return View("Index");
             }
-
         }
 
         public IActionResult About()

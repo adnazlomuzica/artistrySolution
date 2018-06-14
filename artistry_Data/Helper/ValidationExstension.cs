@@ -41,8 +41,6 @@ namespace artistry_Data.Helper
                 }
             }
 
-           
-
             return null;
         }
     }

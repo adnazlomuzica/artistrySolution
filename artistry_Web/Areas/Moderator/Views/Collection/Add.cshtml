@@ -20,18 +20,18 @@
     </div>
 </div>
 
-<div class="content" style="padding-bottom:0px;">
+<div class="content" style="padding-bottom:0px;" id="closePanel1">
     <div class="panel panel-flat">
         <div class="panel-heading">
             <h6 class="panel-title">New</h6>
             <div class="heading-elements">
                 <ul class="icons-list">
-                    <li><a data-action="collapse" href="#collapsePanel1"></a></li>
-                    <li><a data-action="close" href="#reloadPanel1"></a></li>
+                    <li><a data-toggle="collapse" data-target="#collapsePanel1" class="icon-arrow-down12"></a></li>
+                    <li><a data-close="close" data-target="#reloadPanel1" class="icon-cross3"></a></li>
                 </ul>
             </div>
         </div>
-        <div class="panel-body" id="collapsePanel1 reloadPanel1">
+        <div class="panel-body" id="collapsePanel1">
             <form asp-action="Save" enctype="multipart/form-data">
                 @Html.AntiForgeryToken()
                 <input asp-for="MuseumId" type="hidden" />

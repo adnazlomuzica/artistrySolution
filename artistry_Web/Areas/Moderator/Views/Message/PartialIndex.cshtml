@@ -12,7 +12,7 @@
 
         @if (item.SenderId == user)
         {
-            <div class="media-body" data-id="@item.SenderId" id="message_details">
+            <div class="media-body" data-id="@item.ReceiverId" id="message_details">
                 <a href="#" class="media-heading">
                     <span class="text-semibold">@item.Receiver.Username</span>
                     @if (!item.Seen)

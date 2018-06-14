@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using artistry_Data.Context;
@@ -10,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using NLog;
 using NLog.Extensions.Logging;
@@ -32,6 +34,10 @@ namespace artistry_Web
             services.AddDbContext<Context>(options=>options.UseSqlServer("Data Source = SQL6003.site4now.net; Initial Catalog = DB_A3C9B6_artistry; User Id = DB_A3C9B6_artistry_admin; Password = Adna111!;"));
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            services.AddSingleton<IFileProvider>(
+            new PhysicalFileProvider(
+                Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
 
             services.AddMvc();
 

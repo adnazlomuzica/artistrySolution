@@ -1,6 +1,7 @@
 ﻿using artistry_Data.Context;
 using artistry_Data.Models;
 using artistry_Web.Areas.Administrator.ViewModels;
+using artistry_Web.Areas.Moderator.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -23,8 +24,23 @@ namespace artistry_Web.Helper
             
             if (className == "MuseumVM")
             {
-                var obj = validationContext.ObjectInstance as MuseumVM;
+                var obj = validationContext.ObjectInstance as Areas.Administrator.ViewModels.MuseumVM;
                 var  result = db.Museums.Where(x => x.User.Username == value.ToString() && x.Id!=obj.Id).ToList();
+                if (result.Count() > 0)
+                {
+                    return new ValidationResult(string.Format("The {0} already exist", propertyName),
+                                new List<string>() { propertyName });
+                }
+                else
+                {
+                    return ValidationResult.Success;
+                }
+            }
+
+            else if (className == "ArtworkVM")
+            {
+                var obj = validationContext.ObjectInstance as ArtworkVM;
+                var result = db.Artworks.Where(x => x.AccessionNumber.ToString() == value.ToString() && x.Id != obj.Id).ToList();
                 if (result.Count() > 0)
                 {
                     return new ValidationResult(string.Format("The {0} already exist", propertyName),

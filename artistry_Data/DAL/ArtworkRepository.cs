@@ -18,17 +18,17 @@ namespace artistry_Data.DAL
 
         public List<Artworks> GetArtworksByMuseum(int id)
         {
-            return context.Artworks.Include(x => x.Artist).Include(x => x.ArtworkType).Include(x => x.Country).Include(x => x.Material).Include(x => x.Museum).Include(x => x.Style).Where(x => x.MuseumId == id).ToList();
+            return context.Artworks.Include(x => x.Artist).Include(x => x.ArtworkType).Include(x => x.Country).Include(x => x.Material).Include(x => x.Museum).Include(x => x.Style).Where(x => x.MuseumId == id).OrderBy(x=>x.Name).ToList();
         }
 
         public List<Artworks> GetArtworksByArtist(int id)
         {
-            return context.Artworks.Include(x => x.Artist).Include(x => x.ArtworkType).Include(x => x.Country).Include(x => x.Material).Include(x => x.Museum).Include(x => x.Style).Where(x => x.ArtistId == id).ToList();
+            return context.Artworks.Include(x => x.Artist).Include(x => x.ArtworkType).Include(x => x.Country).Include(x => x.Material).Include(x => x.Museum).Include(x => x.Style).Where(x => x.ArtistId == id).OrderBy(x=>x.Name).ToList();
         }
 
         public List<Artworks> Search(string search, int id)
         {
-            return context.Artworks.Include(x => x.Artist).Include(x => x.ArtworkType).Include(x => x.Country).Include(x => x.Material).Include(x => x.Museum).Include(x => x.Style).Where(x => x.Name.Contains(search.Trim()) && x.MuseumId==id).ToList();
+            return context.Artworks.Include(x => x.Artist).Include(x => x.ArtworkType).Include(x => x.Country).Include(x => x.Material).Include(x => x.Museum).Include(x => x.Style).Where(x => x.Name.Contains(search.Trim()) && x.MuseumId==id).OrderBy(x=>x.Name).ToList();
         }
 
         public Artworks GetArtworkById(int id)

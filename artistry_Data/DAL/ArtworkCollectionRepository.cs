@@ -21,6 +21,26 @@ namespace artistry_Data.DAL
             return context.ArtworkCollections.Include(x => x.Artwork).ThenInclude(x=>x.Artist).Include(x => x.Collection).Where(x => x.CollectionId == id).ToList();
         }
 
+        public void InsertArtworkCollection(ArtworkCollections ac)
+        {
+            context.ArtworkCollections.Add(ac);
+        }
+
+        public int DeleteArtworkCollection(int id)
+        {
+            ArtworkCollections ac = context.ArtworkCollections.Where(x => x.Id == id).SingleOrDefault();
+            int n = ac.CollectionId;
+            context.ArtworkCollections.Remove(ac);
+
+            return n;
+        }
+
+
+        public void Save()
+        {
+            context.SaveChanges();
+        }
+
         private bool disposed = false;
 
         protected virtual void Dispose(bool disposing)

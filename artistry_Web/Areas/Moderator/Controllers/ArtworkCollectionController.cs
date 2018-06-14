@@ -37,18 +37,41 @@ namespace artistry_Web.Areas.Moderator.Controllers
             foreach (ArtworkCollections x in model)
             {
                 ArtworkInfoVM vm = new ArtworkInfoVM();
-                vm.Id = x.Id;
+                vm.Id = x.ArtworkId;
                 vm.Artist = x.Artwork.Artist.Name;
                 vm.ArtistId = x.Artwork.ArtistId;
                 vm.Likes = likesRepository.GetLikes(x.Id);
                 vm.Name = x.Artwork.Name;
-                vm.Image = imageRepository.GetArtworkImage(x.Id);
-                vm.ImageId = vm.Image.Id;
+                vm.Image = imageRepository.GetArtworkImage(x.ArtworkId);
+                if(vm.Image!=null)
+                  vm.ImageId = vm.Image.Id;
 
                 list.Add(vm);
             }
 
             return PartialView("Index", list);
+        }
+
+        [HttpGet("Add")]
+        public IActionResult Add(int artwork, int collection)
+        {
+            ArtworkCollections model = new ArtworkCollections();
+            model.ArtworkId = artwork;
+            model.CollectionId = collection;
+
+            artworkCollectionRepository.InsertArtworkCollection(model);
+            artworkCollectionRepository.Save();
+
+            return RedirectToAction("Index", "Artwork");
+        }
+
+        [HttpGet("Delete")]
+        public IActionResult Delete(int id)
+        {
+            int n=artworkCollectionRepository.DeleteArtworkCollection(id);
+            artworkCollectionRepository.Save();
+
+            return RedirectToAction("Details", "Collection", new { id = n });
         }
     }
 }

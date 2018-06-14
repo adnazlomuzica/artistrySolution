@@ -2,7 +2,7 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <style>
-    img {
+    .image img {
         max-width: 100%;
         width: 100%;
         object-fit: contain;
@@ -40,6 +40,7 @@
 <div class="content" style="padding-top:0px;padding-bottom:0;" id="closePanel1">
     <div class="panel panel-flat">
         <div class="panel-heading">
+            <h6 class="panel-title">Details</h6>
             <div class="heading-elements">
                 <ul class="icons-list">
                     <li><a data-toggle="collapse" data-target="#collapsePanel1" class="icon-arrow-down12"></a></li>
@@ -47,12 +48,10 @@
                 </ul>
             </div>
         </div>
-        <div class="panel-body" id="collapsePanel3">
+        <div class="panel-body" id="collapsePanel1">
             <div style="margin-bottom:30px;">
-
                 <div class="row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-8">
+                    <div class="col-md-3">
                         <div class="image">
                             @if (Model.Image != null)
                             {
@@ -64,18 +63,11 @@
                             }
                         </div>
                     </div>
-                    <div class="col-md-2"></div>
-                </div>
-                <br/><hr/>
-                <div class="row">
-                    <p class="col-md-12 text-bold" style="font-size:18px">@Model.Name</p>
+                    <p class="col-md-9 text-bold" style="font-size:18px">@Model.Name</p><br />
+                    <p class="col-md-9">@Model.Description</p>
                 </div>
                 <br />
-                <div class="row">
-                    <p class="col-md-12">@Model.Description</p>
-                </div>
             </div>
-
             <div id="artworks-coll"></div>
         </div>
     </div>

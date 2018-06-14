@@ -28,7 +28,7 @@ namespace artistry_Data.DAL
 
         public IEnumerable<Artists> Search(string search)
         {
-            return context.Artists.Include(x => x.Country).Where(x => x.Name.Contains(search.Trim())).ToList();
+            return context.Artists.Include(x => x.Country).Where(x => x.Name.Contains(search.Trim())).OrderBy(x=>x.Name).ToList();
         }
 
         public void InsertArtist(Artists artist)

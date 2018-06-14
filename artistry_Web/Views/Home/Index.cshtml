@@ -1,106 +1,1621 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿
+<body>
+    <div class="body-wrapper">
+        <div class="body-innerwrapper">
+            <div id="sp-header-sticky-wrapper" class="sticky-wrapper is-sticky" style="height: 90px;">
+                <header id="sp-header" style="width: 1349px; position: fixed; top: 0px;">
+                    <div class="container">
+                        <div class="row" style="position: relative;">
+                            <div id="sp-logo" class="col-xs-8 col-sm-3 col-md-3">
+                                <div class="sp-column">
+                                    <div class="logo">
+                                        <a asp-controller="Home" asp-action="Index">
+                                            <img class="sp-default-logo" src="~/assets/images/Logo3.png" style="margin-top:3px;width:150px;height:50px;">
+                                            <img class="sp-retina-logo" src="~/assets/images/Logo3.png" alt="LT Museum" width="250" height="50">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="sp-menu" class="col-xs-4 col-sm-9 col-md-9" style="position: static;">
+                                <div class="sp-column ">
+                                    <div class="sp-megamenu-wrapper">
+                                        <a id="offcanvas-toggler" href="#" aria-label="Menu"><i class="fa fa-bars" aria-hidden="true" title="Menu"></i></a>
+                                        <ul class="sp-megamenu-parent menu-slide-down hidden-sm hidden-xs">
+                                            <li class="sp-menu-item current-item active"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                                            <li class="sp-menu-item"><a asp-controller="Museum" asp-action="Index">Museums</a>
+                                            <li class="sp-menu-item"><a asp-controller="Collection" asp-action="Index">Collections</a>
+                                            <li class="sp-menu-item"><a asp-controller="Artwork" asp-action="Index">Artworks</a>
+                                            <li class="sp-menu-item"><a asp-controller="Artist" asp-action="Index">Artists</a></li>
+                                            <li class="sp-menu-item"><a asp-controller="News" asp-action="Index">News</a></li>
+                                            <li class="sp-menu-item"><a asp-controller="Autentification" asp-action="Index">Login</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+            </div>
+            <section id="sp-page-title">
+                <div class="row">
+                    <div id="sp-title" class="col-sm-12 col-md-12">
+                        <div class="sp-column "></div>
+                    </div>
+                </div>
+            </section>
+            <section id="sp-main-body">
+                <div class="container">
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-        <li data-target="#myCarousel" data-slide-to="3"></li>
-    </ol>
-    <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <img src="~/images/banner1.svg" alt="ASP.NET" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Learn how to build ASP.NET apps that can run anywhere.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525028&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="~/images/banner2.svg" alt="Visual Studio" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    There are powerful new features in Visual Studio for building modern web apps.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525030&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="~/images/banner3.svg" alt="Package Management" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Bring in libraries from NuGet and npm, and automate tasks using Grunt or Gulp.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525029&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="~/images/banner4.svg" alt="Microsoft Azure" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Learn how Microsoft's Azure cloud platform allows you to build, deploy, and scale web apps.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525027&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-    </div>
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-</div>
+                    <div class="row" style="position:relative;">
+                        <div id="sp-component" class="col-sm-12 col-md-12 col-lg-12">
+                            <div class="sp-column ">
+                                <div id="system-message-container">
+                                </div>
+                                <div class="qx quix">
+                                    <div class="qx-inner windows_nt_10_0">
+                                        <div id="lt-slider" class="qx-section ">
+                                            <!-- Shape -->
+                                            <div id="qx-row-52" class="qx-row lt-slider">
+                                                <div id="qx-column-730" class="qx-column  qx-col-lg-12 qx-col-md-12 qx-col-sm-12 qx-col-xs-12">
+                                                    <div id="qx-joomla-module-8933" class="qx-element qx-element-joomla-module ">
+                                                        <!-- START REVOLUTION SLIDER 4.8.1 fullwidth mode -->
+                                                        <div style="position:relative;width:100%;height:auto;margin-top:0px;margin-bottom:0px" class="forcefullwidth_wrapper_tp_banner">
+                                                            <div id="rev_slider_1_1_wrapper" class="rev_slider_wrapper fullwidthbanner-container" style="margin: 0px auto; padding: 0px; max-height: 700px; height: 700px; left: 15px; position: absolute; width: 1349px; overflow: visible;">
+                                                                <div id="rev_slider_1_1" class="rev_slider fullwidthabanner revslider-initialised tp-simpleresponsive" style="max-height: 700px; height: 700px; background-color: rgba(0, 0, 0, 0); background-image: none; perspective: 2500px; backface-visibility: hidden; transform-style: flat; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);">
+                                                                    <ul class="tp-revslider-mainul" style="display: block; overflow: hidden; width: 100%; height: 100%; max-height: 700px;">
+                                                                        <!-- SLIDE  1-->
+                                                                        <li data-transition="fade" data-slotamount="7" data-masterspeed="300" data-saveperformance="off" class="tp-revslider-slidesli active-revslide" style="width: 100%; height: 100%; overflow: hidden; z-index: 18; visibility: hidden; opacity: 0; position: absolute;">
+                                                                            <!-- MAIN IMAGE -->
+                                                                            <div class="slotholder" style="width:100%;height:100%;" data-duration="undefined" data-zoomstart="undefined" data-zoomend="undefined" data-rotationstart="undefined" data-rotationend="undefined" data-ease="undefined" data-bgpositionend="undefined" data-bgposition="center top" data-kenburns="undefined" data-easeme="undefined" data-bgfit="cover" data-bgfitend="undefined" data-owidth="undefined" data-oheight="undefined"><div class="tp-bgimg defaultimg" data-lazyload="undefined" data-bgfit="cover" data-bgposition="center top" data-bgrepeat="no-repeat" data-lazydone="undefined" src="http://demo5.ltheme.com/joomla/lt-museum/images/demo/slideshow/bg-slide.jpg" data-src="http://demo5.ltheme.com/joomla/lt-museum/images/demo/slideshow/bg-slide.jpg" style="background-color: rgba(0, 0, 0, 0); background-repeat: no-repeat; background-image: url(&quot;http://demo5.ltheme.com/joomla/lt-museum/images/demo/slideshow/bg-slide.jpg&quot;); background-size: cover; background-position: center top; width: 100%; height: 100%; opacity: 1; visibility: inherit;"></div></div>
+                                                                            <!-- LAYERS -->
+                                                                            <!-- LAYER NR. 2 -->
+                                                                            <div class="tp-caption excerpt_1 skewfromleftshort tp-resizeme  et-slider-text start splitted" data-x="center" data-hoffset="0" data-y="center" data-voffset="-15" data-speed="300" data-start="1000" data-easing="Power3.easeInOut" data-splitin="words" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300" style="z-index: 6; white-space: nowrap; transition: all 0s ease 0s; min-height: 0px; min-width: 0px; line-height: 60px; border-width: 0px; margin: 0px; padding: 1px 4px 0px; letter-spacing: -1px; font-size: 57px; left: 113px; top: 304.5px; visibility: visible; opacity: 0; transform: matrix3d(1, 0, 0, 0, 0.996195, 0.0871557, 0, 0, 0, 0, 1, 0, -1137, 0, 0, 1);">
+                                                                                <div class="tp-splitted" style="display: block; text-align: center; position: relative;">
+                                                                                    <div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted"><div style="position:relative;display:inline-block;" class="tp-splitted">I</div><div style="position:relative;display:inline-block;" class="tp-splitted">t</div><div style="position:relative;display:inline-block;" class="tp-splitted">’</div><div style="position:relative;display:inline-block;" class="tp-splitted">s</div></div> <div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted"><div style="position:relative;display:inline-block;" class="tp-splitted">n</div><div style="position:relative;display:inline-block;" class="tp-splitted">o</div><div style="position:relative;display:inline-block;" class="tp-splitted">t</div></div> <div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted"><div style="position:relative;display:inline-block;" class="tp-splitted">a</div></div> <div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted"><div style="position:relative;display:inline-block;" class="tp-splitted">m</div><div style="position:relative;display:inline-block;" class="tp-splitted">u</div><div style="position:relative;display:inline-block;" class="tp-splitted">s</div><div style="position:relative;display:inline-block;" class="tp-splitted">e</div><div style="position:relative;display:inline-block;" class="tp-splitted">u</div><div style="position:relative;display:inline-block;" class="tp-splitted">m</div><div style="position:relative;display:inline-block;" class="tp-splitted">.</div></div> <div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted"><div style="position:relative;display:inline-block;" class="tp-splitted">I</div><div style="position:relative;display:inline-block;" class="tp-splitted">t</div><div style="position:relative;display:inline-block;" class="tp-splitted">’</div><div style="position:relative;display:inline-block;" class="tp-splitted">s</div></div> <div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted"><div style="position:relative;display:inline-block;" class="tp-splitted">p</div><div style="position:relative;display:inline-block;" class="tp-splitted">l</div><div style="position:relative;display:inline-block;" class="tp-splitted">a</div><div style="position:relative;display:inline-block;" class="tp-splitted">c</div><div style="position:relative;display:inline-block;" class="tp-splitted">e</div></div> <div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted"><div style="position:relative;display:inline-block;" class="tp-splitted">o</div><div style="position:relative;display:inline-block;" class="tp-splitted">f</div></div> <div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">
+                                                                                        <div style="position:relative;display:inline-block;" class="tp-splitted">i</div><div style="position:relative;display:inline-block;" class="tp-splitted">d</div><div style="position:relative;display:inline-block;" class="tp-splitted">e</div><div style="position:relative;display:inline-block;" class="tp-splitted">a</div><div style="position:relative;display:inline-block;" class="tp-splitted">s</div><div style="position:relative;display:inline-block;" class="tp-splitted">
+                                                                                        </div><div style="position:relative;display:inline-block;" class="tp-splitted">	</div><div style="position:relative;display:inline-block;" class="tp-splitted">	</div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
 
-<div class="row">
-    <div class="col-md-3">
-        <h2>Application uses</h2>
-        <ul>
-            <li>Sample pages using ASP.NET Core MVC</li>
-            <li>Theming using <a href="https://go.microsoft.com/fwlink/?LinkID=398939">Bootstrap</a></li>
-        </ul>
+                                                                            <!-- LAYER NR. 3 -->
+                                                                            <div class="tp-caption medium_light_white randomrotate tp-resizeme start" data-x="center" data-hoffset="0" data-y="center" data-voffset="80" data-speed="300" data-start="1200" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300" style="z-index: 7; white-space: nowrap; transition: all 0s ease 0s; min-height: 0px; min-width: 0px; line-height: 36px; border-width: 0px; margin: 0px; padding: 0px; letter-spacing: 0px; font-size: 20px; left: 310px; top: 394px; visibility: visible; opacity: 0; transform: matrix3d(0.994522, -0.104528, 0, 0, 0.104528, 0.994522, 0, 0, 0, 0, 1, 0, -46, -73, 0, 1);">
+                                                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt<br style="transition: all 0s ease 0s; min-height: 0px; min-width: 0px; line-height: 36px; border-width: 0px; margin: 0px; padding: 0px; letter-spacing: 0px; font-size: 20px;"> magna aliqua ut enim ad minim veniam, quis nostrud exeri.
+                                                                            </div>
+
+                                                                            <!-- LAYER NR. 4 -->
+                                                                            <div class="tp-caption excerpt_1 randomrotate tp-resizeme start" data-x="center" data-hoffset="0" data-y="center" data-voffset="160" data-speed="300" data-start="1400" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300" style="z-index: 8; white-space: nowrap; transition: all 0s ease 0s; min-height: 0px; min-width: 0px; line-height: 60px; border-width: 0px; margin: 0px; padding: 1px 4px 0px; letter-spacing: -1px; font-size: 57px; left: 576px; top: 472px; visibility: visible; opacity: 0; transform: matrix3d(0.927184, -0.374607, 0, 0, 0.374607, 0.927184, 0, 0, 0, 0, 1, 0, -90, -6, 0, 1);">
+                                                                                <a href="/joomla/lt-museum/index.php/pages/about-us" class="button" style="transition: all 0.2s ease-out 0s; min-height: 0px; min-width: 0px; line-height: 60px; border-width: 2px; margin: 0px; padding: 10px 45px; letter-spacing: -1px; font-size: 14px;">VISIT US TODAY</a>
+                                                                            </div>
+                                                                        </li>
+                                                                        <!-- SLIDE  2-->
+                                                                        <li data-transition="random" data-slotamount="7" data-masterspeed="300" data-saveperformance="off" class="tp-revslider-slidesli active-revslide current-sr-slide-visible" style="width: 100%; height: 100%; overflow: hidden; z-index: 20; visibility: inherit; opacity: 1; position: absolute; transform: matrix(1, 0, 0, 1, 0, 0); transform-origin: center center 0px;">
+                                                                            <!-- MAIN IMAGE -->
+                                                                            <div class="slotholder" style="width:100%;height:100%;" data-duration="undefined" data-zoomstart="undefined" data-zoomend="undefined" data-rotationstart="undefined" data-rotationend="undefined" data-ease="undefined" data-bgpositionend="undefined" data-bgposition="center top" data-kenburns="undefined" data-easeme="undefined" data-bgfit="cover" data-bgfitend="undefined" data-owidth="undefined" data-oheight="undefined"><div class="tp-bgimg defaultimg" data-lazyload="undefined" data-bgfit="cover" data-bgposition="center top" data-bgrepeat="no-repeat" data-lazydone="undefined" src="http://demo5.ltheme.com/joomla/lt-museum/images/demo/slideshow/slide-home2-2.jpg" data-src="http://demo5.ltheme.com/joomla/lt-museum/images/demo/slideshow/slide-home2-2.jpg" style="background-color: rgba(0, 0, 0, 0); background-repeat: no-repeat; background-image: url(&quot;http://demo5.ltheme.com/joomla/lt-museum/images/demo/slideshow/slide-home2-2.jpg&quot;); background-size: cover; background-position: center top; width: 100%; height: 100%; opacity: 1; visibility: inherit;"></div></div>
+                                                                            <!-- LAYERS -->
+                                                                            <!-- LAYER NR. 1 -->
+                                                                            <div class="tp-caption excerpt-slider1 sft tp-resizeme start splitted" data-x="center" data-hoffset="0" data-y="center" data-voffset="-120" data-speed="300" data-start="800" data-easing="Power3.easeInOut" data-splitin="chars" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300" style="z-index: 5; white-space: nowrap; transition: all 0s ease 0s; min-height: 0px; min-width: 0px; line-height: 78px; border-width: 0px; margin: 0px; padding: 1px 4px 0px; letter-spacing: -1px; font-size: 38px; left: 422px; top: 190.5px; visibility: visible; opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);">
+                                                                                <div class="tp-splitted" style="display: block; text-align: left; position: relative;">
+                                                                                    <div style="position:relative;display:inline-block;" class="tp-splitted"><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">A</div><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">r</div><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">t</div></div> <div style="position:relative;display:inline-block;" class="tp-splitted"><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">i</div><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">s</div></div> <div style="position:relative;display:inline-block;" class="tp-splitted"><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">n</div><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">o</div><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">t</div></div> <div style="position:relative;display:inline-block;" class="tp-splitted"><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">w</div><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">h</div><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">a</div><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">t</div></div> <div style="position:relative;display:inline-block;" class="tp-splitted"><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">Y</div><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">o</div><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">u</div></div> <div style="position:relative;display:inline-block;" class="tp-splitted">
+                                                                                        <div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">s</div><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">e</div><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">e</div><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">
+                                                                                        </div><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">	</div><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">	</div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <!-- LAYER NR. 2 -->
+                                                                            <div class="tp-caption excerpt_1 skewfromrightshort tp-resizeme  et-slider-text start splitted" data-x="center" data-hoffset="0" data-y="center" data-voffset="-35" data-speed="300" data-start="1000" data-easing="Power3.easeInOut" data-splitin="words" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300" style="z-index: 6; white-space: nowrap; transition: all 0s ease 0s; min-height: 0px; min-width: 0px; line-height: 60px; border-width: 0px; margin: 0px; padding: 1px 4px 0px; letter-spacing: -1px; font-size: 57px; left: 269px; top: 284.5px; visibility: visible; opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);">
+                                                                                <div class="tp-splitted" style="display: block; text-align: center; position: relative;">
+                                                                                    <div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted"><div style="position:relative;display:inline-block;" class="tp-splitted">M</div><div style="position:relative;display:inline-block;" class="tp-splitted">u</div><div style="position:relative;display:inline-block;" class="tp-splitted">s</div><div style="position:relative;display:inline-block;" class="tp-splitted">e</div><div style="position:relative;display:inline-block;" class="tp-splitted">u</div><div style="position:relative;display:inline-block;" class="tp-splitted">m</div><div style="position:relative;display:inline-block;" class="tp-splitted">e</div></div> <div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted"><div style="position:relative;display:inline-block;" class="tp-splitted">I</div><div style="position:relative;display:inline-block;" class="tp-splitted">s</div></div> <div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted"><div style="position:relative;display:inline-block;" class="tp-splitted">a</div></div> <div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted"><div style="position:relative;display:inline-block;" class="tp-splitted">P</div><div style="position:relative;display:inline-block;" class="tp-splitted">l</div><div style="position:relative;display:inline-block;" class="tp-splitted">a</div><div style="position:relative;display:inline-block;" class="tp-splitted">c</div><div style="position:relative;display:inline-block;" class="tp-splitted">e</div></div> <div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">
+                                                                                        <div style="position:relative;display:inline-block;" class="tp-splitted">W</div><div style="position:relative;display:inline-block;" class="tp-splitted">h</div><div style="position:relative;display:inline-block;" class="tp-splitted">e</div><div style="position:relative;display:inline-block;" class="tp-splitted">r</div><div style="position:relative;display:inline-block;" class="tp-splitted">e</div><div style="position:relative;display:inline-block;" class="tp-splitted">
+                                                                                        </div><div style="position:relative;display:inline-block;" class="tp-splitted">	</div><div style="position:relative;display:inline-block;" class="tp-splitted">	</div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <!-- LAYER NR. 3 -->
+                                                                            <div class="tp-caption excerpt_1 skewfromrightshort tp-resizeme  et-slider-text start splitted" data-x="center" data-hoffset="0" data-y="center" data-voffset="46" data-speed="300" data-start="1400" data-easing="Power3.easeInOut" data-splitin="words" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300" style="z-index: 7; white-space: nowrap; transition: all 0s ease 0s; min-height: 0px; min-width: 0px; line-height: 60px; border-width: 0px; margin: 0px; padding: 1px 4px 0px; letter-spacing: -1px; font-size: 57px; left: 236px; top: 365.5px; visibility: visible; opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);">
+                                                                                <div class="tp-splitted" style="display: block; text-align: center; position: relative;">
+                                                                                    <div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted"><div style="position:relative;display:inline-block;" class="tp-splitted">O</div><div style="position:relative;display:inline-block;" class="tp-splitted">n</div><div style="position:relative;display:inline-block;" class="tp-splitted">e</div></div> <div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted"><div style="position:relative;display:inline-block;" class="tp-splitted">S</div><div style="position:relative;display:inline-block;" class="tp-splitted">h</div><div style="position:relative;display:inline-block;" class="tp-splitted">o</div><div style="position:relative;display:inline-block;" class="tp-splitted">u</div><div style="position:relative;display:inline-block;" class="tp-splitted">l</div><div style="position:relative;display:inline-block;" class="tp-splitted">d</div></div> <div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted"><div style="position:relative;display:inline-block;" class="tp-splitted">L</div><div style="position:relative;display:inline-block;" class="tp-splitted">o</div><div style="position:relative;display:inline-block;" class="tp-splitted">s</div><div style="position:relative;display:inline-block;" class="tp-splitted">e</div></div> <div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted"><div style="position:relative;display:inline-block;" class="tp-splitted">o</div><div style="position:relative;display:inline-block;" class="tp-splitted">n</div><div style="position:relative;display:inline-block;" class="tp-splitted">e</div><div style="position:relative;display:inline-block;" class="tp-splitted">’</div><div style="position:relative;display:inline-block;" class="tp-splitted">s</div></div> <div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">
+                                                                                        <div style="position:relative;display:inline-block;" class="tp-splitted">h</div><div style="position:relative;display:inline-block;" class="tp-splitted">e</div><div style="position:relative;display:inline-block;" class="tp-splitted">a</div><div style="position:relative;display:inline-block;" class="tp-splitted">d</div><div style="position:relative;display:inline-block;" class="tp-splitted">
+                                                                                        </div><div style="position:relative;display:inline-block;" class="tp-splitted">	</div><div style="position:relative;display:inline-block;" class="tp-splitted">	</div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <!-- LAYER NR. 4 -->
+                                                                            <div class="tp-caption medium_light_white randomrotate tp-resizeme start" data-x="center" data-hoffset="0" data-y="center" data-voffset="134" data-speed="300" data-start="1200" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300" style="z-index: 8; white-space: nowrap; transition: all 0s ease 0s; min-height: 0px; min-width: 0px; line-height: 36px; border-width: 0px; margin: 0px; padding: 0px; letter-spacing: 0px; font-size: 20px; left: 310px; top: 448px; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);">
+                                                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt<br style="transition: all 0s ease 0s; min-height: 0px; min-width: 0px; line-height: 36px; border-width: 0px; margin: 0px; padding: 0px; letter-spacing: 0px; font-size: 20px;"> magna aliqua ut enim ad minim veniam, quis nostrud exeri.
+                                                                            </div>
+
+                                                                            <!-- LAYER NR. 5 -->
+                                                                            <div class="tp-caption excerpt_1 randomrotate tp-resizeme start" data-x="center" data-hoffset="0" data-y="center" data-voffset="215" data-speed="300" data-start="1400" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300" style="z-index: 9; white-space: nowrap; transition: all 0s ease 0s; min-height: 0px; min-width: 0px; line-height: 60px; border-width: 0px; margin: 0px; padding: 1px 4px 0px; letter-spacing: -1px; font-size: 57px; left: 576px; top: 527px; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);">
+                                                                                <a href="/joomla/lt-museum/index.php/pages/history" class="button" style="transition: all 0.2s ease-out 0s; min-height: 0px; min-width: 0px; line-height: 60px; border-width: 2px; margin: 0px; padding: 10px 45px; letter-spacing: -1px; font-size: 14px;">VISIT US TODAY</a>
+                                                                            </div>
+                                                                        </li>
+                                                                        <!-- SLIDE  3-->
+                                                                        <li data-transition="slidehorizontal" data-slotamount="7" data-masterspeed="300" data-saveperformance="off" class="tp-revslider-slidesli active-revslide" style="width: 100%; height: 100%; overflow: hidden; visibility: hidden; opacity: 0; z-index: 18;">
+                                                                            <!-- MAIN IMAGE -->
+                                                                            <div class="slotholder" style="width:100%;height:100%;" data-duration="undefined" data-zoomstart="undefined" data-zoomend="undefined" data-rotationstart="undefined" data-rotationend="undefined" data-ease="undefined" data-bgpositionend="undefined" data-bgposition="center top" data-kenburns="undefined" data-easeme="undefined" data-bgfit="cover" data-bgfitend="undefined" data-owidth="undefined" data-oheight="undefined"><div class="tp-bgimg defaultimg" data-lazyload="undefined" data-bgfit="cover" data-bgposition="center top" data-bgrepeat="no-repeat" data-lazydone="undefined" src="http://demo5.ltheme.com/joomla/lt-museum/images/demo/slideshow/slide-home2-3.jpg" data-src="http://demo5.ltheme.com/joomla/lt-museum/images/demo/slideshow/slide-home2-3.jpg" style="background-color: rgba(0, 0, 0, 0); background-repeat: no-repeat; background-image: url(&quot;http://demo5.ltheme.com/joomla/lt-museum/images/demo/slideshow/slide-home2-3.jpg&quot;); background-size: cover; background-position: center top; width: 100%; height: 100%; opacity: 1; visibility: inherit;"></div></div>
+                                                                            <!-- LAYERS -->
+                                                                            <!-- LAYER NR. 1 -->
+                                                                            <div class="tp-caption excerpt-slider1 lft tp-resizeme start splitted" data-x="center" data-hoffset="0" data-y="center" data-voffset="-120" data-speed="300" data-start="800" data-easing="Power3.easeInOut" data-splitin="chars" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300" style="z-index: 5; white-space: nowrap; transition: all 0s ease 0s; min-height: 0px; min-width: 0px; line-height: 78px; border-width: 0px; margin: 0px; padding: 1px 4px 0px; letter-spacing: -1px; font-size: 38px; left: 446px; top: 190.5px; visibility: visible; opacity: 0; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -104, 0, 1);">
+                                                                                <div class="tp-splitted" style="display: block; text-align: left; position: relative;">
+                                                                                    <div style="position:relative;display:inline-block;" class="tp-splitted"><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">1</div><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">0</div><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">0</div><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">+</div></div> <div style="position:relative;display:inline-block;" class="tp-splitted"><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">A</div><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">r</div><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">t</div><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">s</div></div> <div style="position:relative;display:inline-block;" class="tp-splitted"><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">i</div><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">n</div></div> <div style="position:relative;display:inline-block;" class="tp-splitted"><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">o</div><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">n</div><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">e</div></div> <div style="position:relative;display:inline-block;" class="tp-splitted">
+                                                                                        <div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">p</div><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">l</div><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">a</div><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">c</div><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">e</div><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">
+                                                                                        </div><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">	</div><div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">	</div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <!-- LAYER NR. 2 -->
+                                                                            <div class="tp-caption excerpt_1 skewfromleftshort tp-resizeme  et-slider-text start splitted" data-x="center" data-hoffset="0" data-y="center" data-voffset="-35" data-speed="300" data-start="1000" data-easing="Power3.easeInOut" data-splitin="words" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300" style="z-index: 6; white-space: nowrap; transition: all 0s ease 0s; min-height: 0px; min-width: 0px; line-height: 60px; border-width: 0px; margin: 0px; padding: 1px 4px 0px; letter-spacing: -1px; font-size: 57px; left: 247px; top: 284.5px; visibility: visible; opacity: 0; transform: matrix3d(1, 0, 0, 0, 0.996195, 0.0871557, 0, 0, 0, 0, 1, 0, -871, 0, 0, 1);">
+                                                                                <div class="tp-splitted" style="display: block; text-align: center; position: relative;">
+                                                                                    <div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted"><div style="position:relative;display:inline-block;" class="tp-splitted">M</div><div style="position:relative;display:inline-block;" class="tp-splitted">u</div><div style="position:relative;display:inline-block;" class="tp-splitted">s</div><div style="position:relative;display:inline-block;" class="tp-splitted">e</div><div style="position:relative;display:inline-block;" class="tp-splitted">u</div><div style="position:relative;display:inline-block;" class="tp-splitted">m</div></div> <div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted"><div style="position:relative;display:inline-block;" class="tp-splitted">i</div><div style="position:relative;display:inline-block;" class="tp-splitted">s</div></div> <div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted"><div style="position:relative;display:inline-block;" class="tp-splitted">t</div><div style="position:relative;display:inline-block;" class="tp-splitted">h</div><div style="position:relative;display:inline-block;" class="tp-splitted">e</div></div> <div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted"><div style="position:relative;display:inline-block;" class="tp-splitted">P</div><div style="position:relative;display:inline-block;" class="tp-splitted">l</div><div style="position:relative;display:inline-block;" class="tp-splitted">a</div><div style="position:relative;display:inline-block;" class="tp-splitted">c</div><div style="position:relative;display:inline-block;" class="tp-splitted">e</div></div> <div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">
+                                                                                        <div style="position:relative;display:inline-block;" class="tp-splitted">w</div><div style="position:relative;display:inline-block;" class="tp-splitted">h</div><div style="position:relative;display:inline-block;" class="tp-splitted">e</div><div style="position:relative;display:inline-block;" class="tp-splitted">r</div><div style="position:relative;display:inline-block;" class="tp-splitted">e</div><div style="position:relative;display:inline-block;" class="tp-splitted">
+                                                                                        </div><div style="position:relative;display:inline-block;" class="tp-splitted">	</div><div style="position:relative;display:inline-block;" class="tp-splitted">	</div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <!-- LAYER NR. 3 -->
+                                                                            <div class="tp-caption excerpt_1 skewfromleftshort tp-resizeme  et-slider-text start splitted" data-x="center" data-hoffset="0" data-y="center" data-voffset="46" data-speed="300" data-start="1400" data-easing="Power3.easeInOut" data-splitin="words" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300" style="z-index: 7; white-space: nowrap; transition: all 0s ease 0s; min-height: 0px; min-width: 0px; line-height: 60px; border-width: 0px; margin: 0px; padding: 1px 4px 0px; letter-spacing: -1px; font-size: 57px; left: 248.5px; top: 365.5px; visibility: visible; opacity: 0; transform: matrix3d(1, 0, 0, 0, 0.996195, 0.0871557, 0, 0, 0, 0, 1, 0, -863, 0, 0, 1);">
+                                                                                <div class="tp-splitted" style="display: block; text-align: center; position: relative;">
+                                                                                    <div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted"><div style="position:relative;display:inline-block;" class="tp-splitted">y</div><div style="position:relative;display:inline-block;" class="tp-splitted">o</div><div style="position:relative;display:inline-block;" class="tp-splitted">u</div></div> <div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted"><div style="position:relative;display:inline-block;" class="tp-splitted">c</div><div style="position:relative;display:inline-block;" class="tp-splitted">a</div><div style="position:relative;display:inline-block;" class="tp-splitted">n</div></div> <div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted"><div style="position:relative;display:inline-block;" class="tp-splitted">s</div><div style="position:relative;display:inline-block;" class="tp-splitted">e</div><div style="position:relative;display:inline-block;" class="tp-splitted">e</div></div> <div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted"><div style="position:relative;display:inline-block;" class="tp-splitted">w</div><div style="position:relative;display:inline-block;" class="tp-splitted">o</div><div style="position:relative;display:inline-block;" class="tp-splitted">n</div><div style="position:relative;display:inline-block;" class="tp-splitted">d</div><div style="position:relative;display:inline-block;" class="tp-splitted">e</div><div style="position:relative;display:inline-block;" class="tp-splitted">r</div></div> <div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted"><div style="position:relative;display:inline-block;" class="tp-splitted">&amp;</div></div> <div style="position: relative; display: inline-block; visibility: visible; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="tp-splitted">
+                                                                                        <div style="position:relative;display:inline-block;" class="tp-splitted">F</div><div style="position:relative;display:inline-block;" class="tp-splitted">e</div><div style="position:relative;display:inline-block;" class="tp-splitted">e</div><div style="position:relative;display:inline-block;" class="tp-splitted">l</div><div style="position:relative;display:inline-block;" class="tp-splitted">!</div><div style="position:relative;display:inline-block;" class="tp-splitted">
+                                                                                        </div><div style="position:relative;display:inline-block;" class="tp-splitted">	</div><div style="position:relative;display:inline-block;" class="tp-splitted">	</div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <!-- LAYER NR. 4 -->
+                                                                            <div class="tp-caption medium_light_white randomrotate tp-resizeme start" data-x="center" data-hoffset="0" data-y="center" data-voffset="134" data-speed="300" data-start="1200" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300" style="z-index: 8; white-space: nowrap; transition: all 0s ease 0s; min-height: 0px; min-width: 0px; line-height: 36px; border-width: 0px; margin: 0px; padding: 0px; letter-spacing: 0px; font-size: 20px; left: 310px; top: 448px; visibility: visible; opacity: 0; transform: matrix3d(-0.121869, 0.992546, 0, 0, -0.992546, -0.121869, 0, 0, 0, 0, 1, 0, -25, -61, 0, 1);">
+                                                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt<br style="transition: all 0s ease 0s; min-height: 0px; min-width: 0px; line-height: 36px; border-width: 0px; margin: 0px; padding: 0px; letter-spacing: 0px; font-size: 20px;"> magna aliqua ut enim ad minim veniam, quis nostrud exeri.
+                                                                            </div>
+
+                                                                            <!-- LAYER NR. 5 -->
+                                                                            <div class="tp-caption excerpt_1 randomrotate tp-resizeme start" data-x="center" data-hoffset="0" data-y="center" data-voffset="215" data-speed="300" data-start="1400" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300" style="z-index: 9; white-space: nowrap; transition: all 0s ease 0s; min-height: 0px; min-width: 0px; line-height: 60px; border-width: 0px; margin: 0px; padding: 1px 4px 0px; letter-spacing: -1px; font-size: 57px; left: 576px; top: 527px; visibility: visible; opacity: 0; transform: matrix3d(-0.052336, 0.99863, 0, 0, -0.99863, -0.052336, 0, 0, 0, 0, 1, 0, -82, -58, 0, 1);">
+                                                                                <a href="/joomla/lt-museum/index.php/pages/events" class="button" style="transition: all 0.2s ease-out 0s; min-height: 0px; min-width: 0px; line-height: 60px; border-width: 2px; margin: 0px; padding: 10px 45px; letter-spacing: -1px; font-size: 14px;">VISIT US TODAY</a>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                    <div class="tp-bannertimer tp-bottom" style="display: none; visibility: hidden; width: 81.8444%; transform: translate3d(0px, 0px, 0px);"></div>	<div class="tp-loader spinner3" style="display: none;"><div class="dot1"></div><div class="dot2"></div><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>
+                                                                </div>
+
+                                                                <script type="text/javascript">
+
+
+                                                                    /******************************************
+                                                                        -	PREPARE PLACEHOLDER FOR SLIDER	-
+                                                                    ******************************************/
+
+
+                                                                    var setREVStartSize = function () {
+                                                                        var tpopt = new Object();
+                                                                        tpopt.startwidth = 1349;
+                                                                        tpopt.startheight = 700;
+                                                                        tpopt.container = jQuery('#rev_slider_1_1');
+                                                                        tpopt.fullScreen = "off";
+                                                                        tpopt.forceFullWidth = "on";
+
+                                                                        tpopt.container.closest(".rev_slider_wrapper").css({ height: tpopt.container.height() }); tpopt.width = parseInt(tpopt.container.width(), 0); tpopt.height = parseInt(tpopt.container.height(), 0); tpopt.bw = tpopt.width / tpopt.startwidth; tpopt.bh = tpopt.height / tpopt.startheight; if (tpopt.bh > tpopt.bw) tpopt.bh = tpopt.bw; if (tpopt.bh < tpopt.bw) tpopt.bw = tpopt.bh; if (tpopt.bw < tpopt.bh) tpopt.bh = tpopt.bw; if (tpopt.bh > 1) { tpopt.bw = 1; tpopt.bh = 1 } if (tpopt.bw > 1) { tpopt.bw = 1; tpopt.bh = 1 } tpopt.height = Math.round(tpopt.startheight * (tpopt.width / tpopt.startwidth)); if (tpopt.height > tpopt.startheight && tpopt.autoHeight != "on") tpopt.height = tpopt.startheight; if (tpopt.fullScreen == "on") { tpopt.height = tpopt.bw * tpopt.startheight; var cow = tpopt.container.parent().width(); var coh = jQuery(window).height(); if (tpopt.fullScreenOffsetContainer != undefined) { try { var offcontainers = tpopt.fullScreenOffsetContainer.split(","); jQuery.each(offcontainers, function (e, t) { coh = coh - jQuery(t).outerHeight(true); if (coh < tpopt.minFullScreenHeight) coh = tpopt.minFullScreenHeight }) } catch (e) { } } tpopt.container.parent().height(coh); tpopt.container.height(coh); tpopt.container.closest(".rev_slider_wrapper").height(coh); tpopt.container.closest(".forcefullwidth_wrapper_tp_banner").find(".tp-fullwidth-forcer").height(coh); tpopt.container.css({ height: "100%" }); tpopt.height = coh; } else { tpopt.container.height(tpopt.height); tpopt.container.closest(".rev_slider_wrapper").height(tpopt.height); tpopt.container.closest(".forcefullwidth_wrapper_tp_banner").find(".tp-fullwidth-forcer").height(tpopt.height); }
+                                                                    };
+
+                                                                    /* CALL PLACEHOLDER */
+                                                                    setREVStartSize();
+
+
+                                                                    var tpj = jQuery;
+                                                                    tpj.noConflict();
+                                                                    var revapi1;
+
+
+
+                                                                    tpj(document).ready(function () {
+
+
+
+                                                                        if (tpj('#rev_slider_1_1').revolution == undefined) {
+                                                                            revslider_showDoubleJqueryError('#rev_slider_1_1');
+                                                                        } else {
+                                                                            revapi1 = tpj('#rev_slider_1_1').show().revolution(
+                                                                                {
+
+                                                                                    dottedOverlay: "none",
+                                                                                    delay: 9000,
+                                                                                    startwidth: 1349,
+                                                                                    startheight: 700,
+                                                                                    hideThumbs: 0,
+
+                                                                                    thumbWidth: 100,
+                                                                                    thumbHeight: 50,
+                                                                                    thumbAmount: 3,
+
+                                                                                    simplifyAll: "off",
+                                                                                    navigationType: "none",
+                                                                                    navigationArrows: "solo",
+                                                                                    navigationStyle: "round",
+                                                                                    touchenabled: "on",
+                                                                                    onHoverStop: "on",
+                                                                                    nextSlideOnWindowFocus: "off",
+
+                                                                                    swipe_threshold: 75,
+                                                                                    swipe_min_touches: 1,
+                                                                                    drag_block_vertical: false,
+
+
+                                                                                    keyboardNavigation: "off",
+
+                                                                                    navigationHAlign: "center",
+                                                                                    navigationVAlign: "bottom",
+                                                                                    navigationHOffset: 0,
+                                                                                    navigationVOffset: 20,
+
+                                                                                    soloArrowLeftHalign: "left",
+                                                                                    soloArrowLeftValign: "center",
+                                                                                    soloArrowLeftHOffset: 20,
+                                                                                    soloArrowLeftVOffset: 0,
+
+                                                                                    soloArrowRightHalign: "right",
+                                                                                    soloArrowRightValign: "center",
+                                                                                    soloArrowRightHOffset: 20,
+                                                                                    soloArrowRightVOffset: 0,
+
+                                                                                    shadow: 0,
+                                                                                    fullWidth: "on",
+                                                                                    fullScreen: "off",
+
+                                                                                    spinner: "spinner3",
+
+                                                                                    stopLoop: "off",
+                                                                                    stopAfterLoops: -1,
+                                                                                    stopAtSlide: -1,
+
+                                                                                    shuffle: "off",
+
+                                                                                    autoHeight: "off",
+                                                                                    forceFullWidth: "on",
+
+
+                                                                                    hideTimerBar: "on",
+                                                                                    hideThumbsOnMobile: "off",
+                                                                                    hideNavDelayOnMobile: 1500,
+                                                                                    hideBulletsOnMobile: "off",
+                                                                                    hideArrowsOnMobile: "off",
+                                                                                    hideThumbsUnderResolution: 0,
+
+                                                                                    hideSliderAtLimit: 0,
+                                                                                    hideCaptionAtLimit: 0,
+                                                                                    hideAllCaptionAtLilmit: 0,
+                                                                                    startWithSlide: 0,
+                                                                                    isJoomla: true
+                                                                                });
+
+
+
+                                                                        }
+                                                                    });	/*ready*/
+
+                                                                </script>
+                                                                <style type="text/css">
+                                                                    #rev_slider_1_1_wrapper .tp-loader.spinner3 div {
+                                                                        background-color: #FFFFFF !important;
+                                                                    }
+                                                                </style>
+                                                                <div style="position: absolute; top: 350px; margin-top: -20px; left: 20px;" class="tp-leftarrow  tparrows default round"><div class="tp-arr-allwrapper"><div class="tp-arr-iwrapper"><div class="tp-arr-imgholder" style="visibility: inherit; opacity: 1; background-image: url(&quot;http://demo5.ltheme.com/joomla/lt-museum/images/demo/slideshow/bg-slide.jpg&quot;);"></div><div class="tp-arr-imgholder2"></div><div class="tp-arr-titleholder"></div><div class="tp-arr-subtitleholder"></div></div></div></div><div style="position: absolute; top: 350px; margin-top: -20px; right: 20px;" class="tp-rightarrow  tparrows default round"><div class="tp-arr-allwrapper"><div class="tp-arr-iwrapper"><div class="tp-arr-imgholder" style="visibility: inherit; opacity: 1; background-image: url(&quot;http://demo5.ltheme.com/joomla/lt-museum/images/demo/slideshow/slide-home2-3.jpg&quot;);"></div><div class="tp-arr-imgholder2"></div><div class="tp-arr-titleholder"></div><div class="tp-arr-subtitleholder"></div></div></div></div>
+                                                            </div><div class="tp-fullwidth-forcer" style="width:100%;height:700px"></div>
+                                                        </div>
+                                                        <!-- END REVOLUTION SLIDER -->
+                                                    </div>
+                                                    <!-- qx-element-joomla-module -->
+                                                </div>
+                                                <!-- qx-col -->
+
+                                            </div>
+                                            <!-- qx-row -->
+
+
+                                        </div>
+                                        <!-- qx-section -->
+
+                                        <div id="lt-feature" class="qx-section  qx-section--stretch" style="position: relative; width: 1349px; margin-left: 0px;">
+
+                                            <!-- Shape -->
+
+                                            <div class="qx-container">
+
+                                                <div id="qx-row-77252" class="qx-row ">
+
+                                                    <div id="lt-service-sub" class="qx-column  qx-col-lg-4 qx-col-md-4 qx-col-sm-6 qx-col-xs-12 wow fadeInUp animated animated" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s;">
+                                                        <div id="qx-blurb-22261" class="qx-element qx-element-blurb lt-service-sub-item wow fadeInUp animated animated" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s;">
+
+
+
+                                                            <img class="qx-image " src="/joomla/lt-museum/images/demo/pages/home1.jpg" alt=""><h3 class="qx-blurb-title ">  </h3>        <div class="qx-blurb-content">
+                                                                <h4>Unique experiences &amp; spaces</h4>
+                                                                <p>Lectus placerat a ultricies a,interdum donec eget metus auguen u Fusce mollis imperdiet interdum donec eget metus auguen unc.</p>
+                                                            </div>
+
+
+
+                                                        </div>
+                                                        <!-- qx-element-blurb -->
+                                                    </div>
+                                                    <!-- qx-col -->
+                                                    <div id="lt-service-sub" class="qx-column  qx-col-lg-4 qx-col-md-4 qx-col-sm-6 qx-col-xs-12 wow fadeInUp animated animated" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s;">
+                                                        <div id="qx-blurb-78662" class="qx-element qx-element-blurb lt-service-sub-item wow fadeInUp animated animated" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s;">
+
+
+
+                                                            <img class="qx-image " src="/joomla/lt-museum/images/demo/pages/home2.jpg" alt=""><h3 class="qx-blurb-title ">  </h3>        <div class="qx-blurb-content">
+                                                                <h4>Word of mouth - TripAdvisor</h4>
+                                                                <p>Lectus placerat a ultricies a,interdum donec eget metus auguen u Fusce mollis imperdiet interdum donec eget metus auguen unc.</p>
+                                                            </div>
+
+
+
+                                                        </div>
+                                                        <!-- qx-element-blurb -->
+                                                    </div>
+                                                    <!-- qx-col -->
+                                                    <div id="lt-service-sub" class="qx-column  qx-col-lg-4 qx-col-md-4 qx-col-sm-6 qx-col-xs-12 wow fadeInUp animated animated" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s;">
+                                                        <div id="qx-blurb-71665" class="qx-element qx-element-blurb lt-service-sub-item wow fadeInUp animated animated" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s;">
+
+
+
+                                                            <img class="qx-image " src="/joomla/lt-museum/images/demo/pages/home3.jpg" alt=""><h3 class="qx-blurb-title ">  </h3>        <div class="qx-blurb-content">
+                                                                <h4>Learning and enjoying art</h4>
+                                                                <p>Lectus placerat a ultricies a,interdum donec eget metus auguen u Fusce mollis imperdiet interdum donec eget metus auguen unc.</p>
+                                                            </div>
+
+
+
+                                                        </div>
+                                                        <!-- qx-element-blurb -->
+                                                    </div>
+                                                    <!-- qx-col -->
+
+                                                </div>
+                                                <!-- qx-row -->
+
+                                            </div>
+
+                                        </div>
+                                        <!-- qx-section -->
+
+                                        <div id="lt-intro" class="qx-section  qx-section--stretch" style="position: relative; width: 1349px; margin-left: 0px;">
+
+                                            <!-- Shape -->
+
+                                            <div class="qx-container-fluid">
+
+                                                <div id="qx-row-4396" class="qx-row ">
+
+                                                    <div id="qx-column-2598" class="qx-column  qx-col-lg-12 qx-col-md-12 qx-col-sm-12 qx-col-xs-12">
+                                                        <div id="qx-text-82101" class="qx-element qx-element-text lt-title wow zoomIn animated animated" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s;">
+                                                            <h2>ARTS OF GLOBALLY COVERED</h2>
+                                                            <h3>Adventure,History,Mystery,Fantasy</h3>
+                                                        </div>
+                                                        <!-- qx-element-text -->
+                                                    </div>
+                                                    <!-- qx-col -->
+
+                                                </div>
+                                                <!-- qx-row -->
+                                                <div class="qx-container">
+                                                    <div id="qx-row-49134" class="qx-row ">
+
+                                                        <div id="qx-column-7136" class="qx-column  qx-col-lg-12 qx-col-md-12 qx-col-sm-12 qx-col-xs-12">
+                                                            <div id="qx-blurb-51139" class="qx-element qx-element-blurb et-title-general">
+
+
+
+                                                                <img class="qx-image " src="/joomla/lt-museum/images/demo/pages/title-bgr.png" alt=""><h3 class="qx-blurb-title ">  </h3>        <div class="qx-blurb-content"></div>
+
+
+
+                                                            </div>
+                                                            <!-- qx-element-blurb -->
+                                                        </div>
+                                                        <!-- qx-col -->
+
+                                                    </div>
+                                                    <!-- qx-row -->
+                                                </div>
+                                                <div class="qx-container">
+                                                    <div id="qx-row-7875" class="qx-row ">
+
+                                                        <div id="qx-column-8077" class="qx-column  qx-col-lg-3 qx-col-md-3 qx-col-sm-6 qx-col-xs-12">
+                                                            <div id="qx-blurb-2286" class="qx-element qx-element-blurb lt-intro-item wow rotateIn animated animated" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s;">
+
+
+
+                                                                <i class="qx-icon fa fa-star qx-hvr-bob"></i><h3 class="qx-blurb-title "> War History </h3>        <div class="qx-blurb-content"><p>A fishing lure is a type of artificial fishing bait which is designed to attract a fish’s attention. The lure uses movement…</p></div>
+
+
+
+                                                            </div>
+                                                            <!-- qx-element-blurb -->
+                                                        </div>
+                                                        <!-- qx-col -->
+                                                        <div id="qx-column-7579" class="qx-column  qx-col-lg-3 qx-col-md-3 qx-col-sm-6 qx-col-xs-12">
+                                                            <div id="qx-blurb-38223" class="qx-element qx-element-blurb lt-intro-item wow rotateIn animated animated" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s;">
+
+
+
+                                                                <i class="qx-icon fa fa-bookmark qx-hvr-bob"></i><h3 class="qx-blurb-title "> Classical Art </h3>        <div class="qx-blurb-content"><p>A fishing lure is a type of artificial fishing bait which is designed to attract a fish’s attention. The lure uses movement…</p></div>
+
+
+
+                                                            </div>
+                                                            <!-- qx-element-blurb -->
+                                                        </div>
+                                                        <!-- qx-col -->
+                                                        <div id="qx-column-881" class="qx-column  qx-col-lg-3 qx-col-md-3 qx-col-sm-6 qx-col-xs-12">
+                                                            <div id="qx-blurb-33221" class="qx-element qx-element-blurb lt-intro-item wow rotateIn animated animated" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s;">
+
+
+
+                                                                <i class="qx-icon fa fa-binoculars qx-hvr-bob"></i><h3 class="qx-blurb-title "> Kings of History </h3>        <div class="qx-blurb-content"><p>A fishing lure is a type of artificial fishing bait which is designed to attract a fish’s attention. The lure uses movement…</p></div>
+
+
+
+                                                            </div>
+                                                            <!-- qx-element-blurb -->
+                                                        </div>
+                                                        <!-- qx-col -->
+                                                        <div id="qx-column-383" class="qx-column  qx-col-lg-3 qx-col-md-3 qx-col-sm-6 qx-col-xs-12">
+                                                            <div id="qx-blurb-93227" class="qx-element qx-element-blurb lt-intro-item wow rotateIn animated animated" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s;">
+
+
+
+                                                                <i class="qx-icon fa fa-medium qx-hvr-bob"></i><h3 class="qx-blurb-title "> Decorative Art </h3>        <div class="qx-blurb-content"><p>A fishing lure is a type of artificial fishing bait which is designed to attract a fish’s attention. The lure uses movement…</p></div>
+
+
+
+                                                            </div>
+                                                            <!-- qx-element-blurb -->
+                                                        </div>
+                                                        <!-- qx-col -->
+
+                                                    </div>
+                                                    <!-- qx-row -->
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <!-- qx-section -->
+
+                                        <div id="lt-our-care" class="qx-section ">
+
+                                            <!-- Shape -->
+
+
+                                            <div class="qx-container">
+                                                <div id="qx-row-43458" class="qx-row ">
+
+                                                    <div id="lt-our-care-sub" class="qx-column  qx-col-lg-8 qx-col-md-6 qx-col-sm-6 qx-col-xs-12 wow fadeInLeft animated animated" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s;">
+                                                        <div id="qx-text-741938" class="qx-element qx-element-text lt-title wow rotateIn animated animated" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s;">
+                                                            <h2>The Great Museum</h2>
+                                                            <h3>Estimated by Romans in 1961</h3>
+                                                        </div>
+                                                        <!-- qx-element-text --><div id="qx-text-1083" class="qx-element qx-element-text ">
+                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do esmod tempor incididunt ut labore et dolore magna aliqua. Ut miveniam, quis nostrud exer sit voluptatem accusantium doloremque laudantium, totam raperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt Lorem ipsum dolor sit amet, consectetur adipisicingcididunt ut labore et dolore</p>
+                                                        </div>
+                                                        <!-- qx-element-text --><div id="qx-text-652239" class="qx-element qx-element-text ">
+                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do esmod tempor incididunt ut labore et dolore magna aliqua. Ut miveniam, quis nostrud exer sit voluptatem accusantium doloremque laudantium, totam raperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt Lorem ipsum dolor sit amet, consectetur adipisicingcididunt ut labore et dolore</p>
+                                                        </div>
+                                                        <!-- qx-element-text -->
+                                                    </div>
+                                                    <!-- qx-col -->
+                                                    <div id="qx-column-43462" class="qx-column  qx-col-lg-4 qx-col-md-6 qx-col-sm-6 qx-col-xs-12">
+                                                        <div id="qx-dropcap-63766" class="qx-element qx-element-dropcap  wow fadeInRight animated animated" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s;">
+                                                            <p>Morem ipsum dolor sit amet timeam deleniti mnesarchum ex sed alii hinc dolores ad cum. Urbanitas similique ex nam paulo temporibus ea vis id odio adhuc nostrum eos.</p>
+                                                        </div>
+                                                        <!-- qx-element-text --><div id="qx-dropcap-76848" class="qx-element qx-element-dropcap  wow fadeInRight animated animated" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s;">
+                                                            <p>Uorem ipsum dolor sit amet timeam deleniti mnesarchum ex sed alii hinc dolores ad cum. Urbanitas similique ex nam paulo temporibus ea vis id odio adhuc nostrum eos.</p>
+                                                        </div>
+                                                        <!-- qx-element-text --><div id="qx-dropcap-0852" class="qx-element qx-element-dropcap  wow fadeInRight animated animated" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s;">
+                                                            <p>Sorem ipsum dolor sit amet timeam deleniti mnesarchum ex sed alii hinc dolores ad cum. Urbanitas similique ex nam paulo temporibus ea vis id odio adhuc nostrum eos.</p>
+                                                        </div>
+                                                        <!-- qx-element-text --><div id="qx-dropcap-91850" class="qx-element qx-element-dropcap  wow fadeInRight animated animated" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s;">
+                                                            <p>Eorem ipsum dolor sit amet timeam deleniti mnesarchum ex sed alii hinc dolores ad cum. Urbanitas similique ex nam paulo temporibus ea vis id odio adhuc nostrum eos.</p>
+                                                        </div>
+                                                        <!-- qx-element-text --><div id="qx-dropcap-432155" class="qx-element qx-element-dropcap  wow fadeInRight animated animated" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s;">
+                                                            <p>Uorem ipsum dolor sit amet timeam deleniti mnesarchum ex sed alii hinc dolores ad cum. Urbanitas similique ex nam paulo temporibus ea vis id odio adhuc nostrum eos.</p>
+                                                        </div>
+                                                        <!-- qx-element-text --><div id="qx-dropcap-991801" class="qx-element qx-element-dropcap  wow fadeInRight animated animated" data-wow-delay="0.6s" style="visibility: visible; animation-delay: 0.6s;">
+                                                            <p>Morem ipsum dolor sit amet timeam deleniti mnesarchum ex sed alii hinc dolores ad cum. Urbanitas similique ex nam paulo temporibus ea vis id odio adhuc nostrum eos.</p>
+                                                        </div>
+                                                        <!-- qx-element-text -->
+                                                    </div>
+                                                    <!-- qx-col -->
+
+                                                </div>
+                                                <!-- qx-row -->
+                                            </div>
+
+
+                                        </div>
+                                        <!-- qx-section -->
+
+                                        <div id="lt-about" class="qx-section  qx-section--stretch" style="position: relative; width: 1349px; margin-left: 0px;">
+
+                                            <!-- Shape -->
+
+                                            <div class="qx-container-fluid">
+
+                                                <div id="qx-row-412243" class="qx-row ">
+
+                                                    <div id="qx-column-422245" class="qx-column  qx-col-lg-12 qx-col-md-12 qx-col-sm-12 qx-col-xs-12">
+                                                        <div id="qx-text-02248" class="qx-element qx-element-text lt-title wow zoomIn animated animated" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s;">
+                                                            <h2>REASONS TO COME TO LT MUSEUM</h2>
+                                                            <h3>HERE COMES THE BEST MUSEUM THEME EVER!</h3>
+                                                        </div>
+                                                        <!-- qx-element-text --><div id="qx-blurb-871874" class="qx-element qx-element-blurb et-title-general">
+
+
+
+                                                            <img class="qx-image " src="/joomla/lt-museum/images/demo/pages/title-bgr.png" alt=""><h3 class="qx-blurb-title ">  </h3>        <div class="qx-blurb-content"></div>
+
+
+
+                                                        </div>
+                                                        <!-- qx-element-blurb -->
+                                                    </div>
+                                                    <!-- qx-col -->
+
+                                                </div>
+                                                <!-- qx-row -->
+                                                <div class="qx-container">
+                                                    <div id="qx-row-82504" class="qx-row ">
+
+                                                        <div id="qx-column-102506" class="qx-column  qx-col-lg-4 qx-col-md-4 qx-col-sm-6 qx-col-xs-12">
+                                                            <div id="qx-blurb-02561" class="qx-element qx-element-blurb  wow fadeInUp animated animated" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s;">
+
+
+
+                                                                <img class="qx-image  qx-hvr-bob" src="/joomla/lt-museum/images/demo/pages/home4.jpg" alt=""><h3 class="qx-blurb-title "> Art - a games companion </h3>        <div class="qx-blurb-content">Lorem ipsum dolor sit amet timeam deleniti mnesarchum ex sed alii hinc dolores ad cum. Urbanitas similique ex nam paulo temporibus ea vis id odio adhuc nostrum eos.</div>
+
+
+
+                                                            </div>
+                                                            <!-- qx-element-blurb -->
+                                                        </div>
+                                                        <!-- qx-col -->
+                                                        <div id="qx-column-142508" class="qx-column  qx-col-lg-4 qx-col-md-4 qx-col-sm-6 qx-col-xs-12">
+                                                            <div id="qx-blurb-362698" class="qx-element qx-element-blurb  wow fadeInUp animated animated" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s;">
+
+
+
+                                                                <img class="qx-image  qx-hvr-bob" src="/joomla/lt-museum/images/demo/pages/home6.jpg" alt=""><h3 class="qx-blurb-title "> Reading &amp; carrying out research </h3>        <div class="qx-blurb-content">Lorem ipsum dolor sit amet timeam deleniti mnesarchum ex sed alii hinc dolores ad cum. Urbanitas similique ex nam paulo temporibus ea vis id odio adhuc nostrum eos.</div>
+
+
+
+                                                            </div>
+                                                            <!-- qx-element-blurb -->
+                                                        </div>
+                                                        <!-- qx-col -->
+                                                        <div id="qx-column-602510" class="qx-column  qx-col-lg-4 qx-col-md-4 qx-col-sm-6 qx-col-xs-12">
+                                                            <div id="qx-blurb-632701" class="qx-element qx-element-blurb  wow fadeInUp animated animated" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s;">
+
+
+
+                                                                <img class="qx-image  qx-hvr-bob" src="/joomla/lt-museum/images/demo/pages/home5.jpg" alt=""><h3 class="qx-blurb-title "> A bird’s eye view of the city </h3>        <div class="qx-blurb-content">Lorem ipsum dolor sit amet timeam deleniti mnesarchum ex sed alii hinc dolores ad cum. Urbanitas similique ex nam paulo temporibus ea vis id odio adhuc nostrum eos.</div>
+
+
+
+                                                            </div>
+                                                            <!-- qx-element-blurb -->
+                                                        </div>
+                                                        <!-- qx-col -->
+
+                                                    </div>
+                                                    <!-- qx-row -->
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <!-- qx-section -->
+
+                                        <div id="lt-ourboat" class="qx-section  qx-section--stretch" style="position: relative; width: 1349px; margin-left: 0px;">
+
+                                            <!-- Shape -->
+
+                                            <div class="qx-container-fluid">
+
+                                                <div class="qx-container">
+                                                    <div id="qx-row-15651" class="qx-row  wow fadeInDown animated animated" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInDown;">
+
+                                                        <div id="qx-column-48652" class="qx-column  qx-col-lg-12 qx-col-md-12 qx-col-sm-12 qx-col-xs-12">
+                                                            <div id="qx-text-3495" class="qx-element qx-element-text lt-title wow zoomIn animated animated" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: zoomIn;">
+                                                                <h2>UPCOMING EVENTS</h2>
+                                                                <h3>HERE COMES THE BEST MUSEUM THEME EVER!</h3>
+                                                            </div>
+                                                            <!-- qx-element-text --><div id="qx-blurb-42101" class="qx-element qx-element-blurb et-title-general">
+
+
+
+                                                                <img class="qx-image " src="/joomla/lt-museum/images/demo/pages/ssssss.png" alt=""><h3 class="qx-blurb-title ">  </h3>        <div class="qx-blurb-content"></div>
+
+
+
+                                                            </div>
+                                                            <!-- qx-element-blurb -->
+                                                        </div>
+                                                        <!-- qx-col -->
+
+                                                    </div>
+                                                    <!-- qx-row -->
+                                                </div>
+                                                <div class="qx-container">
+                                                    <div id="qx-row-18293" class="qx-row ">
+
+                                                        <div id="qx-column-84295" class="qx-column  qx-col-lg-4 qx-col-md-4 qx-col-sm-6 qx-col-xs-12">
+                                                            <div id="qx-blurb-49302" class="qx-element qx-element-blurb lt-ourboat-item wow zoomIn animated animated" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s;">
+
+
+
+                                                                <img class="qx-image  qx-hvr-bob" src="/joomla/lt-museum/images/demo/pages/home8.jpg" alt=""><h3 class="qx-blurb-title "> Will Barnet: Graphic Retrospective (70 Years) </h3>        <div class="qx-blurb-content">
+                                                                    <ul style="box-sizing: border-box; margin: 0px; list-style: none; padding: 0px; font-size: 15px;">
+                                                                        <li style="box-sizing: border-box; display: block; margin-right: 30px; margin-bottom: 10px;">&nbsp;May 21, 2016 - June 28, 2018</li>
+                                                                        <li style="box-sizing: border-box; display: block; margin-right: 30px; margin-bottom: 10px;">&nbsp;Location: Bloch Building, Galleries L13 and L14</li>
+                                                                        <li style="box-sizing: border-box; display: block; margin-right: 30px; margin-bottom: 10px;">&nbsp;Adults: $12</li>
+                                                                        <li style="box-sizing: border-box; display: block; margin-right: 30px; margin-bottom: 10px;">&nbsp;Groups 15+: $10 / person</li>
+                                                                    </ul>
+                                                                </div>
+
+
+
+                                                            </div>
+                                                            <!-- qx-element-blurb -->
+                                                        </div>
+                                                        <!-- qx-col -->
+                                                        <div id="qx-column-38297" class="qx-column  qx-col-lg-4 qx-col-md-4 qx-col-sm-6 qx-col-xs-12">
+                                                            <div id="qx-blurb-63436" class="qx-element qx-element-blurb lt-ourboat-item wow zoomIn animated animated" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s;">
+
+
+
+                                                                <img class="qx-image  qx-hvr-bob" src="/joomla/lt-museum/images/demo/pages/home7.jpg" alt=""><h3 class="qx-blurb-title "> Unconventional Clay: Engaged in Change </h3>        <div class="qx-blurb-content">
+                                                                    <ul style="box-sizing: border-box; margin: 0px; list-style: none; padding: 0px; font-size: 15px;">
+                                                                        <li style="box-sizing: border-box; display: block; margin-right: 30px; margin-bottom: 10px;">&nbsp;May 21, 2016 - June 28, 2018</li>
+                                                                        <li style="box-sizing: border-box; display: block; margin-right: 30px; margin-bottom: 10px;">&nbsp;Location: Bloch Building, Galleries L2 and L3</li>
+                                                                        <li style="box-sizing: border-box; display: block; margin-right: 30px; margin-bottom: 10px;">&nbsp;Adults: $9</li>
+                                                                        <li style="box-sizing: border-box; display: block; margin-right: 30px; margin-bottom: 10px;">&nbsp;Groups 15+: $13 / person</li>
+                                                                    </ul>
+                                                                </div>
+
+
+
+                                                            </div>
+                                                            <!-- qx-element-blurb -->
+                                                        </div>
+                                                        <!-- qx-col -->
+                                                        <div id="qx-column-69299" class="qx-column  qx-col-lg-4 qx-col-md-4 qx-col-sm-6 qx-col-xs-12">
+                                                            <div id="qx-blurb-15571" class="qx-element qx-element-blurb lt-ourboat-item wow zoomIn animated animated" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s;">
+
+
+
+                                                                <img class="qx-image  qx-hvr-bob" src="/joomla/lt-museum/images/demo/pages/home9.jpg" alt=""><h3 class="qx-blurb-title "> Masterworks of the German Renaissance </h3>        <div class="qx-blurb-content">
+                                                                    <ul style="box-sizing: border-box; margin: 0px; list-style: none; padding: 0px; font-size: 15px;">
+                                                                        <li style="box-sizing: border-box; display: block; margin-right: 30px; margin-bottom: 10px;">&nbsp;May 21, 2016 - June 28, 2018</li>
+                                                                        <li style="box-sizing: border-box; display: block; margin-right: 30px; margin-bottom: 10px;">&nbsp;Location: Project Space, Big Galleries L8</li>
+                                                                        <li style="box-sizing: border-box; display: block; margin-right: 30px; margin-bottom: 10px;">&nbsp;Adults: $12</li>
+                                                                        <li style="box-sizing: border-box; display: block; margin-right: 30px; margin-bottom: 10px;">&nbsp;Groups 15+: $19 / person</li>
+                                                                    </ul>
+                                                                </div>
+
+
+
+                                                            </div>
+                                                            <!-- qx-element-blurb -->
+                                                        </div>
+                                                        <!-- qx-col -->
+
+                                                    </div>
+                                                    <!-- qx-row -->
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <!-- qx-section -->
+
+                                        <div id="lt-portfolio" class="qx-section  qx-section--stretch" style="position: relative; width: 1349px; margin-left: 0px;">
+
+                                            <!-- Shape -->
+
+                                            <div class="qx-container-fluid">
+
+                                                <div id="qx-row-68953" class="qx-row ">
+
+                                                    <div id="qx-column-7955" class="qx-column  qx-col-lg-12 qx-col-md-12 qx-col-sm-12 qx-col-xs-12">
+                                                        <div id="qx-text-523326" class="qx-element qx-element-text lt-title wow zoomIn animated animated" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s;">
+                                                            <h2>OUR GALLERY</h2>
+                                                            <h3>MODERN ANCIENT STATUE</h3>
+                                                        </div>
+                                                        <!-- qx-element-text --><div id="qx-blurb-353335" class="qx-element qx-element-blurb et-title-general">
+
+
+
+                                                            <img class="qx-image " src="/joomla/lt-museum/images/demo/pages/title-bgr.png" alt=""><h3 class="qx-blurb-title ">  </h3>        <div class="qx-blurb-content"></div>
+
+
+
+                                                        </div>
+                                                        <!-- qx-element-blurb -->
+                                                        <div id="qx-filterable-gallery-871085" class="qx-element qx-element-filterable-gallery ">
+
+                                                            <ul class="qx-fg-filter text-center">
+                                                                <li><a class="btn active" href="#" data-filter="*">All</a></li>
+                                                                <li><a class="btn" href="#" data-filter=".vintage-art">vintage art</a></li>
+                                                                <li><a class="btn" href="#" data-filter=".modern-art">modern art</a></li>
+                                                                <li><a class="btn" href="#" data-filter=".ancient-statue">ancient statue</a></li>
+                                                            </ul><!--/#filter-->
+
+                                                            <div class="qx-fg-items" style="position: relative; height: 674.468px;">
+                                                                <div class="qx-col-md-4 qx-col-sm-6 item-padding qx-fg-item vintage-art wow fadeInUp animated animated" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; position: absolute; left: 0%; top: 0px; animation-name: fadeInUp;">
+                                                                    <div class="qx-fg-wrap">
+                                                                        <figure class="qx-overlay qx-overlay-hover">
+                                                                            <a class="qx-image--gallery" href="/joomla/lt-museum/images/advportfoliopro/images/Port1.jpg">
+                                                                                <img src="/joomla/lt-museum/images/advportfoliopro/images/Port1.jpg" alt="Arts of Global Africa">
+
+                                                                                <div class="qx-overlay-panel qx-overlay-background qx-overlay-fade"></div>
+
+
+                                                                                <div class="qx-overlay-panel qx-overlay-icon qx-overlay-fade"></div>
+
+
+                                                                            </a>
+                                                                        </figure>
+
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="qx-col-md-4 qx-col-sm-6 item-padding qx-fg-item vintage-art wow fadeInUp animated animated" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; position: absolute; left: 33.2828%; top: 0px; animation-name: fadeInUp;">
+                                                                    <div class="qx-fg-wrap">
+                                                                        <figure class="qx-overlay qx-overlay-hover">
+                                                                            <a class="qx-image--gallery" href="/joomla/lt-museum/images/advportfoliopro/images/port2.jpg">
+                                                                                <img src="/joomla/lt-museum/images/advportfoliopro/images/port2.jpg" alt="American Art">
+
+                                                                                <div class="qx-overlay-panel qx-overlay-background qx-overlay-fade"></div>
+
+
+                                                                                <div class="qx-overlay-panel qx-overlay-icon qx-overlay-fade"></div>
+
+
+                                                                            </a>
+                                                                        </figure>
+
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="qx-col-md-4 qx-col-sm-6 item-padding qx-fg-item modern-art wow fadeInUp animated animated" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; position: absolute; left: 66.6414%; top: 0px; animation-name: fadeInUp;">
+                                                                    <div class="qx-fg-wrap">
+                                                                        <figure class="qx-overlay qx-overlay-hover">
+                                                                            <a class="qx-image--gallery" href="/joomla/lt-museum/images/advportfoliopro/images/port3.jpg">
+                                                                                <img src="/joomla/lt-museum/images/advportfoliopro/images/port3.jpg" alt="Classical Art">
+
+                                                                                <div class="qx-overlay-panel qx-overlay-background qx-overlay-fade"></div>
+
+
+                                                                                <div class="qx-overlay-panel qx-overlay-icon qx-overlay-fade"></div>
+
+
+                                                                            </a>
+                                                                        </figure>
+
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="qx-col-md-4 qx-col-sm-6 item-padding qx-fg-item modern-art wow fadeInUp animated animated" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; position: absolute; left: 0%; top: 337px;">
+                                                                    <div class="qx-fg-wrap">
+                                                                        <figure class="qx-overlay qx-overlay-hover">
+                                                                            <a class="qx-image--gallery" href="/joomla/lt-museum/images/advportfoliopro/images/port4.jpg">
+                                                                                <img src="/joomla/lt-museum/images/advportfoliopro/images/port4.jpg" alt="German Arts">
+
+                                                                                <div class="qx-overlay-panel qx-overlay-background qx-overlay-fade"></div>
+
+
+                                                                                <div class="qx-overlay-panel qx-overlay-icon qx-overlay-fade"></div>
+
+
+                                                                            </a>
+                                                                        </figure>
+
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="qx-col-md-4 qx-col-sm-6 item-padding qx-fg-item ancient-statue wow fadeInUp animated animated" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; position: absolute; left: 33.2828%; top: 337px;">
+                                                                    <div class="qx-fg-wrap">
+                                                                        <figure class="qx-overlay qx-overlay-hover">
+                                                                            <a class="qx-image--gallery" href="/joomla/lt-museum/images/advportfoliopro/images/port5.jpg">
+                                                                                <img src="/joomla/lt-museum/images/advportfoliopro/images/port5.jpg" alt="Decorative Art">
+
+                                                                                <div class="qx-overlay-panel qx-overlay-background qx-overlay-fade"></div>
+
+
+                                                                                <div class="qx-overlay-panel qx-overlay-icon qx-overlay-fade"></div>
+
+
+                                                                            </a>
+                                                                        </figure>
+
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="qx-col-md-4 qx-col-sm-6 item-padding qx-fg-item ancient-statue wow fadeInUp animated animated" data-wow-delay="0.6s" style="visibility: visible; animation-delay: 0.6s; position: absolute; left: 66.6414%; top: 337px;">
+                                                                    <div class="qx-fg-wrap">
+                                                                        <figure class="qx-overlay qx-overlay-hover">
+                                                                            <a class="qx-image--gallery" href="/joomla/lt-museum/images/advportfoliopro/images/port8.jpg">
+                                                                                <img src="/joomla/lt-museum/images/advportfoliopro/images/port8.jpg" alt="Vintage Arts">
+
+                                                                                <div class="qx-overlay-panel qx-overlay-background qx-overlay-fade"></div>
+
+
+                                                                                <div class="qx-overlay-panel qx-overlay-icon qx-overlay-fade"></div>
+
+
+                                                                            </a>
+                                                                        </figure>
+
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- qx-element-filterable-gallery -->
+                                                    </div>
+                                                    <!-- qx-col -->
+
+                                                </div>
+                                                <!-- qx-row -->
+
+                                            </div>
+
+                                        </div>
+                                        <!-- qx-section -->
+
+                                        <div id="qx-section-87259" class="qx-section lt-pricing">
+
+                                            <!-- Shape -->
+
+
+                                            <div class="qx-container">
+                                                <div id="qx-row-18260" class="qx-row ">
+
+                                                    <div id="qx-column-74345" class="qx-column  qx-col-lg-12 qx-col-md-12 qx-col-sm-12 qx-col-xs-12">
+                                                        <div id="qx-text-93178" class="qx-element qx-element-text lt-title wow zoomIn animated animated" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s;">
+                                                            <h2>GROUP PRICING</h2>
+                                                            <h3>it’s not a museum. it’s place of ideas</h3>
+                                                        </div>
+                                                        <!-- qx-element-text --><div id="qx-blurb-69181" class="qx-element qx-element-blurb et-title-general">
+
+
+
+                                                            <img class="qx-image " src="/joomla/lt-museum/images/demo/pages/ssssss.png" alt=""><h3 class="qx-blurb-title ">  </h3>        <div class="qx-blurb-content"></div>
+
+
+
+                                                        </div>
+                                                        <!-- qx-element-blurb -->
+                                                        <div id="lt-pricing" class="qx-element qx-element-pricing-table  qx-flex wow fadeInUp qx-pricing-table animated animated" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s;">
+                                                            <div class="single-table ">
+                                                                <div class="table-heading">
+                                                                    <div class="title">
+                                                                        SINGLE TICKET
+                                                                    </div><!-- /.title -->
+
+
+                                                                    <div class="cost">
+                                                                        <span class="curency">$</span><!-- /.curency -->
+
+                                                                        <span class="amount">49</span><!-- /.amount -->
+
+                                                                        <span class="plantype">/ day</span><!-- /.plantype -->
+                                                                    </div><!-- /.cost -->
+                                                                </div><!--/.table-heading-->
+
+                                                                <div class="table-body">
+                                                                    <ul class="pricing-feature-list" style="box-sizing: border-box; margin: 0px; font-size: 16px; padding: 5px; list-style: none; text-align: center; color: #696767;">
+                                                                        <li style="box-sizing: border-box; padding: 10px; font-size: 17px;">1 Visitor</li>
+                                                                        <li style="box-sizing: border-box; padding: 10px; font-size: 17px;">Access to All Collections</li>
+                                                                        <li style="box-sizing: border-box; padding: 10px; font-size: 17px;"><span style="text-decoration: line-through;">Group Guide</span></li>
+                                                                        <li style="box-sizing: border-box; padding: 10px; font-size: 17px;"><span style="text-decoration: line-through;">Photo and Video Services</span></li>
+                                                                    </ul>
+                                                                </div><!--/.table-body-->
+
+                                                                <div class="table-footer">
+
+                                                                    <a class="qx-btn qx-btn-regular qx-btn-default" href="/joomla/lt-museum/index.php/pages/contact-us">
+                                                                        Buy Ticket
+                                                                    </a>
+
+                                                                </div><!-- /.table-footer -->
+                                                            </div><!--/.single-table-->
+                                                            <div class="single-table ">
+                                                                <div class="table-heading">
+                                                                    <div class="title">
+                                                                        SMALL GROUP
+                                                                    </div><!-- /.title -->
+
+
+                                                                    <div class="cost">
+                                                                        <span class="curency">$</span><!-- /.curency -->
+
+                                                                        <span class="amount">59</span><!-- /.amount -->
+
+                                                                        <span class="plantype">/ Day</span><!-- /.plantype -->
+                                                                    </div><!-- /.cost -->
+                                                                </div><!--/.table-heading-->
+
+                                                                <div class="table-body">
+                                                                    <ul class="pricing-feature-list" style="box-sizing: border-box; margin: 0px; font-size: 16px; padding: 5px; list-style: none; text-align: center; color: #696767;">
+                                                                        <li style="box-sizing: border-box; padding: 10px; font-size: 17px;">5 Visitor</li>
+                                                                        <li style="box-sizing: border-box; padding: 10px; font-size: 17px;">Access to All Collections</li>
+                                                                        <li style="box-sizing: border-box; padding: 10px; font-size: 17px;">Group Guide</li>
+                                                                        <li style="box-sizing: border-box; padding: 10px; font-size: 17px;"><span style="text-decoration: line-through;">Photo and Video Services</span></li>
+                                                                    </ul>
+                                                                </div><!--/.table-body-->
+
+                                                                <div class="table-footer">
+
+                                                                    <a class="qx-btn qx-btn-regular qx-btn-default" href="/joomla/lt-museum/index.php/pages/contact-us">
+                                                                        Buy Ticket
+                                                                    </a>
+
+                                                                </div><!-- /.table-footer -->
+                                                            </div><!--/.single-table-->
+                                                            <div class="single-table ">
+                                                                <div class="table-heading">
+                                                                    <div class="title">
+                                                                        STANDARD GROUP
+                                                                    </div><!-- /.title -->
+
+
+                                                                    <div class="cost">
+                                                                        <span class="curency">$</span><!-- /.curency -->
+
+                                                                        <span class="amount">69</span><!-- /.amount -->
+
+                                                                        <span class="plantype">/ Day</span><!-- /.plantype -->
+                                                                    </div><!-- /.cost -->
+                                                                </div><!--/.table-heading-->
+
+                                                                <div class="table-body">
+                                                                    <ul class="pricing-feature-list" style="box-sizing: border-box; margin: 0px; font-size: 16px; padding: 5px; list-style: none; text-align: center; color: #696767;">
+                                                                        <li style="box-sizing: border-box; padding: 10px; font-size: 17px;">10 Visitor</li>
+                                                                        <li style="box-sizing: border-box; padding: 10px; font-size: 17px;">Access to All Collections</li>
+                                                                        <li style="box-sizing: border-box; padding: 10px; font-size: 17px;">Group Guide</li>
+                                                                        <li style="box-sizing: border-box; padding: 10px; font-size: 17px;">Photo and Video Services</li>
+                                                                    </ul>
+                                                                </div><!--/.table-body-->
+
+                                                                <div class="table-footer">
+
+                                                                    <a class="qx-btn qx-btn-regular qx-btn-default" href="/joomla/lt-museum/index.php/pages/contact-us">
+                                                                        Buy Ticket
+                                                                    </a>
+
+                                                                </div><!-- /.table-footer -->
+                                                            </div><!--/.single-table-->
+                                                        </div>
+                                                        <!-- qx-element-pricing -->
+
+                                                    </div>
+                                                    <!-- qx-col -->
+
+                                                </div>
+                                                <!-- qx-row -->
+                                            </div>
+
+
+                                        </div>
+                                        <!-- qx-section -->
+
+                                        <div id="qx-section-14752" class="qx-section lt-blog">
+
+                                            <!-- Shape -->
+
+
+                                            <div class="qx-container">
+                                                <div id="qx-row-20792" class="qx-row lt-blog">
+
+                                                    <div id="qx-column-69794" class="qx-column  qx-col-lg-12 qx-col-md-12 qx-col-sm-12 qx-col-xs-12">
+                                                        <div id="qx-text-4327" class="qx-element qx-element-text lt-title wow zoomIn animated animated" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s;">
+                                                            <h2>NEWS BLOG</h2>
+                                                            <h3>ARTS OF GLOBALLY COVERD</h3>
+                                                        </div>
+                                                        <!-- qx-element-text --><div id="qx-blurb-77332" class="qx-element qx-element-blurb et-title-general">
+
+
+
+                                                            <img class="qx-image " src="/joomla/lt-museum/images/demo/pages/title-bgr.png" alt=""><h3 class="qx-blurb-title ">  </h3>        <div class="qx-blurb-content"></div>
+
+
+
+                                                        </div>
+                                                        <!-- qx-element-blurb -->
+                                                        <div id="qx-joomla-module-56797" class="qx-element qx-element-joomla-module et-blog wow fadeInUp animated animated" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s;">
+
+                                                            <div id="k2ModuleBox119" class="k2ItemsBlock">
+
+
+                                                                <ul>
+                                                                    <li class="even">
+
+                                                                        <!-- Plugins: BeforeDisplay -->
+                                                                        <!-- K2 Plugins: K2BeforeDisplay -->
+
+
+                                                                        <a class="moduleItemTitle" href="/joomla/lt-museum/index.php/k2-blog/blog-listing/item/6-imagination-of-the-paintings">Imagination of the Paintings</a>
+
+
+                                                                        <!-- Plugins: AfterDisplayTitle -->
+                                                                        <!-- K2 Plugins: K2AfterDisplayTitle -->
+                                                                        <!-- Plugins: BeforeDisplayContent -->
+                                                                        <!-- K2 Plugins: K2BeforeDisplayContent -->
+
+                                                                        <div class="moduleItemIntrotext">
+                                                                            <a class="moduleItemImage" href="/joomla/lt-museum/index.php/k2-blog/blog-listing/item/6-imagination-of-the-paintings" title="Continue reading &quot;Imagination of the Paintings&quot;">
+                                                                                <img src="/joomla/lt-museum/media/k2/items/cache/ada9a09acea936d776a6f55c82778c43_L.jpg" alt="Imagination of the Paintings">
+                                                                            </a>
+
+                                                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat…
+                                                                        </div>
+
+
+                                                                        <div class="clr"></div>
+
+
+                                                                        <div class="clr"></div>
+
+                                                                        <!-- Plugins: AfterDisplayContent -->
+                                                                        <!-- K2 Plugins: K2AfterDisplayContent -->
+
+                                                                        <span class="moduleItemDateCreated">Written on Monday, 06 March 2017 08:57</span>
+
+
+
+
+
+
+
+                                                                        <!-- Plugins: AfterDisplay -->
+                                                                        <!-- K2 Plugins: K2AfterDisplay -->
+
+                                                                        <div class="clr"></div>
+                                                                    </li>
+                                                                    <li class="odd">
+
+                                                                        <!-- Plugins: BeforeDisplay -->
+                                                                        <!-- K2 Plugins: K2BeforeDisplay -->
+
+
+                                                                        <a class="moduleItemTitle" href="/joomla/lt-museum/index.php/k2-blog/blog-listing/item/5-the-museum-of-london-to-west">The Museum of London to west</a>
+
+
+                                                                        <!-- Plugins: AfterDisplayTitle -->
+                                                                        <!-- K2 Plugins: K2AfterDisplayTitle -->
+                                                                        <!-- Plugins: BeforeDisplayContent -->
+                                                                        <!-- K2 Plugins: K2BeforeDisplayContent -->
+
+                                                                        <div class="moduleItemIntrotext">
+                                                                            <a class="moduleItemImage" href="/joomla/lt-museum/index.php/k2-blog/blog-listing/item/5-the-museum-of-london-to-west" title="Continue reading &quot;The Museum of London to west&quot;">
+                                                                                <img src="/joomla/lt-museum/media/k2/items/cache/ffee2447b152494b43d9816faaea83c8_L.jpg" alt="The Museum of London to west">
+                                                                            </a>
+
+                                                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat…
+                                                                        </div>
+
+
+                                                                        <div class="clr"></div>
+
+
+                                                                        <div class="clr"></div>
+
+                                                                        <!-- Plugins: AfterDisplayContent -->
+                                                                        <!-- K2 Plugins: K2AfterDisplayContent -->
+
+                                                                        <span class="moduleItemDateCreated">Written on Monday, 06 March 2017 08:57</span>
+
+
+
+
+
+
+
+                                                                        <!-- Plugins: AfterDisplay -->
+                                                                        <!-- K2 Plugins: K2AfterDisplay -->
+
+                                                                        <div class="clr"></div>
+                                                                    </li>
+                                                                    <li class="even lastItem">
+
+                                                                        <!-- Plugins: BeforeDisplay -->
+                                                                        <!-- K2 Plugins: K2BeforeDisplay -->
+
+
+                                                                        <a class="moduleItemTitle" href="/joomla/lt-museum/index.php/k2-blog/blog-listing/item/4-roman-fort-gate-tours-museum">Roman fort gate tours museum</a>
+
+
+                                                                        <!-- Plugins: AfterDisplayTitle -->
+                                                                        <!-- K2 Plugins: K2AfterDisplayTitle -->
+                                                                        <!-- Plugins: BeforeDisplayContent -->
+                                                                        <!-- K2 Plugins: K2BeforeDisplayContent -->
+
+                                                                        <div class="moduleItemIntrotext">
+                                                                            <a class="moduleItemImage" href="/joomla/lt-museum/index.php/k2-blog/blog-listing/item/4-roman-fort-gate-tours-museum" title="Continue reading &quot;Roman fort gate tours museum&quot;">
+                                                                                <img src="/joomla/lt-museum/media/k2/items/cache/2ff2ba0051687eef5ca0459cf942940c_L.jpg" alt="Roman fort gate tours museum">
+                                                                            </a>
+
+                                                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat…
+                                                                        </div>
+
+
+                                                                        <div class="clr"></div>
+
+
+                                                                        <div class="clr"></div>
+
+                                                                        <!-- Plugins: AfterDisplayContent -->
+                                                                        <!-- K2 Plugins: K2AfterDisplayContent -->
+
+                                                                        <span class="moduleItemDateCreated">Written on Monday, 06 March 2017 08:57</span>
+
+
+
+
+
+
+
+                                                                        <!-- Plugins: AfterDisplay -->
+                                                                        <!-- K2 Plugins: K2AfterDisplay -->
+
+                                                                        <div class="clr"></div>
+                                                                    </li>
+                                                                    <li class="clearList"></li>
+                                                                </ul>
+
+
+
+                                                            </div>
+                                                        </div>
+                                                        <!-- qx-element-joomla-module -->
+                                                    </div>
+                                                    <!-- qx-col -->
+
+                                                </div>
+                                                <!-- qx-row -->
+                                            </div>
+
+
+                                        </div>
+                                        <!-- qx-section -->
+
+                                        <div id="qx-section-01375" class="qx-section  qx-section-parallax" qx-parallax="bgy:-250" style="background-size: 1528px 793px; background-repeat: no-repeat; background-position-y: calc(-250px);">
+
+                                            <!-- Shape -->
+
+
+                                            <div class="qx-container">
+                                                <div id="qx-row-321376" class="qx-row  wow zoomIn animated animated" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s;">
+
+                                                    <div id="qx-column-231377" class="qx-column  qx-col-lg-12 qx-col-md-12 qx-col-sm-12 qx-col-xs-12">
+                                                        <div id="qx-text-371378" class="qx-element qx-element-text ">
+                                                            <h1>Museume Is a Place Where <br> One Should Lose one’s head</h1>
+                                                        </div>
+                                                        <!-- qx-element-text --><div id="qx-text-461379" class="qx-element qx-element-text ">
+                                                            <p>These days are all Happy and Free. These days are all share them with me oh baby. Knight Rider: A shadowy <br>flight into the dangerous world of a man who does not exist.</p>
+                                                        </div>
+                                                        <!-- qx-element-text --><div id="lt-button-group" class="qx-element qx-element-button-group ">
+                                                            <a href="/joomla/lt-museum/index.php/pages/about-us" class="qx-btn qx-btn-default qx-btn-0 ">
+
+
+
+                                                                VISIT US TODAY
+
+                                                            </a>
+                                                            <a href="/joomla/lt-museum/index.php/pages/contact-us" class="qx-btn qx-btn-default qx-btn-1 ">
+
+
+
+                                                                BUY TICKET
+
+                                                            </a>
+                                                        </div>
+                                                        <!-- qx-element-button-group -->
+                                                    </div>
+                                                    <!-- qx-col -->
+
+                                                </div>
+                                                <!-- qx-row -->
+                                            </div>
+
+
+                                        </div>
+                                        <!-- qx-section -->
+
+                                        <div id="qx-section-0110" class="qx-section ">
+
+                                            <!-- Shape -->
+
+                                            <div class="qx-container">
+
+                                                <div id="qx-row-2111" class="qx-row ">
+
+                                                    <div id="qx-column-92112" class="qx-column  qx-col-lg-12 qx-col-md-12 qx-col-sm-12 qx-col-xs-12">
+                                                        <div id="qx-text-90113" class="qx-element qx-element-text lt-title wow zoomIn animated animated" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s;">
+                                                            <h2>WHAT CLIENT SAY ABOUT US</h2>
+                                                            <h3>HERE COMES THE BEST MUSEUM THEME EVER!</h3>
+                                                        </div>
+                                                        <!-- qx-element-text --><div id="qx-blurb-1114" class="qx-element qx-element-blurb et-title-general">
+
+
+
+                                                            <img class="qx-image " src="/joomla/lt-museum/images/demo/pages/title-bgr.png" alt=""><h3 class="qx-blurb-title ">  </h3>        <div class="qx-blurb-content"></div>
+
+
+
+                                                        </div>
+                                                        <!-- qx-element-blurb -->
+                                                    </div>
+                                                    <!-- qx-col -->
+
+                                                </div>
+                                                <!-- qx-row -->
+                                                <div id="qx-row-45115" class="qx-row ">
+
+                                                    <div id="qx-column-62116" class="qx-column  qx-col-lg-12 qx-col-md-12 qx-col-sm-12 qx-col-xs-12">
+                                                        <div id="qx-testimonial-97117" class="qx-element qx-element-testimonial  wow fadeInLeft animated animated" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s;">
+                                                            <div class="qx-media">
+                                                                <div class="qx-media-body">
+                                                                    <div class="qx-testimony">
+                                                                        <p style="text-align: center;">"Adipisicing lorem ipsum dolor sit amet, consectetur ed do eiusmod tempor inmi</p>
+                                                                        <p style="text-align: center;">cididunt ut labore et dolore magna aliqua. Ut enim ad minim ve niam</p>
+                                                                        <p style="text-align: center;">laborex econsequat. Duis aute irure dolor in reprehenderit"</p>
+                                                                    </div>
+                                                                    <h4 class="title"></h4>
+                                                                    <p class="qx-text-muted designation"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- qx-element-testimonial --><div id="qx-carousel-58118" class="qx-element qx-element-carousel swiper-container swiper-container-horizontal" dir="ltr">
+
+                                                            <!-- Start Slider Wrapper -->
+                                                            <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);">
+                                                                <div class="qx-carousel-item swiper-slide wow fadeInRight animated swiper-slide-active" data-wow-delay="0.4s" style="width: 257.5px; visibility: visible; animation-delay: 0.4s; margin-right: 30px;">
+
+                                                                    <img class="img-rounded" src="/joomla/lt-museum/images/demo/team/team01.jpg" alt="Gorge Barnard">
+
+                                                                    <h4 class="qx-carousel-title">Gorge Barnard</h4>
+                                                                    <div class="qx-carousel-caption">Archeologist</div>
+
+
+                                                                </div>
+                                                                <div class="qx-carousel-item swiper-slide wow fadeInRight animated swiper-slide-next" data-wow-delay="0.5s" style="width: 257.5px; visibility: visible; animation-delay: 0.5s; margin-right: 30px;">
+
+                                                                    <img class="img-rounded" src="/joomla/lt-museum/images/demo/team/team02.jpg" alt="Cascada">
+
+                                                                    <h4 class="qx-carousel-title">Cascada</h4>
+                                                                    <div class="qx-carousel-caption">Archeologist</div>
+
+
+                                                                </div>
+                                                                <div class="qx-carousel-item swiper-slide wow fadeInRight animated" data-wow-delay="0.6s" style="width: 257.5px; visibility: visible; animation-delay: 0.6s; margin-right: 30px;">
+
+                                                                    <img class="img-rounded" src="/joomla/lt-museum/images/demo/team/team03.jpg" alt="Jimmy">
+
+                                                                    <h4 class="qx-carousel-title">Jimmy</h4>
+                                                                    <div class="qx-carousel-caption">Archeologist</div>
+
+
+                                                                </div>
+                                                                <div class="qx-carousel-item swiper-slide wow fadeInRight animated" data-wow-delay="0.7s" style="width: 257.5px; visibility: visible; animation-delay: 0.7s; margin-right: 30px;">
+
+                                                                    <img class="img-rounded" src="/joomla/lt-museum/images/demo/team/team04.jpg" alt="Thomas">
+
+                                                                    <h4 class="qx-carousel-title">Thomas</h4>
+                                                                    <div class="qx-carousel-caption">Archeologist</div>
+
+
+                                                                </div>
+                                                                <div class="qx-carousel-item swiper-slide wow fadeInRight animated" data-wow-delay="0.8s" style="width: 257.5px; visibility: visible; animation-delay: 0.8s; margin-right: 30px;">
+
+                                                                    <img class="img-rounded" src="/joomla/lt-museum/images/demo/team/team05.jpg" alt="Liasna">
+
+                                                                    <h4 class="qx-carousel-title">Liasna</h4>
+                                                                    <div class="qx-carousel-caption">Archeologist</div>
+
+
+                                                                </div>
+                                                                <div class="qx-carousel-item swiper-slide wow fadeInRight animated" data-wow-delay="0.9s" style="width: 257.5px; visibility: visible; animation-delay: 0.9s; margin-right: 30px;">
+
+                                                                    <img class="img-rounded" src="/joomla/lt-museum/images/demo/team/team06.jpg" alt="Barnard">
+
+                                                                    <h4 class="qx-carousel-title">Barnard</h4>
+                                                                    <div class="qx-carousel-caption">Archeologist</div>
+
+
+                                                                </div>
+                                                                <div class="qx-carousel-item swiper-slide wow fadeInRight animated" data-wow-delay="1s" style="width: 257.5px; visibility: visible; animation-delay: 1s; margin-right: 30px;">
+
+                                                                    <img class="img-rounded" src="/joomla/lt-museum/images/demo/team/team07.jpg" alt="Gorge">
+
+                                                                    <h4 class="qx-carousel-title">Gorge</h4>
+                                                                    <div class="qx-carousel-caption">Archeologist</div>
+
+
+                                                                </div>
+                                                                <div class="qx-carousel-item swiper-slide wow fadeInRight animated" data-wow-delay="1.1s" style="width: 257.5px; visibility: visible; animation-delay: 1.1s; margin-right: 30px;">
+
+                                                                    <img class="img-rounded" src="/joomla/lt-museum/images/demo/team/team08.jpg" alt="Davis">
+
+                                                                    <h4 class="qx-carousel-title">Davis</h4>
+                                                                    <div class="qx-carousel-caption">Archeologist</div>
+
+
+                                                                </div>
+
+                                                            </div>
+                                                            <!-- End Slider Wrapper -->
+                                                            <!-- Start Pagination Control -->
+                                                            <!-- End Pagination Control -->
+                                                            <!-- Start Arrow control -->
+                                                            <div class="swiper-button-prev swiper-button-disabled"></div>
+                                                            <div class="swiper-button-next"></div>
+                                                            <!-- End Arrow Control -->
+                                                        </div>
+                                                        <!-- qx-element-carousel -->
+
+                                                    </div>
+                                                    <!-- qx-col -->
+
+                                                </div>
+                                                <!-- qx-row -->
+
+                                            </div>
+
+                                        </div>
+                                        <!-- qx-section -->
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        <section id="sp-bottom">
+                <div class="container">
+                    <div class="row">
+                        <div id="sp-bottom1" class="col-sm-6 col-md-3">
+                            <div class="sp-column ">
+                                <div class="sp-module ">
+                                    <h3 class="sp-module-title">About LT Museum</h3><div class="sp-module-content">
+
+                                        <div class="custom">
+                                            <p>Ball tip biltong pork belly frankfurter shankle jerky leberkas pig kielbasa kay boudin alcatra short loin.</p>
+                                            <p>Ball tip biltong pork belly frankfurter shankle jerky leberkas pig kielbasa kay boudin alcatra short loinowl salami.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><div id="sp-bottom2" class="col-sm-6 col-md-3">
+                            <div class="sp-column ">
+                                <div class="sp-module ">
+                                    <h3 class="sp-module-title">Get In Touch</h3><div class="sp-module-content">
+
+                                        <div class="custom">
+                                            <p>Address: 262 Milacina Mrest Street.</p>
+                                            <p>Phone: +84 3333 6789.</p>
+                                            <p>Tax: +04 3333 6789.</p>
+                                            <p>Email: support@yoursiteurl.com</p>
+                                            <p>Website: www.yoursiteurl.com</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><div id="sp-bottom3" class="col-sm-6 col-md-3">
+                            <div class="sp-column ">
+                                <div class="sp-module ">
+                                    <h3 class="sp-module-title">Upcoming Events</h3><div class="sp-module-content">
+                                        <ul class="nav menu">
+                                            <li class="item-475"><a href="/joomla/lt-museum/index.php/egyptian-history-archeology"> Egyptian History &amp; Archeology</a></li>
+                                            <li class="item-476"><a href="/joomla/lt-museum/index.php/transforming-smithfield"> Transforming Smithfield</a></li>
+                                            <li class="item-477"><a href="/joomla/lt-museum/index.php/smithfield-past-and-future"> Smithfield Past And Future</a></li>
+                                            <li class="item-479"><a href="/joomla/lt-museum/index.php/engaged-in-change"> Engaged in Change</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><div id="sp-bottom4" class="col-sm-6 col-md-3">
+                            <div class="sp-column ">
+                                <div class="sp-module ">
+                                    <h3 class="sp-module-title">Join Our Community</h3><div class="sp-module-content">
+                                        <div class="acymailing_module" id="acymailing_module_formAcymailing90461">
+                                            <div class="acymailing_fulldiv" id="acymailing_fulldiv_formAcymailing90461">
+                                                <form id="formAcymailing90461" action="/joomla/lt-museum/index.php" onsubmit="return submitacymailingform('optin','formAcymailing90461')" method="post" name="formAcymailing90461">
+                                                    <div class="acymailing_module_form">
+                                                        <div class="acymailing_introtext">Sign up to receive email for the latest information.</div>			<table class="acymailing_form">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="acyfield_name acy_requiredField">
+                                                                        <input id="user_name_formAcymailing90461" onfocus="if(this.value == 'Name') this.value = '';" onblur="if(this.value=='') this.value='Name';" class="inputbox" type="text" name="user[name]" style="width:80%" value="Name" title="Name">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="acyfield_email acy_requiredField">
+                                                                        <input id="user_email_formAcymailing90461" onfocus="if(this.value == 'E-mail') this.value = '';" onblur="if(this.value=='') this.value='E-mail';" class="inputbox" type="text" name="user[email]" style="width:80%" value="E-mail" title="E-mail">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+
+                                                                    <td class="acysubbuttons">
+                                                                        <input class="button subbutton btn btn-primary" type="submit" value="Subscribe" name="Submit" onclick="try{ return submitacymailingform('optin','formAcymailing90461'); }catch(err){alert('The form could not be submitted '+err);return false;}">
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <input type="hidden" name="ajax" value="0">
+                                                        <input type="hidden" name="acy_source" value="module_126">
+                                                        <input type="hidden" name="ctrl" value="sub">
+                                                        <input type="hidden" name="task" value="notask">
+                                                        <input type="hidden" name="redirect" value="http%3A%2F%2Fdemo5.ltheme.com%2Fjoomla%2Flt-museum%2F">
+                                                        <input type="hidden" name="redirectunsub" value="http%3A%2F%2Fdemo5.ltheme.com%2Fjoomla%2Flt-museum%2F">
+                                                        <input type="hidden" name="option" value="com_acymailing">
+                                                        <input type="hidden" name="hiddenlists" value="1">
+                                                        <input type="hidden" name="acyformname" value="formAcymailing90461">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section><footer id="sp-footer">
+                <div class="container">
+                    <div class="row">
+                        <div id="sp-footer1" class="col-sm-6 col-md-6">
+                            <div class="sp-column ">
+                                <div class="sp-module ">
+                                    <div class="sp-module-content">
+
+                                        <div class="custom">
+                                            <div class="custom">
+                                                <p>The Joomla! name is used under a limited license from Open Source Matters in the United States and other countries. <a href="http://ltheme.com">LTheme.com</a> is not affiliated with or endorsed by Open Source Matters or the Joomla! Project.</p>
+                                                <p>Designed by <a href="http://ltheme.com" target="_blank" rel="noopener noreferrer">LTheme.com</a> - Powered by <a href="http://joomla.org" target="_blank" rel="noopener noreferrer">Joomla!</a></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><div id="sp-footer2" class="col-sm-6 col-md-6">
+                            <div class="sp-column ">
+                                <div class="sp-module ">
+                                    <div class="sp-module-content">
+
+                                        <div class="custom">
+                                            <div class="custom">
+                                                <p>Copyright © 2013 <a href="http://ltheme.com" target="_blank" rel="noopener noreferrer">LTheme.com</a>. All rights reserved. Many features demonstrated on this website are available only in template.</p>
+                                                <p>All stock photos used on this template demo site are only for demo purposes</p>
+                                                <p>and notincluded in the template package.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div> <!-- /.body-innerwrapper -->
+    </div> <!-- /.body-innerwrapper -->
+    <!-- Off Canvas Menu -->
+    <div class="offcanvas-menu">
+        <a href="#" class="close-offcanvas"><i class="fa fa-remove"></i></a>
+        <div class="offcanvas-inner">
+            <div class="sp-module ">
+                <h3 class="sp-module-title">Search</h3><div class="sp-module-content">
+                    <div class="search">
+                        <form action="/joomla/lt-museum/index.php" method="post">
+                            <input name="searchword" id="mod-search-searchword" maxlength="200" class="inputbox search-query" type="text" size="20" placeholder="Search ...">		<input type="hidden" name="task" value="search">
+                            <input type="hidden" name="option" value="com_search">
+                            <input type="hidden" name="Itemid" value="437">
+                        </form>
+                    </div>
+                </div>
+            </div><div class="sp-module ">
+                <div class="sp-module-content">
+                    <ul class="nav menu">
+                        <li class="item-437  current active"><a href="/joomla/lt-museum/index.php"> Home</a></li>
+                        <li class="item-279  deeper parent"><a href="#"> Pages</a><span class="offcanvas-menu-toggler collapsed" data-toggle="collapse" data-target="#collapse-menu-279"><i class="open-icon fa fa-angle-down"></i><i class="close-icon fa fa-angle-up"></i></span><ul class="collapse" id="collapse-menu-279"><li class="item-545"><a href="/joomla/lt-museum/index.php/pages/about-us"> About Us</a></li><li class="item-547"><a href="/joomla/lt-museum/index.php/pages/history"> History</a></li><li class="item-546"><a href="/joomla/lt-museum/index.php/pages/events"> Events</a></li><li class="item-549"><a href="/joomla/lt-museum/index.php/pages/contact-us"> Contact Us</a></li><li class="item-487"><a href="/joomla/lt-museum/?tmpl=comingsoon"> Coming Soon</a></li><li class="item-488"><a href="/joomla/lt-museum/index.php/component/404/?Itemid=488"> 404 Page</a></li></ul></li>
+                        <li class="item-502  deeper parent"><a href="/joomla/lt-museum/index.php/portfolio"> Portfolio</a><span class="offcanvas-menu-toggler collapsed" data-toggle="collapse" data-target="#collapse-menu-502"><i class="open-icon fa fa-angle-down"></i><i class="close-icon fa fa-angle-up"></i></span><ul class="collapse" id="collapse-menu-502"><li class="item-551"><a href="/joomla/lt-museum/index.php/portfolio/portfolio-2-columns"> Portfolio 2 Columns</a></li><li class="item-550"><a href="/joomla/lt-museum/index.php/portfolio/portfolio-3-columns"> Portfolio 3 Columns</a></li><li class="item-552"><a href="/joomla/lt-museum/index.php/portfolio/portfolio-4-columns"> Portfolio 4 Columns</a></li></ul></li>
+                        <li class="item-278  deeper parent"><a href="/joomla/lt-museum/index.php/blog"> Blog</a><span class="offcanvas-menu-toggler collapsed" data-toggle="collapse" data-target="#collapse-menu-278"><i class="open-icon fa fa-angle-down"></i><i class="close-icon fa fa-angle-up"></i></span><ul class="collapse" id="collapse-menu-278"><li class="item-492"><a href="/joomla/lt-museum/index.php/blog/blog-with-right-sidebar"> Blog With Right Sidebar</a></li><li class="item-493"><a href="/joomla/lt-museum/index.php/blog/blog-with-left-sidebar"> Blog With Left Sidebar</a></li><li class="item-504"><a href="/joomla/lt-museum/index.php/blog/article-category-blog-2"> Article Category Blog</a></li></ul></li>
+                        <li class="item-503  deeper parent"><a href="#"> Post Formats</a><span class="offcanvas-menu-toggler collapsed" data-toggle="collapse" data-target="#collapse-menu-503"><i class="open-icon fa fa-angle-down"></i><i class="close-icon fa fa-angle-up"></i></span><ul class="collapse" id="collapse-menu-503"><li class="item-494"><a href="/joomla/lt-museum/index.php/post-formats/standard-post-format"> Standard Post Format</a></li><li class="item-495"><a href="/joomla/lt-museum/index.php/post-formats/video-post-format"> Video Post Format</a></li><li class="item-497"><a href="/joomla/lt-museum/index.php/post-formats/audio-post-format"> Audio Post Format</a></li><li class="item-496"><a href="/joomla/lt-museum/index.php/post-formats/gallery-post-format"> Gallery Post Format</a></li><li class="item-499"><a href="/joomla/lt-museum/index.php/post-formats/link-post-format"> Link Post Format</a></li><li class="item-501"><a href="/joomla/lt-museum/index.php/post-formats/quote-post-format"> Quote Post Format</a></li><li class="item-500"><a href="/joomla/lt-museum/index.php/post-formats/status-post-format"> Status Post Format</a></li><li class="item-498"><a href="/joomla/lt-museum/index.php/post-formats/image-post-format"> Image Post Format</a></li></ul></li>
+                        <li class="item-280  divider deeper parent">
+                            <a class="separator ">Joomla!</a>
+                            <span class="offcanvas-menu-toggler collapsed" data-toggle="collapse" data-target="#collapse-menu-280"><i class="open-icon fa fa-angle-down"></i><i class="close-icon fa fa-angle-up"></i></span><ul class="collapse" id="collapse-menu-280"><li class="item-266  deeper parent"><a href="#"> Content Component</a><span class="offcanvas-menu-toggler collapsed" data-toggle="collapse" data-target="#collapse-menu-266"><i class="open-icon fa fa-angle-down"></i><i class="close-icon fa fa-angle-up"></i></span><ul class="collapse" id="collapse-menu-266"><li class="item-257"><a href="/joomla/lt-museum/index.php/joomla/content-component/single-article"> Single Article</a></li><li class="item-259"><a href="/joomla/lt-museum/index.php/joomla/content-component/article-category-blog"> Article Category Blog</a></li><li class="item-260"><a href="/joomla/lt-museum/index.php/joomla/content-component/article-category-list"> Article Category List</a></li><li class="item-262"><a href="/joomla/lt-museum/index.php/joomla/content-component/featured-articles"> Featured Articles</a></li></ul></li><li class="item-270  deeper parent"><a href="#"> Contact Component</a><span class="offcanvas-menu-toggler collapsed" data-toggle="collapse" data-target="#collapse-menu-270"><i class="open-icon fa fa-angle-down"></i><i class="close-icon fa fa-angle-up"></i></span><ul class="collapse" id="collapse-menu-270"><li class="item-251"><a href="/joomla/lt-museum/index.php/joomla/contact-component/contact-categories"> Contact Categories</a></li><li class="item-275"><a href="/joomla/lt-museum/index.php/joomla/contact-component/contact-single-category"> Contact Single Category</a></li><li class="item-229"><a href="/joomla/lt-museum/index.php/joomla/contact-component/single-contact"> Single Contact</a></li><li class="item-452"><a href="/joomla/lt-museum/index.php/joomla/contact-component/featured-contacts"> Featured Contacts</a></li></ul></li><li class="item-271  deeper parent"><a href="#"> Users Component</a><span class="offcanvas-menu-toggler collapsed" data-toggle="collapse" data-target="#collapse-menu-271"><i class="open-icon fa fa-angle-down"></i><i class="close-icon fa fa-angle-up"></i></span><ul class="collapse" id="collapse-menu-271"><li class="item-402"><a href="/joomla/lt-museum/index.php/joomla/users-component/login-form"> Login Form</a></li><li class="item-403"><a href="/joomla/lt-museum/index.php/joomla/users-component/user-profile"> User Profile</a></li><li class="item-404"><a href="/joomla/lt-museum/index.php/joomla/users-component/edit-user-profile"> Edit User Profile</a></li><li class="item-405"><a href="/joomla/lt-museum/index.php/joomla/users-component/registration-form"> Registration Form</a></li></ul></li><li class="item-268  deeper parent"><a href="#"> Other Components</a><span class="offcanvas-menu-toggler collapsed" data-toggle="collapse" data-target="#collapse-menu-268"><i class="open-icon fa fa-angle-down"></i><i class="close-icon fa fa-angle-up"></i></span><ul class="collapse" id="collapse-menu-268"><li class="item-267  deeper parent"><a href="/joomla/lt-museum/index.php/joomla/other-components/news-feeds-component"> News Feeds Component</a><span class="offcanvas-menu-toggler collapsed" data-toggle="collapse" data-target="#collapse-menu-267"><i class="open-icon fa fa-angle-down"></i><i class="close-icon fa fa-angle-up"></i></span><ul class="collapse" id="collapse-menu-267"><li class="item-252"><a href="/joomla/lt-museum/index.php/joomla/other-components/news-feeds-component/new-feed-categories"> News Feed Categories</a></li><li class="item-254"><a href="/joomla/lt-museum/index.php/joomla/other-components/news-feeds-component/single-news-feed"> Single News Feed</a></li><li class="item-253"><a href="/joomla/lt-museum/index.php/joomla/other-components/news-feeds-component/news-feed-category"> News Feed Category</a></li></ul></li><li class="item-276"><a href="/joomla/lt-museum/index.php/joomla/other-components/search-component"> Search Components</a></li><li class="item-466"><a href="/joomla/lt-museum/index.php/joomla/other-components/smart-search"> Smart Search</a></li><li class="item-255"><a href="/joomla/lt-museum/index.php/joomla/other-components/search"> Search</a></li></ul></li></ul>
+                        </li>
+                        <li class="item-553  deeper parent"><a href="/joomla/lt-museum/index.php/k2-blog"> K2 Blog</a><span class="offcanvas-menu-toggler collapsed" data-toggle="collapse" data-target="#collapse-menu-553"><i class="open-icon fa fa-angle-down"></i><i class="close-icon fa fa-angle-up"></i></span><ul class="collapse" id="collapse-menu-553"><li class="item-554"><a href="/joomla/lt-museum/index.php/k2-blog/blog-listing"> Blog Listing</a></li><li class="item-555"><a href="/joomla/lt-museum/index.php/k2-blog/single-blog"> Single Blog</a></li><li class="item-556"><a href="/joomla/lt-museum/index.php/k2-blog/user-s-blog"> User's Blog</a></li></ul></li>
+                    </ul>
+                </div>
+            </div>
+        </div> <!-- /.offcanvas-inner -->
+    </div> <!-- /.offcanvas-menu -->
+
+
+    <div class="template-options">
+        <div class="options-inner">
+            <a class="helix3-toggler" href="#">
+                <i class="fa fa-cog fa-spin"></i>
+            </a>
+            <div class="option-section">
+                <h4>Layout Type</h4>
+                <div class="checkbox">
+                    <label><input type="checkbox" id="helix3-boxed">Enable Boxed Layout</label>
+                </div>
+            </div>
+            <div class="option-section">
+                <h4>Presets Color</h4>
+                <ul class="helix3-presets clearfix">
+                    <li data-preset="1" class="helix3-preset1 active">
+                        <a href="#" style="background-color:#80c8b5"></a>
+                    </li>
+                    <li data-preset="2" class="helix3-preset2">
+                        <a href="#" style="background-color:#4db788"></a>
+                    </li>
+                    <li data-preset="3" class="helix3-preset3">
+                        <a href="#" style="background-color:#e2b13c"></a>
+                    </li>
+                    <li data-preset="4" class="helix3-preset4">
+                        <a href="#" style="background-color:#c19b76"></a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="option-section">
+                <h4>Background Image</h4>
+                <ul class="helix3-bg-images clearfix">
+                    <li data-bg="http://demo5.ltheme.com/joomla/lt-museum/templates/ltmuseum/images/backgrounds/1.jpg">
+                        <a href="#"><img alt="" src="http://demo5.ltheme.com/joomla/lt-museum/templates/ltmuseum/images/backgrounds/1.jpg" class="img-responsive"></a>
+                    </li>
+                    <li data-bg="http://demo5.ltheme.com/joomla/lt-museum/templates/ltmuseum/images/backgrounds/2.jpg">
+                        <a href="#"><img alt="" src="http://demo5.ltheme.com/joomla/lt-museum/templates/ltmuseum/images/backgrounds/2.jpg" class="img-responsive"></a>
+                    </li>
+                    <li data-bg="http://demo5.ltheme.com/joomla/lt-museum/templates/ltmuseum/images/backgrounds/3.jpg">
+                        <a href="#"><img alt="" src="http://demo5.ltheme.com/joomla/lt-museum/templates/ltmuseum/images/backgrounds/3.jpg" class="img-responsive"></a>
+                    </li>
+                    <li data-bg="http://demo5.ltheme.com/joomla/lt-museum/templates/ltmuseum/images/backgrounds/4.jpg">
+                        <a href="#"><img alt="" src="http://demo5.ltheme.com/joomla/lt-museum/templates/ltmuseum/images/backgrounds/4.jpg" class="img-responsive"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <div class="col-md-3">
-        <h2>How to</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=398600">Add a Controller and View</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699315">Manage User Secrets using Secret Manager.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699316">Use logging to log a message.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699317">Add packages using NuGet.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699319">Target development, staging or production environment.</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>Overview</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=518008">Conceptual overview of what is ASP.NET Core</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699320">Fundamentals of ASP.NET Core such as Startup and middleware.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=398602">Working with Data</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=398603">Security</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699321">Client side development</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699322">Develop on different platforms</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699323">Read more on the documentation site</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>Run &amp; Deploy</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517851">Run your app</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517853">Run tools such as EF migrations and more</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=398609">Publish to Microsoft Azure Web Apps</a></li>
-        </ul>
-    </div>
-</div>
+
+
+
+    <!-- Preloader -->
+    <!-- Go to top -->
+
+
+
+    <div id="scrollToTop" title="Go To Top" class="scrollToTop fa fa-angle-up" style="display: block;"></div>
+    <style type="text/css">
+        .typewrite > .wrap {
+            border-right: 0.08em solid #fff;
+        }
+        </style>
+   
+</body>
+
+

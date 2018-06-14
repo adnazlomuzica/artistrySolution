@@ -1,4 +1,5 @@
 ﻿using artistry_Data.Models;
+using artistry_Web.Helper;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace artistry_Web.Areas.Moderator.ViewModels
         public string Date { get; set; }
 
         [Required(ErrorMessage = "Please enter accession number")]
+        [ValidationExstension]
         public int AccessionNumber { get; set; }
 
         [Required(ErrorMessage = "Please select country")]
@@ -44,6 +46,8 @@ namespace artistry_Web.Areas.Moderator.ViewModels
         public int MuseumId { get; set; }
         public bool Active { get; set; }
         public string Provenance { get; set; }
+
+        [Required(ErrorMessage = "Please enter description")]
         public string CatalogueEntry { get; set; }
         public IEnumerable<Images> Images { get; set; }
         public string Country_S { get; set; }

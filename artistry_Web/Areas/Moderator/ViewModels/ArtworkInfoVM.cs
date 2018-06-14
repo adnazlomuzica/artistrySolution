@@ -13,7 +13,7 @@ namespace artistry_Web.Areas.Moderator.ViewModels
         public int ArtistId { get; set; }
         public string Artist { get; set; }
         public int Likes { get; set; }
-        public int ImageId { get; set; }
+        public int? ImageId { get; set; }
         public Images Image { get; set; }
     }
 }

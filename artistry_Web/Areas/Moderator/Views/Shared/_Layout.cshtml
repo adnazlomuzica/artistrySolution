@@ -1,5 +1,12 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
+<style>
+    .page-container{
+        min-height:650px;
+        height:100%;
+        overflow:auto;
+    }
+</style>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -87,34 +94,6 @@
             </ul>
         </div>
         <div class="navbar-collapse collapse" id="navbar-mobile">
-            <ul class="nav navbar-nav">
-                <li><a class="sidebar-control sidebar-main-toggle hidden-xs"><i class="icon-paragraph-justify3"></i></a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle applog" data-toggle="dropdown">
-                        <i class="icon-bell2"></i>
-                        <span class="visible-xs-inline-block position-right">Notifications</span>
-                        <span id="newlog-place" class="badge bg-warning-400"></span>
-                    </a>
-                    <div class="dropdown-menu dropdown-content">
-                        <div class="dropdown-content-heading">
-                            Notifications
-                            <ul class="icons-list">
-                                <li><a href="#" class="applog"><i class="icon-sync"></i></a></li>
-                            </ul>
-                        </div>
-                        <ul class="media-list dropdown-content-body width-350">
-                            <li class="media">
-                                <div class="media-left">
-                                    <div id="applog-place"></div>
-                                </div>
-                            </li>
-                        </ul>
-                        <div class="dropdown-content-footer">
-                            <a asp-area="Administrator" asp-controller="AppLog" asp-action="Index" data-popup="tooltip" title="All activity"><i class="icon-menu display-block"></i></a>
-                        </div>
-                    </div>
-                </li>
-            </ul>
             <ul class="nav navbar-nav navbar-right">
 
                 <li class="dropdown message">
@@ -161,7 +140,7 @@
                     <div class="sidebar-user">
                         <div class="category-content">
                             <div class="media">
-                                <a href="#" class="media-left"><img src="~/assets/images/placeholder.jpg" class="img-circle img-sm" alt=""></a>
+                                <a asp-controller="Museum" asp-action="Details" class="media-left"><img src="~/assets/images/placeholder.jpg" class="img-circle img-sm" alt=""></a>
                                 <div class="media-body">
                                     <div id="user-info"></div>
                                 </div>
@@ -179,23 +158,29 @@
                                 @{ url = Url.Action("Index", "Home"); }
                                 <li class="nav link @(Context.Request.Path == url ? "active" : null)"><a href="@url"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
 
-                                @{ url = Url.Action("Index", "TicketType"); }
-                                <li class="nav link @(Context.Request.Path == url ? "active" : null)"><a href="@url"><i class="icon-library2"></i> <span>Ticket types</span></a></li>
+                                @{ url = Url.Action("Index", "Collection"); }
+                                <li class="nav link @(Context.Request.Path == url ? "active" : null)"><a href="@url"><i class="icon-images3"></i> <span>Collections</span></a></li>
 
                                 @{ url = Url.Action("Index", "Artwork"); }
-                                <li class="nav link @(Context.Request.Path == url ? "active" : null)"><a href="@url"><i class="icon-list3"></i> <span>Artworks</span></a></li>
+                                <li class="nav link @(Context.Request.Path == url ? "active" : null)"><a href="@url"><i class="icon-image4"></i> <span>Artworks</span></a></li>
 
                                 @{ url = Url.Action("Index", "Artist"); }
                                 <li class="nav link @(Context.Request.Path == url ? "active" : null)"><a href="@url"><i class="icon-users4"></i> <span>Artists</span></a></li>
 
-                                @{ url = Url.Action("Index", "News"); }
-                                <li class="nav link @(Context.Request.Path == url ? "active" : null)"><a href="@url"><i class="icon-images3"></i> <span>News</span></a></li>
-
-                                @{ url = Url.Action("Index", "Collection"); }
-                                <li class="nav link @(Context.Request.Path == url ? "active" : null)"><a href="@url"><i class="fa fa-paint-brush"></i> <span>Collections</span></a></li>
-
                                 @{ url = Url.Action("Index", "Event"); }
-                                <li class="nav link @(Context.Request.Path == url ? "active" : null)"><a href="@url"><i class="fa fa-dashboard"></i> <span>Events</span></a></li>
+                                <li class="nav link @(Context.Request.Path == url ? "active" : null)"><a href="@url"><i class="icon-calendar"></i> <span>Events</span></a></li>
+
+                                @{ url = Url.Action("Index", "News"); }
+                                <li class="nav link @(Context.Request.Path == url ? "active" : null)"><a href="@url"><i class="icon-newspaper"></i> <span>News</span></a></li>
+
+                                @{ url = Url.Action("Index", "Ticket"); }
+                                <li class="nav link @(Context.Request.Path == url ? "active" : null)"><a href="@url"><i class="icon-coins"></i> <span>Tickets</span></a></li>
+
+                                @{ url = Url.Action("Index", "Review"); }
+                                <li class="nav link @(Context.Request.Path == url ? "active" : null)"><a href="@url"><i class="icon-bubble-lines4"></i> <span>Reviews</span></a></li>
+
+                                @{ url = Url.Action("Index", "TicketType"); }
+                                <li class="nav link @(Context.Request.Path == url ? "active" : null)"><a href="@url"><i class="icon-ticket"></i> <span>Ticket types</span></a></li>
                             </ul>
                         </div>
                     </div>

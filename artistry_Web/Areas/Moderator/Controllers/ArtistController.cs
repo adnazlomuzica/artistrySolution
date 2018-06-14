@@ -48,7 +48,9 @@ namespace artistry_Web.Areas.Moderator.Controllers
                 vm.Styles = artistmovementRepository.GetArtistMovementsByArtist(a.Id);
                 vm.Artworks = artworkRepository.GetArtworksByArtist(a.Id);
                 vm.Image = imageRepository.GetArtistImage(a.Id);
-                vm.ImageId = vm.Image.Id;
+
+                if (vm.Image != null)
+                    vm.ImageId = vm.Image.Id;
                 model.Add(vm);
             }
 
@@ -70,7 +72,9 @@ namespace artistry_Web.Areas.Moderator.Controllers
             vm.Styles = artistmovementRepository.GetArtistMovementsByArtist(a.Id);
             vm.Artworks = artworkRepository.GetArtworksByArtist(a.Id);
             vm.Image = imageRepository.GetArtistImage(a.Id);
-            vm.ImageId = vm.Image.Id;
+
+            if (vm.Image != null)
+                vm.ImageId = vm.Image.Id;
 
             return View("Details", vm);
         }
@@ -101,6 +105,8 @@ namespace artistry_Web.Areas.Moderator.Controllers
                 vm.Styles = artistmovementRepository.GetArtistMovementsByArtist(a.Id);
                 vm.Artworks = artworkRepository.GetArtworksByArtist(a.Id);
                 vm.Image = imageRepository.GetArtistImage(a.Id);
+
+                if(vm.Image!=null)
                 vm.ImageId = vm.Image.Id;
                 model.Add(vm);
             }

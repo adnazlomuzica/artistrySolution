@@ -6,11 +6,6 @@
         <div class="page-title">
             <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Artworks</span></h4>
         </div>
-        <div class="heading-elements">
-            <div class="heading-btn-group">
-                <a asp-controller="Image" asp-action="AddArtwork" asp-route-id="@Model.Id" class="btn btn-link btn-float has-text"><i class="icon-image2 text-primary"></i><span>Gallery</span></a>
-            </div>
-        </div>
     </div>
     <div class="breadcrumb-line">
         <ul class="breadcrumb">
@@ -20,18 +15,18 @@
     </div>
 </div>
 
-<div class="content" style="padding-bottom:0px;">
+<div class="content" style="padding-bottom:0px;" id="closePanel1">
     <div class="panel panel-flat">
         <div class="panel-heading">
             <h6 class="panel-title">Add</h6>
             <div class="heading-elements">
                 <ul class="icons-list">
-                    <li><a data-action="collapse" href="#collapsePanel1"></a></li>
-                    <li><a data-action="close" href="#reloadPanel1"></a></li>
+                    <li><a data-toggle="collapse" data-target="#collapsePanel1" class="icon-arrow-down12"></a></li>
+                    <li><a data-close="close" data-target="#closePanel1" class="icon-cross3"></a></li>               
                 </ul>
             </div>
         </div>
-        <div class="panel-body" id="collapsePanel1 reloadPanel1">
+        <div class="panel-body" id="collapsePanel1">
             <form asp-action="Save" role="form">
                 @Html.AntiForgeryToken()
                 <input asp-for="Id" type="hidden" />

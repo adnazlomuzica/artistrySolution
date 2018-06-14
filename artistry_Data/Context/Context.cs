@@ -47,7 +47,6 @@ namespace artistry_Data.Context
         public DbSet<Clients> Clients { get; set; }
         public DbSet<Collections> Collections { get; set; }
         public DbSet<Countries> Countries { get; set; }
-        public DbSet<Currencies> Currencies { get; set; }
         public DbSet<Events> Events { get; set; }
         public DbSet<Images> Images { get; set; }
         public DbSet<Likes> Likes { get; set; }
@@ -57,6 +56,8 @@ namespace artistry_Data.Context
         public DbSet<MuseumTypes> MuseumTypes { get; set; }
         public DbSet<News> News { get; set; }
         public DbSet<Styles> Styles { get; set; }
+        public DbSet<Reviews> Reviews { get; set; }
+        public DbSet<Tickets> Tickets { get; set; }
         public DbSet<TicketTypes> TicketTypes { get; set; }
         public DbSet<UserAccounts> UserAccounts { get; set; }
         public DbSet<WorkingHours> WorkingHours { get; set; }

@@ -138,7 +138,9 @@ $(function() {
     });
 
     // Add markers
-    var gmarker = addresspickerMap.addresspicker("marker");
+    var gmarker = [];
+    var marker = addresspickerMap.addresspicker("marker");
+    gmarker.push(marker);
     gmarker.setVisible(true);
     addresspickerMap.addresspicker("updatePosition");
 

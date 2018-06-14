@@ -1,6 +1,10 @@
 ﻿@model List<artistry_Data.Models.Events>
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
+<script type="text/javascript" src="~/assets/js/plugins/ui/fullcalendar/fullcalendar.min.js"></script>
+<script type="text/javascript" src="~/assets/js/pages/extra_fullcalendar.js"></script>
+
+
 <div class="page-header page-header-default">
     <div class="page-header-content">
         <div class="page-title">
@@ -19,3 +23,44 @@
         </ul>
     </div>
 </div>
+
+
+<div class="content" id="closePanel1">
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <h5 class="panel-title">Events</h5>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-toggle="collapse" data-target="#collapsePanel1" class="icon-arrow-down12"></a></li>
+                    <li><a data-close="close" data-target="#closePanel1" class="icon-cross3"></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="panel-body" id="collapsePanel1">
+            <div  id="fullcalendar"></div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+        $('#fullcalendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            allDayDefault: false,
+            editable: true,
+            selectable: true,
+            allDaySlot: false,
+            slotMinutes:60,
+            events: "/Moderator/Event/GetEvents",
+            eventClick: function (calEvent) {
+                window.location.href = "/Moderator/Event/Details?id=" + calEvent.id;
+            }
+        });
+    });
+</script>

@@ -12,7 +12,7 @@
         <ul class="breadcrumb">
             <li><a asp-controller="Home" asp-action="Index"><i class="icon-home2 position-left"></i> Home</a></li>
             <li class="active"><a asp-controller="Artist" asp-action="Index">Artists</a></li>
-            <li class="active"><a asp-controller="Artist" asp-action="Details">Details</a></li>
+            <li class="active"><a asp-controller="Artist" asp-action="Details" asp-route-id="@Model.Id">Details</a></li>
         </ul>
     </div>
 </div>
@@ -28,7 +28,7 @@
                 </ul>
             </div>
         </div>
-        <div class="panel-body" id="collapsePanel3">
+        <div class="panel-body" id="collapsePanel1">
             <div style="margin-bottom:30px;">
                 <div class="row">
                     <p class="col-md-3 text-bold">Name</p>

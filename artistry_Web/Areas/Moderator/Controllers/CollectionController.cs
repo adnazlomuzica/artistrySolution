@@ -119,6 +119,7 @@ namespace artistry_Web.Areas.Moderator.Controllers
             }
 
             Images i = new Images();
+            i.Id = model.Id;
             i.Caption = model.Caption;
             i.Primary = true;
             i.ImageThumb = ImageHelper.imageToByteArray(ImageHelper.ResizeImage(Image.FromStream(imagefile.OpenReadStream(), true, true), 150, 150));

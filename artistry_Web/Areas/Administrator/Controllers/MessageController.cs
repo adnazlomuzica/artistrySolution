@@ -120,7 +120,7 @@ namespace artistry_Web.Areas.Administrator.Controllers
                
                 message.Date = DateTime.Now;
                 message.SenderId = Autentification.GetLoggedUser(HttpContext).Id;
-                message.ReceiverId = m.ReceiverId;
+                message.ReceiverId = m.SenderId;
                 message.Seen = false;
                 message.Text = m.Reply.Text;
 

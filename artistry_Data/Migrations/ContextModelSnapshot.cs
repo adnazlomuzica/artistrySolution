@@ -261,24 +261,6 @@ namespace artistry_Data.Migrations
                     b.ToTable("Countries");
                 });
 
-            modelBuilder.Entity("artistry_Data.Models.Currencies", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("CountryId");
-
-                    b.Property<string>("Currency");
-
-                    b.Property<string>("Symbol");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CountryId");
-
-                    b.ToTable("Currencies");
-                });
-
             modelBuilder.Entity("artistry_Data.Models.Events", b =>
                 {
                     b.Property<int>("Id")
@@ -292,7 +274,8 @@ namespace artistry_Data.Migrations
 
                     b.Property<DateTime>("StartDate");
 
-                    b.Property<string>("Title");
+                    b.Property<string>("Title")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -471,6 +454,30 @@ namespace artistry_Data.Migrations
                     b.ToTable("News");
                 });
 
+            modelBuilder.Entity("artistry_Data.Models.Reviews", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ClientId");
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<int>("MuseumId");
+
+                    b.Property<string>("Note");
+
+                    b.Property<int>("Rating");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("MuseumId");
+
+                    b.ToTable("Reviews");
+                });
+
             modelBuilder.Entity("artistry_Data.Models.Styles", b =>
                 {
                     b.Property<int>("Id")
@@ -487,22 +494,49 @@ namespace artistry_Data.Migrations
                     b.ToTable("Styles");
                 });
 
+            modelBuilder.Entity("artistry_Data.Models.Tickets", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("Active");
+
+                    b.Property<int>("ClientId");
+
+                    b.Property<string>("Code");
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<int>("Quantity");
+
+                    b.Property<bool>("Seen");
+
+                    b.Property<int>("TicketTypeId");
+
+                    b.Property<double>("Total");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("TicketTypeId");
+
+                    b.ToTable("Tickets");
+                });
+
             modelBuilder.Entity("artistry_Data.Models.TicketTypes", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("CurrencyId");
-
                     b.Property<int>("MuseumId");
 
                     b.Property<double>("Price");
 
-                    b.Property<string>("Type");
+                    b.Property<string>("Type")
+                        .IsRequired();
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CurrencyId");
 
                     b.HasIndex("MuseumId");
 
@@ -647,14 +681,6 @@ namespace artistry_Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("artistry_Data.Models.Currencies", b =>
-                {
-                    b.HasOne("artistry_Data.Models.Countries", "Country")
-                        .WithMany()
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("artistry_Data.Models.Events", b =>
                 {
                     b.HasOne("artistry_Data.Models.Museums", "Museum")
@@ -729,13 +755,34 @@ namespace artistry_Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("artistry_Data.Models.TicketTypes", b =>
+            modelBuilder.Entity("artistry_Data.Models.Reviews", b =>
                 {
-                    b.HasOne("artistry_Data.Models.Currencies", "Currency")
+                    b.HasOne("artistry_Data.Models.Clients", "Client")
                         .WithMany()
-                        .HasForeignKey("CurrencyId")
+                        .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade);
 
+                    b.HasOne("artistry_Data.Models.Museums", "Museum")
+                        .WithMany()
+                        .HasForeignKey("MuseumId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("artistry_Data.Models.Tickets", b =>
+                {
+                    b.HasOne("artistry_Data.Models.Clients", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("artistry_Data.Models.TicketTypes", "TicketType")
+                        .WithMany()
+                        .HasForeignKey("TicketTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("artistry_Data.Models.TicketTypes", b =>
+                {
                     b.HasOne("artistry_Data.Models.Museums", "Museum")
                         .WithMany()
                         .HasForeignKey("MuseumId")

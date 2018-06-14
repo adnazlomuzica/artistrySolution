@@ -1,4 +1,4 @@
-﻿@model artistry_Web.Areas.Moderator.ViewModels.TicketTypeVM
+﻿@model artistry_Data.Models.TicketTypes
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <div class="page-header page-header-default">
@@ -51,12 +51,8 @@
                         <div class="col-md-3">
                             <label>Price</label>
                             <input asp-for="Price" type="text" class="form-control" />
+                            <span class="help-block">Enter price in €</span>
                             <span asp-validation-for="Price" class="text-danger"></span>
-                        </div>
-                        <div class="col-md-3">
-                            <label>Currency</label>
-                            <select asp-for="CurrencyId" asp-items="@Model.Currencies" type="text" class="form-control"></select>
-                            <span asp-validation-for="CurrencyId" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
@@ -64,7 +60,6 @@
                     <button type="submit" class="btn btn-primary">Save <i class="icon-arrow-right14 position-right"></i></button>
                 </div>
             </form>
-
         </div>
     </div>
 </div>

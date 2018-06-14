@@ -1,4 +1,4 @@
-﻿using artistry_Web.Helper;
+﻿using artistry_Data.Helper;
 using artistry_Data.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;

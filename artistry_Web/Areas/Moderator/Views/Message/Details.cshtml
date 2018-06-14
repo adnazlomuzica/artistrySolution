@@ -1,9 +1,11 @@
 ﻿@model artistry_Web.Areas.Moderator.ViewModels.MessageVM
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
+@{ var userId = ViewData["userId"];}
+
 @foreach (var item in Model.Messages)
 {
-    if (item.SenderId == Model.ReceiverId)
+    if (item.SenderId == Convert.ToInt32(userId))
     {
         <div class="media-body" style="margin-bottom:0; margin-top:0;padding-bottom:0;padding-top:0;">
             <div class="alert alert-warning alert-rounded" role="alert" style="border:none; color:black; margin-bottom:0;margin-top:0;float:right;width:50%;background-color:lightgrey;">
@@ -39,11 +41,12 @@
     <br />
 }
 
-<form asp-action="Reply">
-    @Html.AntiForgeryToken()
-    <input type="hidden" asp-for="@Model.SenderId" />
-    <div style="display:inline">
-        <input type="text" asp-for="@Model.Reply.Text" class="form-control" style="float:left;margin-left:2px;width:80%;" />
-        <input type="submit" value="Reply" class="btn btn-primary message-save" style="float:right;width:18%;" />
-    </div>
-</form>
+    <form asp-action="Reply">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="@Model.SenderId" />
+        <input type="hidden" asp-for="@Model.ReceiverId" />
+        <div style="display:inline">
+            <input type="text" asp-for="@Model.Reply.Text" class="form-control" style="float:left;margin-left:2px;width:80%;" />
+            <input type="submit" value="Reply" class="btn btn-primary message-save" style="float:right;width:18%;" />
+        </div>
+    </form>

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using artistry_Data.Context;
@@ -26,6 +28,7 @@ namespace artistry_Web.Areas.Moderator.Controllers
         private readonly IMuseumRepository museumRepository;
         private readonly ILikesRepository likesRepository;
         private readonly IImageRepository imageRepository;
+        private readonly ICollectionRepository collectionRepository;
 
         public ArtworkController(Context context)
         {
@@ -38,6 +41,7 @@ namespace artistry_Web.Areas.Moderator.Controllers
             this.museumRepository = new MuseumRepository(context);
             this.likesRepository = new LikesRepository(context);
             this.imageRepository = new ImageRepository(context);
+            this.collectionRepository = new CollectionRepository(context);
         }
 
         [HttpGet("Index")]
@@ -59,10 +63,14 @@ namespace artistry_Web.Areas.Moderator.Controllers
                 vm.Likes = likesRepository.GetLikes(x.Id);
                 vm.Name = x.Name;
                 vm.Image = imageRepository.GetArtworkImage(x.Id);
-                vm.ImageId = vm.Image.Id;
+
+                if(vm.Image!=null)
+                  vm.ImageId = vm.Image.Id;
 
                 list.Add(vm);
             }
+
+            ViewData["collections"] = collectionRepository.GetCollections(m.Id);
 
             return View("Index", list);
         }
@@ -121,6 +129,7 @@ namespace artistry_Web.Areas.Moderator.Controllers
         public IActionResult Details(int id)
         {
             Artworks a = artworkRepository.GetArtworkById(id);
+            Museums m = museumRepository.GetMuseum(a.MuseumId);
 
             ArtworkVM model = new ArtworkVM();
 
@@ -150,6 +159,7 @@ namespace artistry_Web.Areas.Moderator.Controllers
             model.Material = new SelectList(materialRepository.GetMaterials(), "Id", "Name");
             model.Style = new SelectList(styleRepository.GetStyles(), "Id", "Name");
 
+            ViewData["download"] = m.QrScanning;
             return View("Details", model);
         }
 
@@ -271,12 +281,28 @@ namespace artistry_Web.Areas.Moderator.Controllers
                 vm.Likes = likesRepository.GetLikes(x.Id);
                 vm.Name = x.Name;
                 vm.Image = imageRepository.GetArtworkImage(x.Id);
-                vm.ImageId = vm.Image.Id;
+
+                if(vm.Image!=null)
+                 vm.ImageId = vm.Image.Id;
 
                 list.Add(vm);
             }
+            ViewData["collections"] = collectionRepository.GetCollections(m.Id);
 
             return View("Index", list);
+        }
+
+        [HttpGet("Download")]
+        public IActionResult Download(int id)
+        {
+            Artworks artwork = artworkRepository.GetArtworkById(id);
+
+            byte[] file = GenerateBarCode.GenerateQr(artwork.AccessionNumber.ToString());
+
+            ImageConverter converte = new ImageConverter();
+            string contentType = "application/png";
+            
+            return File(file, contentType, "image.png");
         }
     }
 }

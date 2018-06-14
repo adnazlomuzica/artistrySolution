@@ -20,12 +20,16 @@ namespace artistry_Web.Areas.Administrator.Controllers
         private readonly IMuseumRepository museumRepository;
         private readonly IUserRepository userRepository;
         private readonly IAppLogRepository appLogRepository;
+        private readonly ITicketRepository ticketRepository;
+        private readonly IClientRepository clientRepository;
 
         public HomeController(Context context)
         {
             this.museumRepository = new MuseumRepository(context);
             this.userRepository = new UserRepository(context);
             this.appLogRepository = new AppLogRepository(context);
+            this.ticketRepository = new TicketRepository(context);
+            this.clientRepository = new ClientRepository(context);
         }
         [HttpGet("Index")]
         public IActionResult Index()
@@ -35,31 +39,37 @@ namespace artistry_Web.Areas.Administrator.Controllers
             model.MuseumsRegistrated = museumRepository.MuseumsRegistrated();
             model.MuseumsRegMonth = museumRepository.MuseumsRegMonth();
             model.TicketsRevenue = 0;
-            model.TicketsRevenueMonth = 0;
+            model.TicketsRevenueMonth =0;
             model.TicketsSale = 0;
             model.TicketsSaleMonth = 0;
-            model.UsersRegistrated = 0;
-            model.UsersRegMonth = 0;
+            model.UsersRegistrated =clientRepository.GetRegClients();
+            model.UsersRegMonth = clientRepository.GetRegClientsMonth();
             model.ActiveMuseums = 0;
             model.InactiveMuseums = 0;
-            Random rnd = new Random();
 
             model.museumTicketSales = new List<MuseumTicketSale>();
 
             IEnumerable<Museums> museums = museumRepository.GetMuseums();
+            museums = museums.Where(x => x.OnlineTickets).ToList();
 
             foreach (Museums x in museums)
             {
+                int total = ticketRepository.GetSum(x.Id);
                 model.museumTicketSales.Add(new MuseumTicketSale
                 {
                     Museum = x.Name,
-                    Quantity = rnd.Next(10)
+                    Quantity = total
                 });
 
                 if (x.User.Active)
                     model.ActiveMuseums++;
                 else
                     model.InactiveMuseums++;
+
+                model.TicketsSale += total;
+                model.TicketsSaleMonth += ticketRepository.GetMonthSum(x.Id);
+                model.TicketsRevenue += ticketRepository.GetTotal(x.Id);
+                model.TicketsRevenueMonth += ticketRepository.GetMonthTotal(x.Id);
             }
             model.TotalMuseumTicketSales = model.museumTicketSales.Select(x=>x.Quantity).Sum();
 

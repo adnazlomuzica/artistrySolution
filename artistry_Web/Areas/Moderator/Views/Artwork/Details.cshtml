@@ -1,6 +1,8 @@
 ﻿@model artistry_Web.Areas.Moderator.ViewModels.ArtworkVM;
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
+@{ Boolean download = Convert.ToBoolean(ViewData["download"]);}
+
 <link href="~/css/fancybox-style.css" rel="stylesheet" type="text/css" />
 
 <div class="page-header page-header-default">
@@ -11,7 +13,12 @@
         <div class="heading-elements">
             <div class="heading-btn-group">
                 <a asp-controller="Artwork" asp-action="GetArtwork" asp-route-id="@Model.Id" class="btn btn-link btn-float has-text"><i class="icon-pencil text-primary"></i><span>Edit</span></a>
-
+                
+                @if (download)
+                {
+                <a asp-controller="Artwork" asp-action="Download" asp-route-id="@Model.Id" class="btn btn-link btn-float has-text"><i class="icon-qrcode text-primary"></i><span>Download</span></a>
+                }
+                
                 @if (Model.Active)
                 {
                     <a asp-controller="Artwork" asp-action="Deactivate" asp-route-id="@Model.Id" class="btn btn-link btn-float has-text"><i class="icon-subtract text-primary"></i><span>Deactivate</span></a>
@@ -31,18 +38,18 @@
     </div>
 </div>
 
-<div class="content" style="padding-bottom:0px;">
+<div class="content" style="padding-bottom:0px;" id="closePanel1">
     <div class="panel panel-flat">
         <div class="panel-heading">
             <h6 class="panel-title">Details</h6>
             <div class="heading-elements">
                 <ul class="icons-list">
-                    <li><a data-action="collapse" href="#collapsePanel1"></a></li>
-                    <li><a data-action="close" href="#reloadPanel1"></a></li>
+                    <li><a data-toggle="collapse" data-target="#collapsePanel1" class="icon-arrow-down12"></a></li>
+                    <li><a data-close="close" data-target="#closePanel1" class="icon-cross3"></a></li>
                 </ul>
             </div>
         </div>
-        <div class="panel-body" id="collapsePanel1 reloadPanel1">
+        <div class="panel-body" id="collapsePanel1">
 
             <div class="row">
                 <p class="col-md-3 text-bold">Name</p>

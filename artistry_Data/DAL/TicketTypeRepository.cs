@@ -18,7 +18,7 @@ namespace artistry_Data.DAL
 
         public IEnumerable<TicketTypes> GetTicketTypes(int id)
         {
-            return context.TicketTypes.Where(x => x.MuseumId == id).Include(x => x.Museum).Include(x=>x.Currency).OrderBy(x=>x.Type.Trim()).ToList();
+            return context.TicketTypes.Where(x => x.MuseumId == id).Include(x => x.Museum).OrderBy(x=>x.Type.Trim()).ToList();
         }
 
         public TicketTypes GetType(int id)
