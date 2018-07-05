@@ -1,7 +1,6 @@
 ﻿@model artistry_Web.Areas.Moderator.ViewModels.ArtistInfoVM
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-
 <div class="page-header page-header-default">
     <div class="page-header-content">
         <div class="page-title">
@@ -16,7 +15,6 @@
         </ul>
     </div>
 </div>
-
 <div class="content" style="padding-top:0px;padding-bottom:0;" id="closePanel1">
     <div class="panel panel-flat">
         <div class="panel-heading">
@@ -31,47 +29,46 @@
         <div class="panel-body" id="collapsePanel1">
             <div style="margin-bottom:30px;">
                 <div class="row">
-                    <p class="col-md-3 text-bold">Name</p>
+                    <p class="col-md-2 text-bold">Name</p>
                     <p class="col-md-3">@Model.Name</p>
-
-                    <p class="col-md-3 text-bold">Nationality</p>
+                </div>
+                <div class="row">
+                    <p class="col-md-2 text-bold">Nationality</p>
                     <p class="col-md-3">@Model.Country</p>
-                </div><hr />
-
+                </div>
                 <div class="row">
-
-                    <p class="col-md-3 text-bold">Born</p>
+                    <p class="col-md-2 text-bold">Born</p>
                     <p class="col-md-3">@Model.Born</p>
-
-                    <p class="col-md-3 text-bold">Died</p>
-                    <p class="col-md-3">@Model.Died</p>
-                </div><hr />
-
+                </div>
                 <div class="row">
-
-                    <p class="col-md-3 text-bold">Styles</p>
+                    <p class="col-md-2 text-bold">Died</p>
+                    <p class="col-md-3">@Model.Died</p>
+                </div>
+                <div class="row">
+                    <p class="col-md-2 text-bold">Styles</p>
                     <p class="col-md-3">
                         @foreach (var item in Model.Styles)
                         {
                             <a asp-controller="Style" asp-action="GetStyle" asp-route-id="@item.Id">@item.Style.Name</a><br />
                         }
                     </p>
+                </div>
 
-                    <p class="col-md-3 text-bold">Artworks</p>
+                <div class="row">
+                    <p class="col-md-2 text-bold">Artworks</p>
                     <p class="col-md-3">
                         @foreach (var item in Model.Artworks)
                         {
                             <a asp-controller="Artwork" asp-action="GetArtwork" asp-route-id="@item.Id">@item.Name</a><br />
                         }
                     </p>
-                </div><hr />
+                </div>
 
                 <div id="gallery"></div>
             </div>
         </div>
     </div>
 </div>
-
 
 <script>
     $(document).ready(function () {

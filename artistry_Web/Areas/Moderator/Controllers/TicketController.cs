@@ -28,6 +28,18 @@ namespace artistry_Web.Areas.Moderator.Controllers
             int Id = Autentification.GetLoggedUser(HttpContext).Id;
             List<Tickets> model = ticketRepository.GetTickets(Id);
 
+            ViewData["StartDate"] = DateTime.Now;
+            ViewData["EndDate"] = DateTime.Now;
+
+            return View("Index", model);
+        }
+
+        [HttpGet("Filter")]
+        public IActionResult Filter(string startDate, string endDate)
+        {
+            int Id = Autentification.GetLoggedUser(HttpContext).Id;
+            List<Tickets> model = ticketRepository.Filter(Id, Convert.ToDateTime(startDate), Convert.ToDateTime(endDate));
+
             return View("Index", model);
         }
     }

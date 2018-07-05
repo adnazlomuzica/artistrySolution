@@ -1,11 +1,9 @@
 ﻿@model List<artistry_Web.Areas.Moderator.ViewModels.ArtworkInfoVM>
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-
 @{ List<artistry_Data.Models.Collections> list = ViewData["collections"] as List<artistry_Data.Models.Collections>; }
-
 @{ string search = "";}
-
 <style>
+
     .image img {
         max-width: 100%;
         width: 100%;
@@ -20,7 +18,6 @@
         height: auto;
     }
 </style>
-
 <div class="page-header page-header-default">
     <div class="page-header-content">
         <div class="page-title">
@@ -39,15 +36,20 @@
         </ul>
     </div>
 </div>
-
 <div class="content" style="padding-bottom:0px;">
     <form asp-action="Search" style="display:inline;" method="get">
         <div class="input-group  input-field" style="margin-left:20px;">
             <div class="input-group-addon">
                 <span class="fa fa-search"></span>
             </div>
-            <input asp-for="@search" type="search" class="form-control" placeholder="Search.." style="width:20%;float:left;" />
-            <input type="submit" class="btn btn-default" value="Search" style="float:right;margin-right:73%;" />
+            <div class="row">
+                <div class="col-md-3">
+                    <input asp-for="@search" type="search" class="form-control" placeholder="Search.." />
+                </div>
+                <div class="col-md-1">
+                    <input type="submit" class="btn btn-default" value="Search" />
+                </div>
+            </div>
         </div>
     </form>
     <br /><hr />
@@ -55,63 +57,62 @@
         @foreach (var x in Model)
         {
             <div class="col-md-3">
-                    <div class="panel panel-flat" style="height:385px;color:#000;">
-                        <div class="panel-body" id="collapsePanel1 reloadPanel1">
-                            <div class="border">
-                                <div class="image">
-                                    @if (x.Image != null)
-                                    {
-                                        <img src="@Url.Action("RenderImage", "Image", new { id = x.ImageId })" class="image-thumb" alt="" width="200" height="250" />
-                                    }
-                                    else
-                                    {
-                                        <img src="~/assets/images/placeholder.jpg" class="image-thumb" alt="" width="200" height="250" />
-                                    }
-                                </div>
-                                </div>
-                                <div class="information" style="font-size:15px;margin-top:10px;padding-top:10px;color:#000;">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <span class="text-bold" style="text-align:center">@x.Name</span>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <span style="text-align:center">@x.Artist</span>
-                                        </div>
-                                    </div>
-                                    <div class="row" style="margin-top:15px;display:inline-block;margin-bottom:15px;width:100%;">
-                                        <div class="col-md-1"><a asp-controller="Artwork" asp-action="Details" asp-route-id="@x.Id" style="float:left;color:#000;"><i class="icon-pencil5 text-muted" style="z-index:1000;"></i></a></div>
-                                        <div class="col-md-4"></div>
-                                           <div class="col-md-1">
-                                                <span class="icon-heart5 text-danger" style="font-size:16px;"></span>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <span class="text-muted" style="font-size:16px;">@x.Likes</span>
-                                            </div>
-                                            <div class="col-md-3"></div>
-                                            <div class="col-md-1">
-                                                <ul class="icons-list">
-                                                    <li class="dropdown dropdown-user">
-                                                        <a class="dropdown-toggle" data-toggle="dropdown">
-                                                            <span></span>
-                                                            <i class="icon-plus3 text-muted"></i>
-                                                        </a>
-                                                        <ul class="dropdown-menu dropdown-menu-right">
-                                                            @foreach (var item in list)
-                                                            {
-                                                                <li><a asp-controller="ArtworkCollection" asp-action="Add" asp-route-artwork="@x.Id" asp-route-collection="@item.Id">@item.Name</a></li>
-                                                            }
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
+                <div class="panel panel-flat" style="height:385px;color:#000;">
+                    <div class="panel-body" id="collapsePanel1 reloadPanel1">
+                        <div class="border">
+                            <div class="image">
+                                @if (x.Image != null)
+                                {
+                                    <img src="@Url.Action("RenderImage", "Image", new { id = x.ImageId })" class="image-thumb" alt="" width="200" height="250" />
+                                }
+                                else
+                                {
+                                    <img src="~/assets/images/placeholder.jpg" class="image-thumb" alt="" width="200" height="250" />
+                                }
                             </div>
                         </div>
+                        <div class="information" style="font-size:15px;margin-top:10px;padding-top:10px;color:#000;">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <span class="text-bold" style="text-align:center">@x.Name</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <span style="text-align:center">@x.Artist</span>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:15px;display:inline-block;margin-bottom:15px;width:100%;">
+                                <div class="col-md-1"><a asp-controller="Artwork" asp-action="Details" asp-route-id="@x.Id" style="float:left;color:#000;"><i class="icon-pencil5 text-muted" style="z-index:1000;"></i></a></div>
+                                <div class="col-md-4"></div>
+                                <div class="col-md-1">
+                                    <span class="icon-heart5 text-danger" style="font-size:16px;"></span>
+                                </div>
+                                <div class="col-md-2">
+                                    <span class="text-muted" style="font-size:16px;">@x.Likes</span>
+                                </div>
+                                <div class="col-md-3"></div>
+                                <div class="col-md-1">
+                                    <ul class="icons-list">
+                                        <li class="dropdown dropdown-user">
+                                            <a class="dropdown-toggle" data-toggle="dropdown">
+                                                <span></span>
+                                                <i class="icon-plus3 text-muted"></i>
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                @foreach (var item in list)
+                                                {
+                                                    <li><a asp-controller="ArtworkCollection" asp-action="Add" asp-route-artwork="@x.Id" asp-route-collection="@item.Id">@item.Name</a></li>
+                                                }
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         }
     </div>
 </div>
-

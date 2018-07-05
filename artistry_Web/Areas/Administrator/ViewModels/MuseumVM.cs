@@ -13,25 +13,31 @@ namespace artistry_Web.Areas.Administrator.ViewModels
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage ="Please enter the museum name")]
-        [StringLength(100, ErrorMessage ="Name must have at least 3 characters",MinimumLength = 3)]
+        [Required(ErrorMessage = "Please enter the museum name")]
+        [StringLength(100, ErrorMessage = "Name must have at least 3 characters", MinimumLength = 3)]
         public string Name { get; set; }
 
         public int UserId { get; set; }
 
-        [Required(ErrorMessage ="Please enter the username")]
+        [Required(ErrorMessage = "Please enter the username")]
         [StringLength(100, ErrorMessage = "Username must have at least 4 characters", MinimumLength = 4)]
         [ValidationExstension]
         public string Username { get; set; }
 
-        [RegularExpression(pattern: "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", ErrorMessage = "Password must contain at least 8 characters, at least one number, upper-case letter and special character")]
-        [DataType(DataType.Password)]
         public string PasswordSalt { get; set; }
 
-        [DataType(DataType.Password)]
         public string PasswordHash { get; set; }
 
         public int MuseumTypeId { get; set; }
         public IEnumerable<SelectListItem> MuseumType { get; set; }
+
+        [RegularExpression(pattern: "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", ErrorMessage = "Password must contain at least 8 characters, at least one number, upper-case letter and special character")]
+        [DataType(DataType.Password)]
+        public string NewPassword { get; set; }
+
+        [DataType(DataType.Password)]
+        public string RepeatPassword { get; set; }
+
+
     }
 }

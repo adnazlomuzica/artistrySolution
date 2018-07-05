@@ -8,7 +8,10 @@ namespace artistry_Data.DAL
 {
     public interface INewsRepository:IDisposable
     {
+        List<News> GetAllNews();
+        List<News> Search(string search);
         List<News> GetNews(int id);
+        List<News> GetLatest();
         News GetNewsById(int id);
         void InsertNews(News news);
         void UpdateNews(News news);

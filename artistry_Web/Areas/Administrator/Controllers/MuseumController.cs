@@ -49,12 +49,14 @@ namespace artistry_Web.Areas.Administrator.Controllers
             MuseumVM model = new MuseumVM()
             {
                 Id = m.Id,
-                Name=m.Name,
-                MuseumTypeId=m.MuseumTypeId, 
-                UserId=m.UserId, 
-                Username=m.User.Username,
-                PasswordHash=m.User.PasswordHash, 
-                PasswordSalt=m.User.PasswordSalt,
+                Name = m.Name,
+                MuseumTypeId = m.MuseumTypeId,
+                UserId = m.UserId,
+                Username = m.User.Username,
+                PasswordHash = m.User.PasswordHash,
+                PasswordSalt = m.User.PasswordSalt,
+                NewPassword = null,
+                RepeatPassword = null,
                 MuseumType = museumtypeRepository.GetMuseumTypes().Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name }).ToList()
             };
 
@@ -65,7 +67,7 @@ namespace artistry_Web.Areas.Administrator.Controllers
         public IActionResult Add()
         {
             MuseumVM m = new MuseumVM();
-            
+
             m.MuseumType = new SelectList(museumtypeRepository.GetMuseumTypes(), "Id", "Name").ToList();
 
             return View(m);
@@ -84,12 +86,19 @@ namespace artistry_Web.Areas.Administrator.Controllers
             UserAccounts u = userRepository.GetUserById(museum.UserId);
             if (museum.PasswordHash != null && museum.PasswordSalt != null)
             {
-                if (museum.PasswordHash == museum.PasswordSalt)
+                if (museum.NewPassword == museum.RepeatPassword)
                 {
-                    string password = museum.PasswordHash;
-                    u.PasswordSalt = GeneratePassword.GenerateSalt();
-                    u.PasswordHash = GeneratePassword.GenerateHash(password, u.PasswordSalt);
-
+                    if (museum.NewPassword != null && museum.RepeatPassword != null)
+                    {
+                        string password = museum.NewPassword;
+                        u.PasswordSalt = GeneratePassword.GenerateSalt();
+                        u.PasswordHash = GeneratePassword.GenerateHash(password, u.PasswordSalt);
+                    }
+                    else
+                    {
+                        u.PasswordHash = museum.PasswordHash;
+                        u.PasswordSalt = museum.PasswordSalt;
+                    }
                     u.Username = museum.Username;
                     userRepository.UpdateUser(u);
                     museumRepository.Save();
@@ -167,7 +176,7 @@ namespace artistry_Web.Areas.Administrator.Controllers
         public IActionResult Search(string search)
         {
             List<Museums> model = new List<Museums>();
-            if (search !=null)
+            if (search != null)
             {
                 model = museumRepository.Search(search);
             }

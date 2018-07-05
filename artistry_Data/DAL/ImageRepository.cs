@@ -26,6 +26,11 @@ namespace artistry_Data.DAL
             return context.Images.Where(x => x.MuseumId == id).ToList();
         }
 
+        public Images GetMuseumImage(int id)
+        {
+            return context.Images.Where(x => x.MuseumId == id && x.Primary).SingleOrDefault();
+        }
+
         public IEnumerable<Images> GetArtworkImages(int id)
         {
             return context.Images.Where(x => x.ArtworkId == id).ToList();

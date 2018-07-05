@@ -1,0 +1,193 @@
+﻿@model List<artistry_Web.ViewModels.NewsVM>
+@{ string search = "";}
+<link href="~/assets/css/icons/fontawesome/styles.min.css" rel="stylesheet">
+<link href="~/assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+<div class="body-wrapper">
+    <div class="body-innerwrapper">
+        <div id="sp-header-sticky-wrapper" class="sticky-wrapper is-sticky" style="height: 70px;width:100%;">
+            <header id="sp-header" style="position: fixed; top: 0px;width:100%;background-color:#333;">
+                <div class="container">
+                    <div class="row" style="position: relative;">
+                        <div id="sp-logo" class="col-xs-8 col-sm-3 col-md-3">
+                            <div class="sp-column">
+                                <div class="logo" style="margin-left:0px;">
+                                    <a asp-controller="Home" asp-action="Index">
+                                        <img class="sp-default-logo" src="~/assets/images/Logo3.png" style="margin-top:3px;width:150px;height:50px;">
+                                        <img class="sp-retina-logo" src="~/assets/images/Logo3.png" alt="LT Museum" width="250" height="50">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="sp-menu" class="col-xs-4 col-sm-9 col-md-9" style="position: static;">
+                            <div class="sp-column ">
+                                <div class="sp-megamenu-wrapper">
+                                    <ul class="sp-megamenu-parent menu-slide-down hidden-sm hidden-xs">
+                                        <li class="sp-menu-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                                        <li class="sp-menu-item"><a asp-controller="Museum" asp-action="Index">Museums</a>
+                                        <li class="sp-menu-item"><a asp-controller="Artwork" asp-action="Index">Artworks</a>
+                                        <li class="sp-menu-item"><a asp-controller="Artist" asp-action="Index">Artists</a></li>
+                                        <li class="sp-menu-item current-item active"><a asp-controller="News" asp-action="Index">News</a></li>
+                                        <li class="sp-menu-item"><a asp-controller="Autentification" asp-action="Index">Login</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <section id="sp-page-title">
+            <div class="row">
+                <div id="sp-title" class="col-sm-12 col-md-12">
+                    <div class="sp-column ">
+                        <div class="sp-page-title">
+                            <div class="container">
+                                <h2>News</h2>
+                                <ol class="breadcrumb">
+                                    <li><a asp-controller="Home" asp-action="Index" class="pathway">Home</a></li>
+                                    <li class="active">News</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <br />
+        <section id="sp-main-body">
+            <div class="container">
+                <div class="row">
+                    <div id="sp-component" class="col-sm-12 col-md-12">
+                        <div class="sp-column ">
+                            <div id="system-message-container">
+                            </div>
+                            <form asp-action="Search" style="display:inline;" method="get">
+                                <div class="input-group  input-field" style="margin-left:20px;width:100%;">
+                                    <div class="row" style="margin-top:20px;">
+                                        <div class="col-md-3">
+                                            <input asp-for="@search" type="search" class="form-control" placeholder="Search.." style="float:left;border-radius:5px;" />
+                                        </div>
+                                        <div class="col-md-3" style="padding-left:0px;">
+                                            <input type="submit" class="btn btn-default" value="Search" style="height:40px;" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <br /><hr />
+                            <div class="blog" itemscope="" itemtype="http://schema.org/Blog">
+                                <div class="items-row row-0 row clearfix">
+
+                                    @foreach (var x in Model)
+                                    {
+                                        <div class="col-sm-6">
+                                            <article class="item column-1" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting">
+                                                <div class="pull-left entry-image intro-image">
+                                                    <a asp-controller="News" asp-action="Details" asp-route-id="@x.Id">
+                                                        @if (x.Image != null)
+                                                        {
+                                                            <img src="@Url.Action("RenderImage", "Image", new { id = x.ImageId })" alt="" itemprop="thumbnailUrl" style="width:600px;height:300px;" />
+                                                        }
+                                                    </a>
+                                                </div>
+                                                <div class="entry-header has-post-format">
+                                                    <span class="post-format"><i class="fa fa-thumb-tack"></i></span>
+                                                    <dl class="article-info">
+                                                        <dt class="article-info-term"></dt>
+                                                        <dd class="createdby" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+                                                            <i class="fa fa-user"></i>
+                                                            <span itemprop="name" data-toggle="tooltip" title="" data-original-title="Written by ">@x.Museum</span>
+                                                        </dd>
+                                                        <dd class="category-name">
+                                                            <i class="fa fa-folder-open-o"></i>
+                                                            <a asp-controller="News" asp-action="Details" asp-route-id="@x.Id" itemprop="genre" data-toggle="tooltip" title="" data-original-title="Article Category">Blog</a>
+                                                        </dd>
+                                                        <dd class="published">
+                                                            <i class="fa fa-calendar-o"></i>
+                                                            <time datetime="@x.Date" itemprop="datePublished" data-toggle="tooltip" title="" data-original-title="Published Date">
+                                                                @x.Date.ToString("dd/MM/yyyy")
+                                                            </time>
+                                                        </dd>
+                                                    </dl>
+                                                    <h2 itemprop="name">
+                                                        <a asp-controller="News" asp-action="Details" asp-route-id="@x.Id" itemprop="url">
+                                                            @x.Title
+                                                        </a>
+                                                    </h2>
+                                                </div>
+                                                @if (x.Text.Length > 200)
+                                                {
+                                                    <p>@x.Text.Substring(0, 200) ...</p>
+                                                }
+                                                else
+                                                {
+                                                    <p>@x.Text</p>
+                                                }
+                                                <p class="readmore">
+                                                    <a class="btn btn-default" asp-controller="News" asp-action="Details" asp-route-id="@x.Id" itemprop="url">
+                                                        Read more ...
+                                                    </a>
+                                                </p>
+                                            </article>
+                                        </div>
+                                    }
+                                </div>
+
+                                <div class="pagination-wrapper">
+                                    <ul class="pagination">
+                                        @for (int i = 1; i <= ViewBag.MaxPage; i++)
+                                        {
+                                            @if (ViewBag.Page == i)
+                                            {
+                                                <li class="active">
+                                                    <a asp-controller="News" asp-action="Index" asp-route-page="@i">@i</a>
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li>
+                                                    <a asp-controller="News" asp-action="Index" asp-route-page="@i">@i</a>
+                                                </li>
+                                            }
+                                        }
+                                        @if (ViewBag.NextPage <= ViewBag.MaxPage)
+                                        {
+                                            <li>
+                                                <a class="next" asp-controller="News" asp-action="Index" asp-route-page="@ViewBag.NextPage" title="»">»</a>
+                                            </li>
+                                        }
+
+                                        <li>
+                                            <a class="" asp-controller="News" asp-action="Index" asp-route-page="@ViewBag.MaxPage" title="End">
+                                                End
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <footer id="sp-footer">
+        <div class="container">
+            <div class="row">
+                <div id="sp-footer1" class="col-sm-6 col-md-12">
+                    <div class="sp-column ">
+                        <div class="sp-module ">
+                            <div class="sp-module-content">
+
+                                <div class="custom">
+                                    <div class="custom">
+                                        <p style="text-align:center;">Copyright &copy; 2018. <a asp-controller="Home" asp-action="Index">artistry</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>

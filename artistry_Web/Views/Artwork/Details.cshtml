@@ -1,0 +1,179 @@
+﻿@model artistry_Web.ViewModels.ArtworkVM
+
+
+@{
+    string search = "";
+}
+
+<style>
+    .liked {
+        margin-bottom: 15px;
+        color: red;
+        -webkit-text-stroke-width: 2px;
+        -webkit-text-stroke-color: red;
+    }
+
+    .unliked {
+        margin-bottom: 15px;
+        color: transparent;
+        -webkit-text-stroke-width: 2px;
+        -webkit-text-stroke-color: red;
+    }
+</style>
+
+<link href="~/assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+<div class="body-wrapper">
+    <div class="body-innerwrapper">
+        <div id="sp-header-sticky-wrapper" class="sticky-wrapper is-sticky" style="height: 70px;width:100%;">
+            <header id="sp-header" style="position: fixed; top: 0px;width:100%;background-color:#333;">
+                <div class="container">
+                    <div class="row" style="position: relative;">
+                        <div id="sp-logo" class="col-xs-8 col-sm-3 col-md-3">
+                            <div class="sp-column">
+                                <div class="logo">
+                                    <a asp-controller="Home" asp-action="Index">
+                                        <img class="sp-default-logo" src="~/assets/images/Logo3.png" style="margin-top:3px;width:150px;height:50px;">
+                                        <img class="sp-retina-logo" src="~/assets/images/Logo3.png" alt="LT Museum" width="250" height="50">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="sp-menu" class="col-xs-4 col-sm-9 col-md-9" style="position: static;">
+                            <div class="sp-column ">
+                                <div class="sp-megamenu-wrapper">
+                                    <ul class="sp-megamenu-parent menu-slide-down hidden-sm hidden-xs">
+                                        <li class="sp-menu-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                                        <li class="sp-menu-item"><a asp-controller="Museum" asp-action="Index">Museums</a>
+                                        <li class="sp-menu-item current-item active"><a asp-controller="Artwork" asp-action="Index">Artworks</a>
+                                        <li class="sp-menu-item"><a asp-controller="Artist" asp-action="Index">Artists</a></li>
+                                        <li class="sp-menu-item"><a asp-controller="News" asp-action="Index">News</a></li>
+                                        <li class="sp-menu-item"><a asp-controller="Autentification" asp-action="Index">Login</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <section id="sp-page-title">
+            <div class="row">
+                <div id="sp-title" class="col-sm-12 col-md-12">
+                    <div class="sp-column ">
+                        <div class="sp-page-title">
+                            <div class="container">
+                                <h2>Artworks</h2>
+                                <ol class="breadcrumb">
+                                    <li><a asp-controller="Home" asp-action="Index" class="pathway">Home</a></li>
+                                    <li><a asp-controller="Artwork" asp-action="Index" class="pathway">Artworks</a></li>
+                                    <li class="active">Details</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="sp-main-body">
+            <div class="container">
+                <div class="row">
+                    <div id="sp-component" class="col-sm-12 col-md-12">
+                        <div class="sp-column ">
+                            <div id="system-message-container">
+                            </div>
+                            <article class="item item-page" itemscope="" itemtype="http://schema.org/Article">
+                                <meta itemprop="inLanguage" content="en-GB">
+                                <div class="row" style="margin-top:50px;">
+                                    <div class="col-md-4">
+                                        <div id="carousel-gallery-74" class="entry-gallery carousel slide" data-ride="carousel">
+                                            <div class="carousel-inner" role="listbox">
+                                                <div class="item active">
+                                                    <a href="@Url.Action("RenderImage", "Image", new { id = Model.ImageId })" rel="group1"><img src="@Url.Action("RenderImage", "Image", new { id = Model.ImageId })" alt="" style="width:400px;height:300px;"></a>
+</div>
+                                                @if (Model.Images.Count() > 1)
+                                                {
+                                                    @foreach (var x in Model.Images)
+                                                    {
+                                                        <div class="item">
+                                                            <a href="@Url.Action("RenderImage", "Image", new { id = x.Id })" rel="group1"><img src="@Url.Action("RenderImage", "Image", new { id = x.Id })" alt="" style="width:400px;height:300px;"></a>
+                                                        </div>
+                                                    }
+                                                }
+                                            </div>
+                                            @if (Model.Images.Count() > 1)
+                                            {
+                                                <a class="carousel-left" href="#carousel-gallery-74" role="button" data-slide="prev">
+                                                    <span class="fa fa-angle-left" aria-hidden="true"></span>
+                                                    <span class="sr-only">Previous</span>
+                                                </a>
+                                                <a class="carousel-right" href="#carousel-gallery-74" role="button" data-slide="next">
+                                                    <span class="fa fa-angle-right" aria-hidden="true"></span>
+                                                    <span class="sr-only">Next</span>
+                                                </a>
+                                            }
+                                        </div>
+                                        @if (Model.Liked)
+                                        {
+                                        <a class="project-icon" asp-controller="Artwork" asp-action="Unlike" asp-route-id="@Model.Id" title="Unlike" id="unlike">
+                                            <i class="icon-heart5 liked" id="unlike-a" style="font-size:42px;"></i>
+                                            <p>@Model.Likes</p>
+                                        </a>
+                                        }
+                                        else
+                                        {
+                                            <a class="project-icon" asp-controller="Artwork" asp-action="Like" asp-route-id="@Model.Id" title="Like" id="like">
+                                                <i class="icon-heart5 unliked" id="like-a" style="font-size:42px;"></i>
+                                                <p>@Model.Likes</p>
+                                            </a>
+                                        }
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="entry-header has-post-format">
+                                            <span class="post-format"><i class="fa fa-thumb-tack"></i></span>
+                                            <h2 itemprop="name">
+                                                @Model.Name
+                                            </h2>
+                                            <h3>
+                                                @Model.Artist (@Model.Country)
+                                            </h3>
+                                            <h4 itemprop="name">
+                                                @Model.Museum
+                                            </h4>
+                                            <h4 itemprop="name">
+                                                @Model.ArtworkType
+                                            </h4>
+                                            <h4 itemprop="name">
+                                                @Model.Material
+                                            </h4>
+                                            <h4 itemprop="name">
+                                                @Model.Style
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div itemprop="articleBody">
+                                    <label style="font-weight:bold;">Provenance</label>
+                                    <p>@Model.Provenance</p>
+                                </div>
+                                <div itemprop="articleBody">
+                                    <label style="font-weight:bold;">Catalogue entry</label>
+                                    <p>@Model.CatalogueEntry</p>
+                                </div>
+                                <div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<script>
+    $("a[rel=group1]").fancybox({
+        'type': 'image',
+        'transitionIn': 'none',
+        'transitionOut': 'none'
+    });
+</script>

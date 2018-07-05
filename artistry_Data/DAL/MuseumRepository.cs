@@ -26,6 +26,51 @@ namespace artistry_Data.DAL
             return context.Museums.Include(x => x.User).Include(x => x.MuseumType).Where(x=>x.MuseumTypeId==typeId).OrderBy(x => x.Name.Trim()).ToList();
         }
 
+        public List<Museums> GetTop3()
+        {
+            List<double> avg = new List<double>();
+            List<Reviews> r = context.Reviews.ToList();
+            List<Museums> museums = new List<Museums>();
+
+            List<Museums> list = context.Museums.ToList();
+
+            foreach (Museums m in list)
+            {
+                if (r.Where(x => x.MuseumId == m.Id).Count() > 0)
+                {
+                    double average = r.Where(x => x.MuseumId == m.Id).Average(x => x.Rating);
+                    avg.Add(average);
+                }
+            }
+
+            if(avg.Count()>=3)
+            avg=avg.OrderBy(x => x).Take(3).ToList(); 
+
+            foreach (Museums m in list)
+            {
+                if (r.Where(x => x.MuseumId == m.Id).Count() > 0)
+                {
+                    foreach (double d in avg)
+                    {
+                        if (r.Where(x => x.MuseumId == m.Id).Average(x => x.Rating) == d)
+                            museums.Add(m);
+                    }
+                }
+            }
+
+            if (museums.Count() < 3)
+            {
+                foreach(Museums m in list)
+                {
+                    if (museums.Count() < 3 && museums.Where(x=>x.Id==m.Id).Count()==0)
+                    {
+                        museums.Add(m);
+                    }
+                }
+            }
+            return museums;
+        }
+
         public Museums GetMuseum(int museumId)
         {
             return context.Museums.Include(x=>x.User).Include(x => x.MuseumType).Where(x => x.Id == museumId).SingleOrDefault();

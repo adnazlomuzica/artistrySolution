@@ -1,0 +1,186 @@
+﻿@model artistry_Web.ViewModels.UserVM
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        width: 100%;
+        min-height: 650px;
+        overflow: auto;
+    }
+    .container-div {
+        width: 100%;
+        min-height: 650px;
+        overflow: auto;
+    }
+
+    .data-div {
+        background-color: white;
+        margin-top: 70px;
+    }
+
+    
+    .logo-div {       
+        background-color: white;
+        margin-top: 70px;
+        float: left;
+        border-left: 0.5px solid #eee;
+        position: relative;
+        display: block;
+        overflow: hidden;
+    }
+
+    .box {
+        width: 33%;
+        height: 470px;
+        overflow: auto;
+        padding-bottom: 10px;
+    }
+
+    h2 {
+        font-family: 'Poiret One', cursive;
+        z-index: 500;
+        color: #000;
+        font-weight: 700;
+        margin-left: 20px;
+        margin-top: 20px;
+        margin-bottom: 30px;
+    }
+
+    .input-field {
+        width:100%;
+        margin-top: 15px;
+    }
+
+    .btn-submit {
+        width: 90%;
+        border: none;
+        color: white;
+    }
+    
+    .logo {
+    text-align: center;
+    font-family:'Lucida Handwriting', Italic;
+    font-size:60px;
+    margin-top:130px;
+}
+
+.subtitle {
+    font-family: 'Poiret One', cursive;
+    font-size: 26px;
+    font-weight: 500;
+    text-align: center;
+}
+
+
+@@media only screen and (max-width: 1025px){
+    .logo-div{
+        display:none;
+    }
+
+    .data-div{
+        width:80%;
+        margin-left:10%;
+        margin-right:10%;
+    }
+}
+</style>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Artistry</title>
+    <link rel="icon" href="~/icon-a.png">
+
+    <!-- Global stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css" runat="server">
+    <link href="~/assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css" runat="server">
+    <link href="~/assets/css/bootstrap.css" rel="stylesheet" type="text/css" runat="server">
+    <link href="~/assets/css/core.css" rel="stylesheet" type="text/css" runat="server">
+    <link href="~/assets/css/components.css" rel="stylesheet" type="text/css" runat="server">
+    <link href="~/assets/css/colors.css" rel="stylesheet" type="text/css" runat="server">
+    @*<link href="~/css/style.css" rel="stylesheet" type="text/css" runat="server">*@
+    <link href="https://fonts.googleapis.com/css?family=Dosis|Maven+Pro|Nanum+Gothic|Poiret+One|Raleway|Titillium+Web" rel="stylesheet" runat="server">
+   
+    <script type="text/javascript" src="~/assets/js/plugins/loaders/pace.min.js" runat="server"></script>
+    <script type="text/javascript" src="~/assets/js/core/libraries/jquery.min.js" runat="server"></script>
+    <script type="text/javascript" src="~/assets/js/core/libraries/bootstrap.min.js" runat="server"></script>
+    <script type="text/javascript" src="~/assets/js/plugins/loaders/blockui.min.js" runat="server"></script>
+    <script type="text/javascript" src="~/assets/js/core/app.js" runat="server"></script>
+
+</head>
+
+
+<body>
+    <div class="container-div">
+        <div class="col-md-2"></div>
+        <div class="col-md-5 data-div box" style="width:33%">
+            <h2>Register</h2>
+            <form asp-action="Register">
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group  input-field">
+                                <input asp-for="FirstName" class="form-control" type="text" placeholder="First name" />
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group  input-field">
+
+                                <input asp-for="LastName" class="form-control" type="text" placeholder="Last name" />
+                                <span asp-validation-for="LastName" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                  
+                       
+                   
+                    <div class="input-group  input-field">
+
+                        <input asp-for="Email" class="form-control" type="text" placeholder="Email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="input-group  input-field">
+
+                        <input asp-for="Username" class="form-control" type="text" placeholder="Username" />
+                        <span asp-validation-for="Username" class="text-danger"></span>
+                    </div>
+                    <div class="input-group  input-field">
+
+                        <input asp-for="Password" class="form-control" type="password" placeholder="Password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="input-group  input-field">
+
+                        <input asp-for="ConfirmPassword" class="form-control" type="password" placeholder="Repeat password" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+
+
+                </div>
+                <input type="submit" class="form-control btn btn-danger btn-submit" value="Register" style="width:100%;" />
+
+            </form>
+        </div>
+        <div class="col-md-5 logo-div box" style="width:33%">
+            <p class="logo">artistry</p>
+            <p class="subtitle">EXPLORE THE WORLD OF ART</p>
+        </div>
+    </div>
+
+    <div class="footer text-muted" style="margin-top:50px;padding-top:50px;position:absolute;width:100%;bottom:15px;">
+        <p class="text-center" style="text-align:center;">Copyright &copy; 2018. <a href="@Url.Action("Index", "Home")">artistry</a></p>
+    </div>
+
+</body>
+</html>

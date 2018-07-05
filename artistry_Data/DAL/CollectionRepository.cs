@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace artistry_Data.DAL
 {
-    public class CollectionRepository:ICollectionRepository, IDisposable
+    public class CollectionRepository : ICollectionRepository, IDisposable
     {
         private Context.Context context;
 
@@ -18,7 +18,7 @@ namespace artistry_Data.DAL
 
         public List<Collections> GetCollections(int id)
         {
-            return context.Collections.Include(x => x.Museum).Include(x => x.Image).Where(x=>x.MuseumId==id).OrderBy(x=>x.Active).ToList();
+            return context.Collections.Include(x => x.Museum).Include(x => x.Image).Where(x => x.MuseumId == id).OrderBy(x => x.Name).OrderByDescending(x => x.Active).ToList();
         }
 
         public Collections GetCollectionById(int id)
@@ -32,7 +32,12 @@ namespace artistry_Data.DAL
 
         public void UpdateCollection(Collections collection)
         {
-            context.Entry(collection).State = EntityState.Modified;
+            Collections c = context.Collections.Where(x => x.Id == collection.Id).SingleOrDefault();
+            c.Active = collection.Active;
+            c.Description = collection.Description;
+            c.Name = collection.Name;
+
+            context.SaveChanges();
         }
 
         public void Save()

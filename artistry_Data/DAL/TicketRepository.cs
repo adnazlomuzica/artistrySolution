@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace artistry_Data.DAL
 {
-    public class TicketRepository:ITicketRepository, IDisposable
+    public class TicketRepository : ITicketRepository, IDisposable
     {
         private Context.Context context;
 
@@ -18,12 +18,17 @@ namespace artistry_Data.DAL
 
         public List<Tickets> GetTickets(int id)
         {
-            return context.Tickets.Include(x=>x.Client).ThenInclude(x=>x.User).Include(x=>x.TicketType).ThenInclude(x=>x.Museum).Where(x => x.TicketType.Museum.UserId == id).OrderByDescending(x=>x.Date).ToList();
+            return context.Tickets.Include(x => x.Client).ThenInclude(x => x.User).Include(x => x.TicketType).ThenInclude(x => x.Museum).Where(x => x.TicketType.Museum.UserId == id).OrderByDescending(x => x.Date).ToList();
+        }
+
+        public List<Tickets> Filter(int id, DateTime start, DateTime end)
+        {
+            return context.Tickets.Include(x => x.Client).ThenInclude(x => x.User).Include(x => x.TicketType).ThenInclude(x => x.Museum).Where(x => x.TicketType.Museum.UserId == id && x.Date >= start && x.Date <= end).OrderByDescending(x => x.Date).ToList();
         }
 
         public int GetSum(int id)
         {
-            return context.Tickets.Include(x => x.TicketType).ThenInclude(x => x.Museum).Where(x => x.TicketType.Museum.UserId == id).Sum(x=>x.Quantity);
+            return context.Tickets.Include(x => x.TicketType).ThenInclude(x => x.Museum).Where(x => x.TicketType.Museum.UserId == id).Sum(x => x.Quantity);
         }
 
         public double GetTotal(int id)
@@ -33,12 +38,12 @@ namespace artistry_Data.DAL
 
         public double GetMonthTotal(int id)
         {
-            return context.Tickets.Include(x => x.TicketType).ThenInclude(x => x.Museum).Where(x => x.TicketType.Museum.UserId == id && x.Date.Month==DateTime.Now.Month).Sum(x => x.Total);
+            return context.Tickets.Include(x => x.TicketType).ThenInclude(x => x.Museum).Where(x => x.TicketType.Museum.UserId == id && x.Date.Month == DateTime.Now.Month).Sum(x => x.Total);
         }
 
         public int GetMonthSum(int id)
         {
-            return context.Tickets.Include(x => x.TicketType).ThenInclude(x => x.Museum).Where(x => x.TicketType.Museum.UserId == id && x.Date.Month==DateTime.Now.Month).Sum(x => x.Quantity);
+            return context.Tickets.Include(x => x.TicketType).ThenInclude(x => x.Museum).Where(x => x.TicketType.Museum.UserId == id && x.Date.Month == DateTime.Now.Month).Sum(x => x.Quantity);
         }
 
         public bool Scan(string code)

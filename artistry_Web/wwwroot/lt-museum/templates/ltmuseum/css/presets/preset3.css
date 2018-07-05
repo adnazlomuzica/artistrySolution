@@ -190,5 +190,5 @@ blockquote {
     border: 7px solid #d9534f;
 }
 .projects-wrapper .project-img .project-img-extra {
-    background-image: -webkit-linear-gradient(top , rgba(226, 177, 60, 0.51) 0%, rgba(226, 177, 60, 0.51) 100%)!important;
+    background-image: -webkit-linear-gradient(top, rgba(217,83,79, 0.51) 0%, rgba(217,83,79, 0.51) 100%) !important;
 }

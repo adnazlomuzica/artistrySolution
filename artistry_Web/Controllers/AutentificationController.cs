@@ -64,7 +64,7 @@ namespace artistry_Web.Controllers
         public IActionResult Logout()
         {
             HttpContext.SetLoggedUser(null);
-            return RedirectToAction("Index", "Autentification");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

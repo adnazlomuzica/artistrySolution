@@ -1,10 +1,7 @@
 ﻿@model artistry_Web.Areas.Moderator.ViewModels.ArtworkVM;
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-
 @{ Boolean download = Convert.ToBoolean(ViewData["download"]);}
-
 <link href="~/css/fancybox-style.css" rel="stylesheet" type="text/css" />
-
 <div class="page-header page-header-default">
     <div class="page-header-content">
         <div class="page-title">
@@ -13,12 +10,12 @@
         <div class="heading-elements">
             <div class="heading-btn-group">
                 <a asp-controller="Artwork" asp-action="GetArtwork" asp-route-id="@Model.Id" class="btn btn-link btn-float has-text"><i class="icon-pencil text-primary"></i><span>Edit</span></a>
-                
+
                 @if (download)
                 {
-                <a asp-controller="Artwork" asp-action="Download" asp-route-id="@Model.Id" class="btn btn-link btn-float has-text"><i class="icon-qrcode text-primary"></i><span>Download</span></a>
+                    <a asp-controller="Artwork" asp-action="Download" asp-route-id="@Model.Id" class="btn btn-link btn-float has-text"><i class="icon-qrcode text-primary"></i><span>Download</span></a>
                 }
-                
+
                 @if (Model.Active)
                 {
                     <a asp-controller="Artwork" asp-action="Deactivate" asp-route-id="@Model.Id" class="btn btn-link btn-float has-text"><i class="icon-subtract text-primary"></i><span>Deactivate</span></a>
@@ -37,7 +34,6 @@
         </ul>
     </div>
 </div>
-
 <div class="content" style="padding-bottom:0px;" id="closePanel1">
     <div class="panel panel-flat">
         <div class="panel-heading">
@@ -50,53 +46,46 @@
             </div>
         </div>
         <div class="panel-body" id="collapsePanel1">
-
             <div class="row">
-                <p class="col-md-3 text-bold">Name</p>
+                <p class="col-md-2 text-bold">Name</p>
                 <p class="col-md-3">@Model.Name</p>
-
-                <p class="col-md-3 text-bold">Accession number</p>
+            </div>
+            <div class="row">
+                <p class="col-md-2 text-bold">Accession number</p>
                 <p class="col-md-3">@Model.AccessionNumber</p>
-            </div><hr />
-
+            </div>
             <div class="row">
-
-                <p class="col-md-3 text-bold">Date</p>
+                <p class="col-md-2 text-bold">Date</p>
                 <p class="col-md-3">@Model.Date</p>
-
-                <p class="col-md-3 text-bold">Country</p>
+            </div>
+            <div class="row">
+                <p class="col-md-2 text-bold">Country</p>
                 <p class="col-md-3">@Model.Country_S</p>
-            </div><hr />
-
+            </div>
             <div class="row">
-
-                <p class="col-md-3 text-bold">Artwork type</p>
+                <p class="col-md-2 text-bold">Artwork type</p>
                 <p class="col-md-3">@Model.ArtworkType_S</p>
-
-                <p class="col-md-3 text-bold">Artist</p>
+            </div>
+            <div class="row">
+                <p class="col-md-2 text-bold">Artist</p>
                 <p class="col-md-3">@Model.Artist_S</p>
-            </div><hr />
-
+            </div>
             <div class="row">
-                <p class="col-md-3 text-bold">Style</p>
+                <p class="col-md-2 text-bold">Style</p>
                 <p class="col-md-3">@Model.Style_S</p>
-
-                <p class="col-md-3 text-bold">Material</p>
+            </div>
+            <div class="row">
+                <p class="col-md-2 text-bold">Material</p>
                 <p class="col-md-3">@Model.Material_S</p>
-            </div><hr />
-
+            </div><br />
             <div class="row">
-
-                <p class="col-md-6 text-bold">Provenance</p>
+                <p class="col-md-2 text-bold">Provenance</p>
                 <p class="col-md-12">@Model.Provenance</p>
-            </div><hr />
-
+            </div><br />
             <div class="row">
-
-                <p class="col-md-6 text-bold">Catalogue entry</p>
+                <p class="col-md-2 text-bold">Catalogue entry</p>
                 <p class="col-md-12">@Model.CatalogueEntry</p>
-            </div><hr />
-
+            </div>
             <div class="row">
                 @foreach (var item in Model.Images)
                 {
@@ -107,14 +96,11 @@
     </div>
 </div>
 
-
-<script>
-    $(document).ready(function () {
+<script>$(document).ready(function () {
 
         $("a[rel=group1]").fancybox({
             'type': 'image',
             'transitionIn': 'none',
             'transitionOut': 'none'
         });
-    });
-</script>
+    });</script>

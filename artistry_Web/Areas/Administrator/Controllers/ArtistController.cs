@@ -21,7 +21,7 @@ namespace artistry_Web.Areas.Administrator.Controllers
         private readonly IArtistMovementRepository artistmovementRepository;
         private readonly ICountryRepository countryRepository;
         private readonly IStyleRepository styleRepository;
-    
+        private readonly IArtworkRepository artworkRepository;
 
         public ArtistController(Context context)
         {
@@ -29,6 +29,7 @@ namespace artistry_Web.Areas.Administrator.Controllers
             this.artistmovementRepository = new ArtistMovementRepository(context);
             this.countryRepository = new CountryRepository(context);
             this.styleRepository = new StyleRepository(context);
+            this.artworkRepository = new ArtworkRepository(context);
         }
 
         [HttpGet("Index")]
@@ -37,19 +38,19 @@ namespace artistry_Web.Areas.Administrator.Controllers
             IEnumerable<Artists> artists = artistRepository.GetArtists();
             List<ArtistInfoVM> model = new List<ArtistInfoVM>();
             foreach (Artists a in artists)
-                {
-                    ArtistInfoVM vm = new ArtistInfoVM();
+            {
+                ArtistInfoVM vm = new ArtistInfoVM();
 
-                    vm.Id = a.Id;
-                    vm.Name = a.Name;
-                    vm.Born = a.Born;
-                    vm.Died = a.Died;
-                    vm.Country = a.Country.Name;
-                    vm.Styles = artistmovementRepository.GetArtistMovementsByArtist(a.Id);
-                    model.Add(vm);
-                }
-            
-          
+                vm.Id = a.Id;
+                vm.Name = a.Name;
+                vm.Born = a.Born;
+                vm.Died = a.Died;
+                vm.Country = a.Country.Name;
+                vm.Styles = artistmovementRepository.GetArtistMovementsByArtist(a.Id);
+                model.Add(vm);
+            }
+
+
             return View("Index", model);
         }
 
@@ -58,10 +59,10 @@ namespace artistry_Web.Areas.Administrator.Controllers
         {
             ArtistVM model = new ArtistVM();
 
-          
-                model.Country = new SelectList(countryRepository.GetCountries(), "Id", "Name").ToList();
-                model.Style = new SelectList(styleRepository.GetStyles(), "Id", "Name").ToList();
-           
+
+            model.Country = new SelectList(countryRepository.GetCountries(), "Id", "Name").ToList();
+            model.Style = new SelectList(styleRepository.GetStyles(), "Id", "Name").ToList();
+
             return View("Add", model);
         }
 
@@ -69,47 +70,45 @@ namespace artistry_Web.Areas.Administrator.Controllers
         public IActionResult GetArtist(int id)
         {
             Artists a = artistRepository.GetArtistById(id);
-            
+
             ArtistVM model = new ArtistVM()
             {
-                Id=a.Id,
-                Name=a.Name,
-                Born=a.Born, 
-                Died=a.Died, 
-                CountryId=a.CountryId,
-                Biography=a.Biography,
+                Id = a.Id,
+                Name = a.Name,
+                Born = a.Born,
+                Died = a.Died,
+                CountryId = a.CountryId,
+                Biography = a.Biography,
             };
-            
-                IEnumerable<ArtistMovements> am = artistmovementRepository.GetArtistMovementsByArtist(a.Id);
 
-                model.StyleId = new List<int>();
-                foreach (ArtistMovements x in am)
-                {
-                    model.StyleId.Add(x.StyleId);
-                }
+            IEnumerable<ArtistMovements> am = artistmovementRepository.GetArtistMovementsByArtist(a.Id);
 
-                model.Country = new SelectList(countryRepository.GetCountries(), "Id", "Name").ToList();
-                model.Style = new SelectList(styleRepository.GetStyles(), "Id", "Name").ToList();
-         
+            model.StyleId = new List<int>();
+            foreach (ArtistMovements x in am)
+            {
+                model.StyleId.Add(x.StyleId);
+            }
+
+            model.Country = new SelectList(countryRepository.GetCountries(), "Id", "Name").ToList();
+            model.Style = new SelectList(styleRepository.GetStyles(), "Id", "Name").ToList();
+
             return View("Edit", model);
         }
 
         [HttpGet("Details")]
         public IActionResult Details(int id)
         {
-
             ArtistInfoVM vm = new ArtistInfoVM();
-           
-                Artists a = artistRepository.GetArtistById(id);
+            Artists a = artistRepository.GetArtistById(id);
 
+            vm.Id = a.Id;
+            vm.Name = a.Name;
+            vm.Born = a.Born;
+            vm.Died = a.Died;
+            vm.Country = a.Country.Name;
+            vm.Styles = artistmovementRepository.GetArtistMovementsByArtist(a.Id);
+            vm.Artworks = artworkRepository.GetArtworksByArtist(a.Id);
 
-                vm.Id = a.Id;
-                vm.Name = a.Name;
-                vm.Born = a.Born;
-                vm.Died = a.Died;
-                vm.Country = a.Country.Name;
-                vm.Styles = artistmovementRepository.GetArtistMovementsByArtist(a.Id);
-          
             return View("Details", vm);
         }
 
@@ -126,28 +125,28 @@ namespace artistry_Web.Areas.Administrator.Controllers
             }
             Artists a = new Artists();
 
-          
-                a.Biography = artist.Biography;
-                a.Born = artist.Born;
-                a.CountryId = artist.CountryId;
-                a.Died = artist.Died;
-                a.Name = artist.Name;
 
-                artistRepository.InsertArtist(a);
-                artistRepository.Save();
+            a.Biography = artist.Biography;
+            a.Born = artist.Born;
+            a.CountryId = artist.CountryId;
+            a.Died = artist.Died;
+            a.Name = artist.Name;
 
-                foreach (var x in artist.StyleId)
-                {
-                    ArtistMovements movements = new ArtistMovements();
+            artistRepository.InsertArtist(a);
+            artistRepository.Save();
 
-                    movements.ArtistId = a.Id;
-                    movements.StyleId = x;
+            foreach (var x in artist.StyleId)
+            {
+                ArtistMovements movements = new ArtistMovements();
 
-                    artistmovementRepository.InsertArtistMovement(movements);
-                }
+                movements.ArtistId = a.Id;
+                movements.StyleId = x;
 
-                artistmovementRepository.Save();
-          
+                artistmovementRepository.InsertArtistMovement(movements);
+            }
+
+            artistmovementRepository.Save();
+
             return RedirectToAction("Add", "Image", new { id = a.Id });
         }
 
@@ -162,21 +161,21 @@ namespace artistry_Web.Areas.Administrator.Controllers
 
                 return View("Edit", artist);
             }
-          
-                Artists a = new Artists();
-                a.Id = artist.Id;
-                a.Name = artist.Name;
-                a.Biography = artist.Biography;
-                a.Born = artist.Born;
-                a.CountryId = artist.CountryId;
-                a.Died = artist.Died;
 
-                artistRepository.UpdateArtist(a);
-                artistRepository.Save();
+            Artists a = new Artists();
+            a.Id = artist.Id;
+            a.Name = artist.Name;
+            a.Biography = artist.Biography;
+            a.Born = artist.Born;
+            a.CountryId = artist.CountryId;
+            a.Died = artist.Died;
+
+            artistRepository.UpdateArtist(a);
+            artistRepository.Save();
 
             IEnumerable<ArtistMovements> list = artistmovementRepository.GetArtistMovementsByArtist(artist.Id);
 
-            foreach(var x in list)
+            foreach (var x in list)
             {
                 artistmovementRepository.DeleteArtistMovement(x);
             }
@@ -193,8 +192,8 @@ namespace artistry_Web.Areas.Administrator.Controllers
             }
 
             artistmovementRepository.Save();
-            
-           
+
+
             return RedirectToAction("Index");
         }
 

@@ -60,25 +60,25 @@
                             <input asp-for="Username" type="text" class="form-control" />
                             <span asp-validation-for="Username" class="text-danger"></span>
                         </div>
-                        <div class="col-md-6">
-                            <label>Current password</label>
-                            <input type="password" value="****" readonly="readonly" class="form-control">
-                        </div>
+                        
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-6">
-                            <label>Repeat password</label>
-                            <input asp-for="PasswordSalt" type="password" class="form-control" placeholder="Repeat new password" />
-                            <span asp-validation-for="PasswordSalt" class="text-danger"></span>
+                            <label>New password</label>
+                            <input asp-for="NewPassword" type="password" class="form-control" placeholder="Enter new password" />
+                            @if (Model.NewPassword != "")
+                            {
+                            <span asp-validation-for="NewPassword" class="text-danger"></span>
+                            }
                         </div>
                         <div class="col-md-6">
-                            <label>New password</label>
-                            <input asp-for="PasswordHash" type="password" class="form-control" placeholder="Enter new password" />
-                            @if (Model.PasswordSalt != "")
+                            <label>Repeat password</label>
+                            <input asp-for="RepeatPassword" type="password" class="form-control" placeholder="Repeat new password" />
+                            @if (Model.NewPassword != "")
                             {
-                            <span asp-validation-for="PasswordHash" class="text-danger"></span>
+                            <span asp-validation-for="RepeatPassword" class="text-danger"></span>
                             }
                         </div>
                     </div>

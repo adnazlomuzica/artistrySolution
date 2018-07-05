@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using artistry_Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace artistry_Data.DAL
@@ -9,7 +10,15 @@ namespace artistry_Data.DAL
     public class ClientRepository:IClientRepository, IDisposable
     {
         private Context.Context context;
+        public ClientRepository(Context.Context context)
+        {
+            this.context = context;
+        }
 
+        public Clients GetClientByUserId(int id)
+        {
+            return context.Clients.Where(x => x.UserId == id).SingleOrDefault();
+        }
         public int GetRegClients()
         {
             return context.Clients.Count();
@@ -20,9 +29,14 @@ namespace artistry_Data.DAL
             return context.Clients.Include(x => x.User).Where(x => x.User.RegistrationDate.Month == DateTime.Now.Month).Count();
         }
 
-        public ClientRepository(Context.Context context)
+        public void InsertClient(Clients client)
         {
-            this.context = context;
+            context.Clients.Add(client);
+        }
+
+        public void Save()
+        {
+            context.SaveChanges();
         }
 
         private bool disposed = false;

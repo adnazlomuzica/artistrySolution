@@ -79,7 +79,7 @@
                     <a href="#" class="dropdown-toggle applog" data-toggle="dropdown">
                         <i class="icon-bell2"></i>
                         <span class="visible-xs-inline-block position-right">App logs</span>
-                        <span id="newlog-place" class="badge bg-warning-400" ></span>
+                        <span id="newlog-place" class="badge bg-warning-400"></span>
                     </a>
                     <div class="dropdown-menu dropdown-content">
                         <div class="dropdown-content-heading">
@@ -139,7 +139,6 @@
         </div>
     </div>
     <!-- /main navbar -->
-
     <!-- Page container -->
     <div class="page-container">
         <div class="page-content">
@@ -169,20 +168,29 @@
                                 @{ url = Url.Action("Index", "Museum"); }
                                 <li class="nav link @(Context.Request.Path == url ? "active" : null)"><a href="@url"><i class="icon-library2"></i> <span>Museums</span></a></li>
 
-                                @{ url = Url.Action("Index", "MuseumType"); }
-                                <li class="nav link @(Context.Request.Path == url ? "active" : null)"><a href="@url"><i class="icon-list3"></i> <span>Museum types</span></a></li>
                                
                                 @{ url = Url.Action("Index", "Artist"); }
                                 <li class="nav link @(Context.Request.Path == url ? "active" : null)"><a href="@url"><i class="icon-users4"></i> <span>Artists</span></a></li>
+
+                                <li>
+                                    <a href="#"><i class="icon-cog4"></i> <span>Settings</span></a>
+                                    <ul>
+                                        @{ url = Url.Action("Index", "MuseumType"); }
+                                        <li class="nav link @(Context.Request.Path == url ? "active" : null)"><a href="@url"><i class="icon-list3"></i> <span>Museum types</span></a></li>
+
+                                        @{ url = Url.Action("Index", "ArtworkType"); }
+                                        <li class="nav link @(Context.Request.Path == url ? "active" : null)"><a href="@url"><i class="icon-images3"></i> <span>Artwork types</span></a></li>
+
+                                        @{ url = Url.Action("Index", "Material"); }
+                                        <li class="nav link @(Context.Request.Path == url ? "active" : null)"><a href="@url"><i class="fa fa-paint-brush"></i> <span>Materials</span></a></li>
+
+                                        @{ url = Url.Action("Index", "Style"); }
+                                        <li class="nav link @(Context.Request.Path == url ? "active" : null)"><a href="@url"><i class="fa fa-dashboard"></i> <span>Styles</span></a></li>
+                                    </ul>
+                                </li>
                                
-                                @{ url = Url.Action("Index", "ArtworkType"); }
-                                <li class="nav link @(Context.Request.Path == url ? "active" : null)"><a href="@url"><i class="icon-images3"></i> <span>Artwork types</span></a></li>
 
-                                @{ url = Url.Action("Index", "Material"); }
-                                <li class="nav link @(Context.Request.Path == url ? "active" : null)"><a href="@url"><i class="fa fa-paint-brush"></i> <span>Materials</span></a></li>
-
-                                @{ url = Url.Action("Index", "Style"); }
-                                <li class="nav link @(Context.Request.Path == url ? "active" : null)"><a href="@url"><i class="fa fa-dashboard"></i> <span>Styles</span></a></li>
+                                
                             </ul>
                         </div>
                     </div>
@@ -190,7 +198,6 @@
                 </div>
             </div>
             <!-- /main sidebar -->
-
             <!-- Main content -->
             <div class="content-wrapper">
 

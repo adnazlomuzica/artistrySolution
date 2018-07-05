@@ -16,9 +16,24 @@ namespace artistry_Data.DAL
             this.context = context;
         }
 
+        public List<News> GetAllNews()
+        {
+            return context.News.Include(x => x.Museum).OrderByDescending(x => x.Date).ToList();
+        }
+
+        public List<News> Search(string search)
+        {
+            return context.News.Include(x => x.Museum).Where(x=>x.Title.Contains(search) || x.Text.Contains(search)).OrderByDescending(x => x.Date).ToList();
+        }
+
         public List<News> GetNews(int id)
         {
             return context.News.Include(x=>x.Museum).Where(x=>x.MuseumId==id).OrderByDescending(x=>x.Date).ToList();
+        }
+
+        public  List<News> GetLatest()
+        {
+            return context.News.Include(x=>x.Museum).OrderByDescending(x => x.Date).Take(3).ToList();
         }
 
         public News GetNewsById(int id)

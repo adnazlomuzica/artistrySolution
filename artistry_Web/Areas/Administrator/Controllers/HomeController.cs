@@ -39,10 +39,10 @@ namespace artistry_Web.Areas.Administrator.Controllers
             model.MuseumsRegistrated = museumRepository.MuseumsRegistrated();
             model.MuseumsRegMonth = museumRepository.MuseumsRegMonth();
             model.TicketsRevenue = 0;
-            model.TicketsRevenueMonth =0;
+            model.TicketsRevenueMonth = 0;
             model.TicketsSale = 0;
             model.TicketsSaleMonth = 0;
-            model.UsersRegistrated =clientRepository.GetRegClients();
+            model.UsersRegistrated = clientRepository.GetRegClients();
             model.UsersRegMonth = clientRepository.GetRegClientsMonth();
             model.ActiveMuseums = 0;
             model.InactiveMuseums = 0;
@@ -54,7 +54,7 @@ namespace artistry_Web.Areas.Administrator.Controllers
 
             foreach (Museums x in museums)
             {
-                int total = ticketRepository.GetSum(x.Id);
+                int total = ticketRepository.GetSum(x.UserId);
                 model.museumTicketSales.Add(new MuseumTicketSale
                 {
                     Museum = x.Name,
@@ -67,11 +67,11 @@ namespace artistry_Web.Areas.Administrator.Controllers
                     model.InactiveMuseums++;
 
                 model.TicketsSale += total;
-                model.TicketsSaleMonth += ticketRepository.GetMonthSum(x.Id);
-                model.TicketsRevenue += ticketRepository.GetTotal(x.Id);
-                model.TicketsRevenueMonth += ticketRepository.GetMonthTotal(x.Id);
+                model.TicketsSaleMonth += ticketRepository.GetMonthSum(x.UserId);
+                model.TicketsRevenue += ticketRepository.GetTotal(x.UserId);
+                model.TicketsRevenueMonth += ticketRepository.GetMonthTotal(x.UserId);
             }
-            model.TotalMuseumTicketSales = model.museumTicketSales.Select(x=>x.Quantity).Sum();
+            model.TotalMuseumTicketSales = model.museumTicketSales.Select(x => x.Quantity).Sum();
 
             return View(model);
         }
@@ -93,10 +93,10 @@ namespace artistry_Web.Areas.Administrator.Controllers
             users = users.Where(x => (x.RegistrationDate.Month >= startMonth && x.RegistrationDate.Year == DateTime.Now.AddYears(-1).Year) ||
                      (x.RegistrationDate.Month <= endMonth && x.RegistrationDate.Year == DateTime.Now.Year)).ToList();
 
-            
+
             model.monthlyUserRegistrations.Add(new MonthlyUserRegistration
             {
-                Number = (12-startMonth)-(DateTime.Now.Month+startMonth),
+                Number = (12 - startMonth) - (DateTime.Now.Month + startMonth),
                 Month = "January",
                 Quantity = users.Where(y => y.RegistrationDate.Month == 1).Count()
             });
@@ -167,23 +167,24 @@ namespace artistry_Web.Areas.Administrator.Controllers
                 Quantity = users.Where(y => y.RegistrationDate.Month == 12).Count()
             });
 
-            model.monthlyUserRegistrations=model.monthlyUserRegistrations.OrderBy(x => x.Number).ToList();
+            model.monthlyUserRegistrations = model.monthlyUserRegistrations.OrderBy(x => x.Number).ToList();
             IEnumerable<AppLogs> appLogs = appLogRepository.GetThisWeeksLogs();
 
             int startweek = DateTime.Now.AddDays(-6).DayOfYear;
-            int endweek = DateTime.Now.DayOfYear;        
+            int endweek = DateTime.Now.DayOfYear;
 
-            for(int i=startweek; i <= endweek; i++)
+            for (int i = startweek; i <= endweek; i++)
             {
                 WeeklyAppLogReview a = new WeeklyAppLogReview();
-                if (appLogs.Where(x => x.Logged.DayOfYear == i).Count()>0){
-                    foreach(AppLogs log in appLogs.Where(x => x.Logged.DayOfYear == i))
+                if (appLogs.Where(x => x.Logged.DayOfYear == i).Count() > 0)
+                {
+                    foreach (AppLogs log in appLogs.Where(x => x.Logged.DayOfYear == i))
                     {
-                       a.WeekDay = log.Logged.DayOfWeek.ToString();
-                       a.Quantity = appLogs.Where(y => y.Logged.DayOfYear == i).Count();
-                       model.weeklyAppLogReviews.Add(a);
-                       break;
-                    }                  
+                        a.WeekDay = log.Logged.DayOfWeek.ToString();
+                        a.Quantity = appLogs.Where(y => y.Logged.DayOfYear == i).Count();
+                        model.weeklyAppLogReviews.Add(a);
+                        break;
+                    }
                 }
                 else
                 {
@@ -193,7 +194,7 @@ namespace artistry_Web.Areas.Administrator.Controllers
                     a.Quantity = 0;
                     model.weeklyAppLogReviews.Add(a);
                 }
-            }                        
+            }
             return PartialView("Charts", model);
         }
     }

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace artistry_Data.DAL
 {
-    public class ReviewRepository:IReviewRepository, IDisposable
+    public class ReviewRepository : IReviewRepository, IDisposable
     {
         private Context.Context context;
 
@@ -23,12 +23,16 @@ namespace artistry_Data.DAL
 
         public double AverageRating(int id)
         {
-            return context.Reviews.Include(x => x.Museum).Where(x => x.Museum.UserId == id).Average(x=>x.Rating);
+            if (context.Reviews.Include(x => x.Museum).Where(x => x.Museum.UserId == id).Average(x => x.Rating) > 0)
+                return context.Reviews.Include(x => x.Museum).Where(x => x.Museum.UserId == id).Average(x => x.Rating);
+            return 0;
         }
 
         public double MonthAverageRating(int id)
         {
-            return context.Reviews.Include(x => x.Museum).Where(x => x.Museum.UserId == id && x.Date.Month==DateTime.Now.Month).Average(x => x.Rating);
+            if (context.Reviews.Include(x => x.Museum).Where(x => x.Museum.UserId == id && x.Date.Month == DateTime.Now.Month).Count() > 0)
+                return context.Reviews.Include(x => x.Museum).Where(x => x.Museum.UserId == id && x.Date.Month == DateTime.Now.Month).Average(x => x.Rating);
+            return 0;
         }
 
         private bool disposed = false;

@@ -2,6 +2,7 @@
 using artistry_Data.Models;
 using artistry_Web.Areas.Administrator.ViewModels;
 using artistry_Web.Areas.Moderator.ViewModels;
+using artistry_Web.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -25,11 +26,19 @@ namespace artistry_Web.Helper
             if (className == "MuseumVM")
             {
                 var obj = validationContext.ObjectInstance as Areas.Administrator.ViewModels.MuseumVM;
-                var  result = db.Museums.Where(x => x.User.Username == value.ToString() && x.Id!=obj.Id).ToList();
-                if (result.Count() > 0)
+
+                if (value.ToString() != null)
                 {
-                    return new ValidationResult(string.Format("The {0} already exist", propertyName),
-                                new List<string>() { propertyName });
+                    var result = db.Museums.Where(x => x.User.Username == value.ToString() && x.Id != obj.Id).ToList();
+                    if (result.Count() > 0)
+                    {
+                        return new ValidationResult(string.Format("The {0} already exist", propertyName),
+                                    new List<string>() { propertyName });
+                    }
+                    else
+                    {
+                        return ValidationResult.Success;
+                    }
                 }
                 else
                 {
@@ -39,12 +48,63 @@ namespace artistry_Web.Helper
 
             else if (className == "ArtworkVM")
             {
-                var obj = validationContext.ObjectInstance as ArtworkVM;
-                var result = db.Artworks.Where(x => x.AccessionNumber.ToString() == value.ToString() && x.Id != obj.Id).ToList();
-                if (result.Count() > 0)
+                if (value.ToString() != null)
                 {
-                    return new ValidationResult(string.Format("The {0} already exist", propertyName),
-                                new List<string>() { propertyName });
+                    var obj = validationContext.ObjectInstance as Areas.Moderator.ViewModels.ArtworkVM;
+                    var result = db.Artworks.Where(x => x.AccessionNumber.ToString() == value.ToString() && x.Id != obj.Id).ToList();
+                    if (result.Count() > 0)
+                    {
+                        return new ValidationResult(string.Format("The {0} already exist", propertyName),
+                                    new List<string>() { propertyName });
+                    }
+                    else
+                    {
+                        return ValidationResult.Success;
+                    }
+                }
+                else
+                {
+                    return ValidationResult.Success;
+                }
+            }
+
+            else if (className == "UserVM")
+            {
+                if (value.ToString() != null)
+                {
+                    var obj = validationContext.ObjectInstance as UserVM;
+                    var result = db.UserAccounts.Where(x => x.Username.ToString() == value.ToString()).ToList();
+                    if (result.Count() > 0)
+                    {
+                        return new ValidationResult(string.Format("The {0} already exist", propertyName),
+                                    new List<string>() { propertyName });
+                    }
+                    else
+                    {
+                        return ValidationResult.Success;
+                    }
+                }
+                else
+                {
+                    return ValidationResult.Success;
+                }
+            }
+
+            else if (className == "UserVM")
+            {
+                if (value.ToString() != null)
+                {
+                    var obj = validationContext.ObjectInstance as UserVM;
+                    var result = db.Clients.Where(x => x.Email.ToString() == value.ToString()).ToList();
+                    if (result.Count() > 0)
+                    {
+                        return new ValidationResult(string.Format("The {0} already exist", propertyName),
+                                    new List<string>() { propertyName });
+                    }
+                    else
+                    {
+                        return ValidationResult.Success;
+                    }
                 }
                 else
                 {

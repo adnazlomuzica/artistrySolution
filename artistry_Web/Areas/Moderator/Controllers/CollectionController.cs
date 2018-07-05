@@ -36,7 +36,7 @@ namespace artistry_Web.Areas.Moderator.Controllers
 
             List<Collections> model = collectionRepository.GetCollections(m.Id);
 
-            foreach(Collections x in model)
+            foreach (Collections x in model)
             {
                 if (x.Description.Length > 200)
                     x.Description = x.Description.Substring(0, 200);
@@ -61,21 +61,6 @@ namespace artistry_Web.Areas.Moderator.Controllers
             return View("Edit", model);
         }
 
-        [HttpGet("AddImage")]
-        public IActionResult AddImage()
-        {
-            Images model = new Images();
-
-            return View("AddImage", model);
-        }
-
-        [HttpGet("EditImage")]
-        public IActionResult EditImage(int id)
-        {
-            Images model = imageRepository.GetImage(id);
-
-            return View("EditImage", model);
-        }
 
         [HttpGet("Add")]
         public IActionResult Add(int id)
@@ -90,49 +75,8 @@ namespace artistry_Web.Areas.Moderator.Controllers
             return View("Add", model);
         }
 
-        [HttpPost("SaveImage")]
-        public IActionResult SaveImage(Images model, IFormFile imagefile)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View("AddImage", model);
-            }
-
-            Images i = new Images();
-            i.Caption = model.Caption;
-            i.Primary = true;
-            i.ImageThumb = ImageHelper.imageToByteArray(ImageHelper.ResizeImage(Image.FromStream(imagefile.OpenReadStream(), true, true), 150, 150));
-            i.Image = ImageHelper.imageToByteArray(Image.FromStream(imagefile.OpenReadStream(), true, true));
-
-            imageRepository.InsertImage(i);
-            imageRepository.Save();
-
-            return RedirectToAction("Add", new { id = i.Id });
-        }
-
-        [HttpPost("EditImg")]
-        public IActionResult EditImg(Images model, IFormFile imagefile)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View("AddImage", model);
-            }
-
-            Images i = new Images();
-            i.Id = model.Id;
-            i.Caption = model.Caption;
-            i.Primary = true;
-            i.ImageThumb = ImageHelper.imageToByteArray(ImageHelper.ResizeImage(Image.FromStream(imagefile.OpenReadStream(), true, true), 150, 150));
-            i.Image = ImageHelper.imageToByteArray(Image.FromStream(imagefile.OpenReadStream(), true, true));
-
-            imageRepository.UpdateImage(i);
-            imageRepository.Save();
-
-            return RedirectToAction("Index");
-        }
-
         [HttpPost("Save")]
-        public IActionResult Save(Collections model)
+        public IActionResult Save(Collections model, IFormFile imagefile)
         {
             if (!ModelState.IsValid)
             {
@@ -141,6 +85,17 @@ namespace artistry_Web.Areas.Moderator.Controllers
 
             model.Active = true;
 
+            Images i = new Images();
+
+            i.Caption = model.Name;
+            i.Primary = true;
+            i.ImageThumb = ImageHelper.imageToByteArray(ImageHelper.ResizeImage(Image.FromStream(imagefile.OpenReadStream(), true, true), 150, 150));
+            i.Image = ImageHelper.imageToByteArray(Image.FromStream(imagefile.OpenReadStream(), true, true));
+
+            imageRepository.InsertImage(i);
+            imageRepository.Save();
+
+            model.ImageId = i.Id;
             collectionRepository.InsertCollection(model);
             collectionRepository.Save();
 
@@ -148,14 +103,32 @@ namespace artistry_Web.Areas.Moderator.Controllers
         }
 
         [HttpPost("Edit")]
-        public IActionResult Edit(Collections model)
+        public IActionResult Edit(Collections model, IFormFile imagefile)
         {
             if (!ModelState.IsValid)
             {
                 return View("Add", model);
             }
 
-            collectionRepository.UpdateCollection(model);
+            Images i = collectionRepository.GetCollectionById(model.Id).Image;
+            if (imagefile != null)
+            {
+                i.Caption = model.Name;
+                i.Primary = true;
+                i.ImageThumb = ImageHelper.imageToByteArray(ImageHelper.ResizeImage(Image.FromStream(imagefile.OpenReadStream(), true, true), 150, 150));
+                i.Image = ImageHelper.imageToByteArray(Image.FromStream(imagefile.OpenReadStream(), true, true));
+                imageRepository.UpdateImage(i);
+                imageRepository.Save();
+            }
+            Collections c = new Collections();
+            c.Id = model.Id;
+            c.Active = model.Active;
+            c.Description = model.Description;
+            c.ImageId = model.ImageId;
+            c.MuseumId = model.MuseumId;
+            c.Name = model.Name;
+
+            collectionRepository.UpdateCollection(c);
             collectionRepository.Save();
 
             return RedirectToAction("Index");

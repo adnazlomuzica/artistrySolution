@@ -9,6 +9,8 @@ namespace artistry_Data.DAL
     public interface ITicketRepository:IDisposable
     {
         List<Tickets> GetTickets(int id);
+        List<Tickets> Filter(int id, DateTime start, DateTime end);
+
         int GetSum(int id);
         int GetMonthSum(int id);
         double GetTotal(int id);

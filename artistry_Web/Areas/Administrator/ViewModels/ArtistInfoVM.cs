@@ -15,5 +15,6 @@ namespace artistry_Web.Areas.Administrator.ViewModels
         public string Biography { get; set; }
         public string Country { get; set; }
         public IEnumerable<ArtistMovements> Styles { get; set; }
+        public IEnumerable<Artworks> Artworks { get; set; }
     }
 }
