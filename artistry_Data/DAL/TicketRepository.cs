@@ -46,6 +46,16 @@ namespace artistry_Data.DAL
             return context.Tickets.Include(x => x.TicketType).ThenInclude(x => x.Museum).Where(x => x.TicketType.Museum.UserId == id && x.Date.Month == DateTime.Now.Month).Sum(x => x.Quantity);
         }
 
+        public void Add(Tickets ticket)
+        {
+            context.Tickets.Add(ticket);
+        }
+
+        public void Save()
+        {
+            context.SaveChanges();
+        }
+
         public bool Scan(string code)
         {
             Tickets t = context.Tickets.Where(x => x.Active && x.Code == code).SingleOrDefault();

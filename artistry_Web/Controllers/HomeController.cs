@@ -14,7 +14,6 @@ using artistry_Web.ViewModels;
 
 namespace artistry_Web.Controllers
 {
-    [Route("[controller]/[action]")]
     public class HomeController : Controller
     {
         private readonly IMuseumRepository museumRepository;

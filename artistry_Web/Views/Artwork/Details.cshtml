@@ -112,20 +112,6 @@
                                                 </a>
                                             }
                                         </div>
-                                        @if (Model.Liked)
-                                        {
-                                        <a class="project-icon" asp-controller="Artwork" asp-action="Unlike" asp-route-id="@Model.Id" title="Unlike" id="unlike">
-                                            <i class="icon-heart5 liked" id="unlike-a" style="font-size:42px;"></i>
-                                            <p>@Model.Likes</p>
-                                        </a>
-                                        }
-                                        else
-                                        {
-                                            <a class="project-icon" asp-controller="Artwork" asp-action="Like" asp-route-id="@Model.Id" title="Like" id="like">
-                                                <i class="icon-heart5 unliked" id="like-a" style="font-size:42px;"></i>
-                                                <p>@Model.Likes</p>
-                                            </a>
-                                        }
                                     </div>
                                     <div class="col-md-8">
                                         <div class="entry-header has-post-format">

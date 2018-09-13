@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using artistry_Data.Context;
 using artistry_Web.Helper;
+using artistry_Web.ViewModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -16,6 +17,7 @@ using Microsoft.Extensions.Logging;
 using NLog;
 using NLog.Extensions.Logging;
 using NLog.Web;
+using Stripe;
 
 namespace artistry_Web
 {
@@ -26,18 +28,26 @@ namespace artistry_Web
             Configuration = configuration;
         }
 
+        public class StripeSettings
+        {
+            public string SecretKey { get; set; }
+            public string PublishableKey { get; set; }
+        }
+
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<Context>(options=>options.UseSqlServer("Data Source = SQL6003.site4now.net; Initial Catalog = DB_A3C9B6_artistry; User Id = DB_A3C9B6_artistry_admin; Password = Adna111!;"));
+            services.AddDbContext<Context>(options=>options.UseSqlServer("Data Source =localhost; Initial Catalog = DB_A3C9B6_artistry; Integrated Security=True;"));
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddSingleton<IFileProvider>(
             new PhysicalFileProvider(
                 Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
+
+            services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
 
             services.AddMvc();
 
@@ -52,7 +62,9 @@ namespace artistry_Web
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             GlobalDiagnosticsContext.Set("configDir", "Nlog.log");
-            GlobalDiagnosticsContext.Set("connectionString", "Data Source = SQL6003.site4now.net; Initial Catalog = DB_A3C9B6_artistry; User Id = DB_A3C9B6_artistry_admin; Password = Adna111!;");
+            GlobalDiagnosticsContext.Set("connectionString", "Data Source = localhost; Initial Catalog = DB_A3C9B6_artistry; Integrated Security=true;");
+
+            StripeConfiguration.SetApiKey("sk_test_3RYpHa2Dsbr6Q3HDXb6KVfGj");
 
             loggerFactory.AddNLog();
 

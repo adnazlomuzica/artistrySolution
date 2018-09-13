@@ -22,6 +22,13 @@ namespace artistry_Web.ViewModels
         public int UserId { get; set; }
         public int OpeningYear { get; set; }
         public bool TicketSelling { get; set; }
-        IEnumerable<Images> Images { get; set; }
+        public IEnumerable<Images> Images { get; set; }
+        public List<ArtworkVM> Artworks { get; set; }
+        public List<Collections> Collections { get; set; }
+        public IEnumerable<TicketTypes> TicketTypes { get; set; }
+        public List<NewsVM> News { get; set; }
+        public List<Events> Events { get; set; }
+        public IEnumerable<WorkingHours> WorkingHours { get; set; }
+        public Reviews Review { get; set; }
     }
 }

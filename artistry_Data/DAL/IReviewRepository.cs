@@ -11,5 +11,7 @@ namespace artistry_Data.DAL
         List<Reviews> GetReviews(int id);
         double AverageRating(int id);
         double MonthAverageRating(int id);
+        void AddReview(Reviews r);
+        void Save();
     }
 }

@@ -1,0 +1,103 @@
+﻿@model artistry_Data.Models.Tickets;
+@{ var type = ViewData["type"];
+    var total = ViewData["total"];}
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    var stripe = Stripe('pk_test_EZCbB2PTUjc46hFkA7rFDeSD');
+    var elements = stripe.elements();
+</script>
+<link href="~/assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+<div class="body-wrapper">
+    <div class="body-innerwrapper">
+        <div id="sp-header-sticky-wrapper" class="sticky-wrapper is-sticky" style="height: 70px;width:100%;">
+            <header id="sp-header" style="position: fixed; top: 0px;width:100%;background-color:#333;">
+                <div class="container">
+                    <div class="row" style="position: relative;">
+                        <div id="sp-logo" class="col-xs-8 col-sm-3 col-md-3">
+                            <div class="sp-column">
+                                <div class="logo" style="margin-left:0px;">
+                                    <a asp-controller="Home" asp-action="Index">
+                                        <img class="sp-default-logo" src="~/assets/images/Logo3.png" style="margin-top:3px;width:150px;height:50px;">
+                                        <img class="sp-retina-logo" src="~/assets/images/Logo3.png" alt="LT Museum" width="250" height="50">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="sp-menu" class="col-xs-4 col-sm-9 col-md-9" style="position: static;">
+                            <div class="sp-column ">
+                                <div class="sp-megamenu-wrapper">
+                                    <ul class="sp-megamenu-parent menu-slide-down hidden-sm hidden-xs">
+                                        <li class="sp-menu-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                                        <li class="sp-menu-item"><a asp-controller="Museum" asp-action="Index">Museums</a>
+                                        <li class="sp-menu-item"><a asp-controller="Artwork" asp-action="Index">Artworks</a>
+                                        <li class="sp-menu-item"><a asp-controller="Artist" asp-action="Index">Artists</a></li>
+                                        <li class="sp-menu-item"><a asp-controller="News" asp-action="Index">News</a></li>
+                                        <li class="sp-menu-item"><a asp-controller="Autentification" asp-action="Index">Login</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <section id="sp-page-title">
+            <div class="row">
+                <div id="sp-title" class="col-sm-12 col-md-12">
+                    <div class="sp-column ">
+                        <div class="sp-page-title">
+                            <div class="container">
+                                <h2>Museums</h2>
+                                <ol class="breadcrumb">
+                                    <li><a asp-controller="Home" asp-action="Index" class="pathway">Home</a></li>
+                                    <li class="active">Museums</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="sp-main-body">
+            <div class="container">
+                <div id="qx-blurb-69181" class="qx-element qx-element-blurb et-title-general">
+                </div>
+                <!-- qx-element-blurb -->
+                <div id="lt-pricing" class="qx-element qx-element-pricing-table  qx-flex wow fadeInUp qx-pricing-table animated animated" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s;">
+                    <div class="single-table" style="width:100%;">
+                        <div class="table-heading" style="min-height:300px;overflow:hidden;">
+                            <div class="title">
+                                <form asp-action="Charge" method="POST">
+                                    <input type="hidden" asp-for="TicketTypeId" />
+                                    <input type="hidden" asp-for="Total" />
+                                    <input type="hidden" asp-for="ClientId" />
+                                    <input type="hidden" asp-for="Quantity" />
+                                    <input type="hidden" asp-for="Seen" />
+                                    <input type="hidden" asp-for="Date" />
+                                    <input type="hidden" asp-for="Active" />
+                                    <div class="cost">
+                                        @type<br />
+                                        <span class="curency">$</span><!-- /.curency -->
+
+                                        <span class="amount">@Model.Total</span><!-- /.amount -->
+
+                                        <span class="plantype">/ day</span><!-- /.plantype -->
+                                    </div><!-- /.cost -->
+                                    <script src="//checkout.stripe.com/v2/checkout.js"
+                                            class="stripe-button"
+                                            data-key="pk_test_EZCbB2PTUjc46hFkA7rFDeSD"
+                                            data-locale="auto"
+                                            data-description="Sample Charge"
+                                            data-amount="@total">
+                                    </script>
+                                </form>
+                            </div><!--/.table-heading-->
+                        </div>
+                    </div>
+
+                </div>
+                </div>
+</section>
+    </div>
+</div>

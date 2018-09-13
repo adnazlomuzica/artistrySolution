@@ -1,0 +1,635 @@
+﻿@model artistry_Web.ViewModels.MuseumVM
+<style>
+    #lt-our-care {
+        background-image: url(/images/tes1.jpg);
+    }
+
+    #lt-ourboat {
+        background-image: url(/images/slide-home2-3.jpg);
+    }
+
+    .rating-star-block .star.outline {
+        background: url("/images/star-outline.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+        background-size: 20px;
+    }
+
+    .rating-star-block .star.filled {
+        background: url("/images/star-fill.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+        background-size: 20px;
+    }
+
+    .rating-star-block .star {
+        color: rgba(0,0,0,0);
+        display: inline-block;
+        height: 24px;
+        overflow: hidden;
+        text-indent: -999em;
+        width: 24px;
+    }
+
+    a{
+        text-decoration:none;
+    }
+
+    #lt-service-sub{
+        margin-right:20px;
+    }
+</style>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<style>
+    /* Always set the map height explicitly to define the size of the div
+        * element that contains the map. */
+    #map {
+        height: 50%;
+    }
+    /* Optional: Makes the sample page fill the window. */
+
+</style>
+
+<script>
+    var map;
+    function initMap(a, b) {
+        console.log(a + "-" + b);
+        if (a != null && b != null) {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: a, lng: b },
+                zoom: 16
+            });
+            console.log(map);
+            var marker = new google.maps.Marker({
+                position: { lat: a, lng: b }, map: map
+            });
+        }
+    }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcpggMXc_IuTeFhSjOTtPtjy0ytmfy2Y8&callback=initMap" async defer></script>
+
+
+<div class="body-wrapper">
+    <div class="body-innerwrapper">
+        <div id="sp-header-sticky-wrapper" class="sticky-wrapper is-sticky" style="height: 70px;width:100%;position:absolute;">
+            <header id="sp-header" style="position: fixed; top: 0px;width:100%;">
+                <div class="container">
+                    <div class="row" style="position: relative;">
+                        <div id="sp-logo" class="col-xs-8 col-sm-3 col-md-3">
+                            <div class="sp-column">
+                                <div class="logo">
+                                    <a asp-controller="Home" asp-action="Index">
+                                        <img class="sp-default-logo" src="~/assets/images/Logo3.png" style="margin-top:3px;width:150px;height:50px;">
+                                        <img class="sp-retina-logo" src="~/assets/images/Logo3.png" alt="LT Museum" width="250" height="50">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="sp-menu" class="col-xs-4 col-sm-9 col-md-9" style="position: static;">
+                            <div class="sp-column ">
+                                <div class="sp-megamenu-wrapper">
+                                    <ul class="sp-megamenu-parent menu-slide-down hidden-sm hidden-xs">
+                                        <li class="sp-menu-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                                        <li class="sp-menu-item current-item active"><a asp-controller="Museum" asp-action="Index">Museums</a>
+                                        <li class="sp-menu-item"><a asp-controller="Artwork" asp-action="Index">Artworks</a>
+                                        <li class="sp-menu-item"><a asp-area="" asp-controller="Artist" asp-action="Index">Artists</a></li>
+                                        <li class="sp-menu-item"><a asp-controller="News" asp-action="Index">News</a></li>
+                                        <li class="sp-menu-item"><a asp-controller="Autentification" asp-action="Index">Login</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <section id="sp-main-body">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="w3-content w3-display-container">
+
+                        @foreach (var x in Model.Images)
+                        {
+                            <img src="@Url.Action("RenderImage", "Image", new { id = x.Id })" style="width:100%" class="mySlides">
+                        }
+
+                        <div class="w3-left w3-hover-text-khaki button-left" onclick="plusDivs(-1);">&#10095;</div>
+                        <div class="w3-right w3-hover-text-khaki button-right" onclick="plusDivs(1);">&#10094;</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="lt-feature" class="qx-section  qx-section--stretch" style="position: relative; width: 1499px; margin-left: 0px;">
+
+                <!-- Shape -->
+
+                <div class="qx-container">
+
+                    <div id="qx-row-77252" class="qx-row ">
+
+
+                        @foreach (var x in Model.Collections)
+                        {
+                        <a asp-controller="Museum" asp-action="Collection" asp-route-id="@x.Id">
+                            <div id="lt-service-sub" class="qx-column  qx-col-lg-4 qx-col-md-4 qx-col-sm-6 qx-col-xs-12 wow fadeInUp animated animated" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+                                <div id="qx-blurb-22261" class="qx-element qx-element-blurb lt-service-sub-item wow fadeInUp animated animated" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+
+
+                                    <img src="@Url.Action("RenderImage", "Image", new { id = x.ImageId })" class="qx-image" style="height:300px;">
+                                    <h3 class="qx-blurb-title ">  </h3>        <div class="qx-blurb-content">
+                                        <h4 style="width:100%;">@x.Name</h4>
+                                        <p>@x.Description</p>
+                                    </div>
+
+
+
+                                </div>
+                                <!-- qx-element-blurb -->
+                            </div>
+                        </a>
+
+                        }
+                    </div>
+                    <!-- qx-row -->
+
+                </div>
+
+            </div>
+
+            <div id="lt-our-care" class="qx-section ">
+
+                <!-- Shape -->
+
+
+                <div class="qx-container">
+                    <div id="qx-row-43458" class="qx-row ">
+
+                        <div id="lt-our-care-sub" class="qx-column  qx-col-lg-8 qx-col-md-6 qx-col-sm-6 qx-col-xs-12 wow fadeInLeft animated animated" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInLeft;margin-top:0px;">
+                            <div id="qx-text-741938" class="qx-element qx-element-text lt-title wow rotateIn animated animated" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: rotateIn;">
+                                <h3>@Model.Name</h3>
+                                <h2 style="margin:0;padding:0;">@Model.Type</h2><br />
+                                <h2 style="margin:0;padding:0;">Estimated in @Model.OpeningYear</h2>
+                            </div>
+                            <!-- qx-element-text --><div id="qx-text-1083" class="qx-element qx-element-text ">
+                                <p>@Model.Description</p>
+                            </div>
+                            <!-- qx-element-text --><div id="qx-text-652239" class="qx-element qx-element-text ">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div id="lt-portfolio" class="qx-section  qx-section--stretch" style="position: relative; width: 1349px; margin-left: 0px;">
+                <div class="qx-container">
+                    <div id="qx-row-68953" class="qx-row ">
+                        <div id="qx-column-7955" class="qx-column  qx-col-lg-12 qx-col-md-12 qx-col-sm-12 qx-col-xs-12">
+                            <div id="qx-text-523326" class="qx-element qx-element-text lt-title wow zoomIn animated animated" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s;">
+                                <h2>ARTWORKS</h2>
+                                <h3>EXPLORE FAMOUS ARTWORKS</h3>
+                            </div>
+
+                            <div id="qx-filterable-gallery-871085" class="qx-element qx-element-filterable-gallery ">
+                                <div class="qx-fg-items" style="position: relative; height: 674.468px;">
+                                    @foreach (var x in Model.Artworks)
+                                    {
+                                        <div class="qx-col-md-4 qx-col-sm-6 item-padding qx-fg-item vintage-art wow fadeInUp animated animated" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; position: absolute; left: 0%; top: 0px; animation-name: fadeInUp;">
+                                            <div class="qx-fg-wrap">
+                                                <figure class="qx-overlay qx-overlay-hover">
+                                                    <a class="qx-image--gallery" asp-controller="Artwork" asp-action="Details" asp-route-id="@x.Id">
+                                                        @if (x.Image != null)
+                                                        {
+                                                            <img src="@Url.Action("RenderImage", "Image", new { id = x.ImageId })" alt="@x.Name" width="400" height="200" style="height:300px;">
+                                                        }
+                                                        <div class="qx-overlay-panel qx-overlay-background qx-overlay-fade"></div>
+                                                    </a>
+                                                </figure>
+                                                <h3 class="qx-blurb-title" style="font-size:22px; margin-left:20px; margin-right:20px;">@x.Artist - @x.Name</h3>
+                                            </div>
+                                        </div>
+
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="lt-ourboat" class="qx-section  qx-section--stretch" style="position: relative; width: 1499px; margin-left: 0px;">
+
+                <!-- Shape -->
+
+                <div class="qx-container-fluid">
+
+                    <div class="qx-container">
+                        <div id="qx-row-15651" class="qx-row  wow fadeInDown animated animated" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInDown;">
+                            <div id="qx-column-48652" class="qx-column  qx-col-lg-12 qx-col-md-12 qx-col-sm-12 qx-col-xs-12">
+                                <div id="qx-text-3495" class="qx-element qx-element-text lt-title wow zoomIn animated animated" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: zoomIn;">
+                                    <h2>UPCOMING EVENTS</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="qx-container">
+                        <div id="qx-row-18293" class="qx-row ">
+
+
+                            @foreach (var x in Model.Events)
+                            {
+                                <div id="qx-column-84295" class="qx-column  qx-col-lg-4 qx-col-md-4 qx-col-sm-6 qx-col-xs-12">
+                                    <div id="qx-blurb-49302" class="qx-element qx-element-blurb lt-ourboat-item wow zoomIn animated animated" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: zoomIn;">
+                                        <h3 class="qx-blurb-title ">@x.Title</h3>        <div class="qx-blurb-content">
+                                            <ul style="box-sizing: border-box; margin: 0px; list-style: none; padding: 0px; font-size: 15px;">
+                                                <li style="box-sizing: border-box; display: block; margin-right: 30px; margin-bottom: 10px;">&nbsp;@x.StartDate.ToString("dd.MM.yyy") @@ @x.StartDate.ToString("HH:mm") - @x.EndTime.ToString("dd.MM.yyy") @@ @x.EndTime.ToString("HH:mm")</li>
+                                                <li style="box-sizing: border-box; display: block; margin-right: 30px; margin-bottom: 10px;">&nbsp;Location: @Model.Name</li>
+                                                <li style="box-sizing: border-box; display: block; margin-right: 30px; margin-bottom: 10px;">&nbsp;@x.Description</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            }
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div id="qx-section-14752" class="qx-section lt-blog">
+                <div class="qx-container">
+                    <div id="qx-row-20792" class="qx-row lt-blog">
+                        <div id="qx-column-69794" class="qx-column  qx-col-lg-12 qx-col-md-12 qx-col-sm-12 qx-col-xs-12">
+                            <div id="qx-text-4327" class="qx-element qx-element-text lt-title wow zoomIn animated animated" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s;">
+                                <h2>NEWS</h2>
+                                <h3>NEWS BLOG</h3>
+                            </div>
+                            <div id="qx-joomla-module-56797" class="qx-element qx-element-joomla-module et-blog wow fadeInUp animated animated" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s;">
+                                <div id="k2ModuleBox119" class="k2ItemsBlock">
+                                    <ul>
+                                        @foreach (var x in Model.News)
+                                        {
+                                            <li class="even">
+                                                <a class="moduleItemTitle" asp-controller="News" asp-action="Details" asp-route-id="@x.Id"> @x.Title </a>
+                                                <div class="moduleItemIntrotext">
+                                                    <a class="moduleItemImage" asp-controller="News" asp-action="Details" asp-route-id="@x.Id" title="Continue reading..">
+                                                        <img src="@Url.Action("RenderImage", "Image", new { id = x.ImageId })" alt="@x.Title" style="height:300px;">
+                                                    </a>
+                                                    @if (x.Text.Length > 150)
+                                                    {
+                                                        x.Text.Substring(0, 150);
+                                                    }
+                                                    else
+                                                    {
+                                                        @x.Text
+                                                    }
+                                                </div>
+                                                <div class="clr"></div>
+                                                <div class="clr"></div>
+                                                <span class="moduleItemDateCreated">Written on @x.Date.ToString("dd/MM/yyyy")</span>
+                                                <div class="clr"></div>
+                                            </li>
+                                        }
+                                        <li class="clearList"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="qx-section-87259" class="qx-section lt-pricing">
+
+                <!-- Shape -->
+
+
+                <div class="qx-container">
+                    <div id="qx-row-18260" class="qx-row ">
+
+                        <div id="qx-column-74345" class="qx-column  qx-col-lg-12 qx-col-md-12 qx-col-sm-12 qx-col-xs-12">
+                            <div id="qx-text-93178" class="qx-element qx-element-text lt-title wow zoomIn animated animated" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s;">
+                                <h2>BUY TICKET</h2>
+                            </div>
+                            <!-- qx-element-text --><div id="qx-blurb-69181" class="qx-element qx-element-blurb et-title-general">
+                            </div>
+                            <!-- qx-element-blurb -->
+                            <div id="lt-pricing" class="qx-element qx-element-pricing-table  qx-flex wow fadeInUp qx-pricing-table animated animated" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s;">
+                                @foreach (var x in Model.TicketTypes)
+                                {
+                                    <div class="single-table ">
+                                        <div class="table-heading" style="min-height:350px;overflow:hidden;">
+                                            <div class="title">
+                                                @x.Type
+                                            </div><!-- /.title -->
+
+
+                                            <div class="cost">
+                                                <span class="curency">$</span><!-- /.curency -->
+
+                                                <span class="amount">@x.Price</span><!-- /.amount -->
+
+                                                <span class="plantype">/ day</span><!-- /.plantype -->
+                                            </div><!-- /.cost -->
+                                        </div><!--/.table-heading-->
+                                        <div class="table-footer">
+                                            <a class="qx-btn qx-btn-regular qx-btn-default" asp-controller="Museum" asp-action="Buy" asp-route-id="@x.Id">
+                                                Buy Ticket
+                                            </a>
+                                        </div><!-- /.table-footer -->
+                                    </div><!--/.single-table-->
+                                }
+
+                            </div>
+                            <!-- qx-element-pricing -->
+
+                        </div>
+                        <!-- qx-col -->
+
+                    </div>
+                    <!-- qx-row -->
+                </div>
+
+
+            </div>
+
+            <div id="qx-section-87259" class="qx-section" style="padding:0;">
+                <div class="qx-container" style="width:100%; height:500px;">
+                    <div id="qx-row-18260" class="qx-row ">
+                        <input type="hidden" asp-for="Longitude" id="long" />
+                        <input type="hidden" asp-for="Latitude" id="lat" />
+                        <div id="map" class="map-wrapper content-group-sm" style="visibility:visible!important; height:500px;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <section id="sp-bottom">
+                <div class="container">
+                    <div class="row">
+                        <div id="sp-bottom1" class="col-sm-6 col-md-3">
+                            <div class="sp-column ">
+                                <div class="sp-module ">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="sp-bottom2" class="col-sm-6 col-md-3">
+                            <div class="sp-column ">
+                                <div class="sp-module ">
+                                    <h3 class="sp-module-title">Get In Touch</h3><div class="sp-module-content">
+
+                                        <div class="custom">
+                                            <p>Address: @Model.Address.</p>
+                                            <p>Phone: @Model.Phone.</p>
+                                            <p>Email: @Model.Email</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><div id="sp-bottom3" class="col-sm-6 col-md-3">
+                            <div class="sp-column ">
+                                <div class="sp-module ">
+                                    <h3 class="sp-module-title">Working time</h3><div class="sp-module-content">
+                                        <ul class="nav menu">
+                                            @foreach (var item in Model.WorkingHours)
+                                            {
+                                                if (item.Day == 1)
+                                                {
+                                                    <li class="item-475">
+
+                                                        <span>Monday: </span>
+                                                        <span>@item.OpenTime.ToString("HH:mm") </span>
+                                                        <span>-</span>
+                                                        <span> @item.CloseTime.ToString("HH:mm")</span>
+                                                    </li>
+                                                }
+                                                else if (item.Day == 2)
+                                                {
+                                                    <li class="item-475">
+
+                                                        <span>Tuesday: </span>
+                                                        <span>@item.OpenTime.ToString("HH:mm") </span>
+                                                        <span>-</span>
+                                                        <span> @item.CloseTime.ToString("HH:mm")</span>
+                                                    </li>
+                                                }
+                                                else if (item.Day == 3)
+                                                {
+                                                    <li class="item-475">
+
+                                                        <span>Wednesday: </span>
+                                                        <span>@item.OpenTime.ToString("HH:mm") </span>
+                                                        <span>-</span>
+                                                        <span> @item.CloseTime.ToString("HH:mm")</span>
+                                                    </li>
+                                                }
+                                                else if (item.Day == 4)
+                                                {
+                                                    <li class="item-475">
+
+                                                        <span>Thursday: </span>
+                                                        <span>@item.OpenTime.ToString("HH:mm") </span>
+                                                        <span>-</span>
+                                                        <span> @item.CloseTime.ToString("HH:mm")</span>
+                                                    </li>
+                                                }
+                                                else if (item.Day == 5)
+                                                {
+                                                    <li class="item-475">
+                                                        <span>Friday: </span>
+                                                        <span>@item.OpenTime.ToString("HH:mm") </span>
+                                                        <span>-</span>
+                                                        <span> @item.CloseTime.ToString("HH:mm")</span>
+                                                    </li>
+                                                }
+                                                else if (item.Day == 6)
+                                                {
+                                                    <li class="item-475">
+                                                        <span>Saturday: </span>
+                                                        <span>@item.OpenTime.ToString("HH:mm") </span>
+                                                        <span>-</span>
+                                                        <span> @item.CloseTime.ToString("HH:mm")</span>
+                                                    </li>
+                                                }
+                                                else if (item.Day == 7)
+                                                {
+                                                    <li class="item-475">
+                                                        <span>Sunday: </span>
+                                                        <span>@item.OpenTime.ToString("HH:mm") </span>
+                                                        <span>-</span>
+                                                        <span> @item.CloseTime.ToString("HH:mm")</span>
+                                                    </li>
+                                                }
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><div id="sp-bottom4" class="col-sm-6 col-md-3">
+                            <div class="sp-column ">
+                                <div class="sp-module ">
+                                    <h3 class="sp-module-title">Write a review</h3><div class="sp-module-content">
+                                        <div class="acymailing_module" id="acymailing_module_formAcymailing82681">
+                                            <div class="acymailing_fulldiv" id="acymailing_fulldiv_formAcymailing82681">
+                                                <div class="rating-star-block">
+                                                    <form asp-action="Review" method="post">
+                                                        <input type="hidden" class="articleID" asp-for="Review.MuseumId" />
+                                                        <input type="hidden" class="articleID" asp-for="Review.ClientId" />
+                                                        <input type="hidden" class="articleID" asp-for="Review.Rating" id="rate"/>
+                                                        <a class="star outline" rating="1" title="vote 1"> vote 1</a>
+                                                        <a class="star outline" rating="2" title="vote 2"> vote 2</a>
+                                                        <a class="star outline" rating="3" title="vote 3"> vote 3</a>
+                                                        <a class="star outline" rating="4" title="vote 4"> vote 4</a>
+                                                        <a class="star outline" rating="5" title="vote 5"> vote 5</a>
+                                                        <textarea style="width:80%;height:80px;" rows="3" id="komentar" asp-for="Review.Note"></textarea>
+                                                        <input class="button subbutton btn btn-primary btnSave" type="submit" value="Save" name="Submit" style="width:80%;margin-top:10px;" />
+                                                    </form>
+                                                        </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </div>
+    <footer id="sp-footer">
+        <div class="container">
+            <div class="row">
+                <div id="sp-footer1" class="col-sm-6 col-md-12">
+                    <div class="sp-column ">
+                        <div class="sp-module ">
+                            <div class="sp-module-content">
+                                <div class="custom">
+                                    <div class="custom">
+                                        <p style="text-align:center;">Copyright &copy; 2018. <a asp-controller="Home" asp-action="Index">artistry</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<script>
+    var slideIndex = 1;
+    showDivs(slideIndex);
+    window.setTimeout(function () { showDivs(++slideIndex); }, 500);
+    function plusDivs(n) {
+        showDivs(slideIndex += n);
+    }
+
+    function showDivs(n) {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        if (n > x.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = x.length }
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        x[slideIndex - 1].style.display = "block";
+    }
+
+    /**
+ * Listen to scroll to change header opacity class
+ */
+    var $ = jQuery;
+
+    $(document).ready(function () {
+
+        function checkScroll() {
+            var startY = $('#sp-header').height(); //The point where the navbar changes in px
+            if ($(window).scrollTop() > startY) {
+                $('#sp-header').addClass("scrolled");
+            } else {
+                $('#sp-header').removeClass("scrolled");
+            }
+        }
+
+        console.log($('#sp-header').length);
+        if ($('#sp-header').length > 0) {
+            $(window).on("scroll load resize", function () {
+                checkScroll();
+            });
+        }
+
+
+    });
+
+</script>
+
+<script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+        var v = 0;
+        $(".rating-star-block .star").click(function () {
+
+            if ($(this).hasClass('filled')) {
+                $(".rating-star-block .star").click(function () {
+                    $("#" + $(this).parent().attr('id') + " .star").each(function () {
+                        $(this).addClass("outline");
+                        $(this).removeClass("filled");
+                    });
+                });
+            }
+            else {
+                var hoverVal = $(this).attr('rating');
+                $(this).prevUntil().addClass("filled");
+                $(this).addClass("filled");
+                $("#RAT").html(hoverVal);
+            }
+           // v = $(this).parent().attr('rating').val();
+            v = $(this).attr('rating');
+            console.log(v);
+            $("#rate").val(v);
+            console.log("Rating: " + $("#rate").val());
+        });
+        $(".btnSave").click(function () {
+            var newScore = 0;
+            var updateP = "#" + $(this).parent().attr('id') + ' .CurrentScore';
+            var artID = $("#" + $(this).parent().attr('id') + ' .articleID').val();
+            var komentar = document.getElementById('komentar').value;
+            $("#rate").val(v);
+            @*$("#" + $(this).parent().attr('id') + " .star").hide();
+            $("#" + $(this).parent().attr('id') + " .yourScore").html("Your Score is : &nbsp;<b style='color:#ff9900; font-size:15px'>" + v + "</b>");
+            $.ajax({
+                type: "POST",
+                url: "Review?museumId=" +@Model.Review.MuseumId
+            });*@
+        });
+    });
+    function setNewScore(container, data) {
+        $(container).html(data);
+        $("#myElem").show('1000').delay(2000).queue(function (n) {
+            $(this).hide(); n();
+        });
+    }
+</script>
+
+<script>
+    var lat;
+    var lng;
+
+    $(document).ready(function () {
+        lat = parseFloat(document.getElementById('lat').value);
+        lng = parseFloat(document.getElementById('long').value);
+        if (lat != null && lng != null) {
+            console.log(lat + " - " + lng);
+
+            initMap(lat, lng);
+        }
+    });
+</script>
+
+
+
+

@@ -67,16 +67,13 @@
                                 <form asp-action="Search" style="display:inline;" method="get">
                                     <div class="input-group  input-field" style="margin-left:20px;width:100%;">
                                         <div class="row" style="margin-top:20px;">
-                                            <div class="col-md-3">
+                                            <div class="col-md-3" style="padding-right:5px;">
                                                 <input asp-for="@search" type="search" class="form-control" placeholder="Search.." style="float:left;border-radius:5px;" />
                                             </div>
                                             <div class="col-md-3" style="padding-left:0px;">
-                                                <input type="submit" class="btn btn-default" value="Search" style="height:40px;" />
+                                                <input type="submit" class="btn btn-default" value="Search" style="height:40px;background-color:#d9534f;color:#fff;border:none;width:80px;" />
                                             </div>
                                             <div class="col-md-4"></div>
-                                            <div class="col-md-2">
-                                                <a asp-action="MapSearch" asp-route-search="@search" class="btn btn-default" style="height:40px;" >Open map</a>
-                                            </div>
                                         </div>
                                     </div>
                                 </form>
@@ -87,13 +84,13 @@
                                         @foreach (var x in Model)
                                         {
                                             <div class="col-md-3">
-                                                <div class="isotope-item column-4" style="width: 285px; margin: 0px 0px 10px; position: relative; left: 0px; top: 0px;">
+                                                <div class="isotope-item column-4" style="width: 285px;margin: 0px 0px 10px; position: relative; left: 0px; top: 0px;">
                                                     <div class="project-img">
-                                                        <a asp-controller="Artwork" asp-action="Details" asp-route-id="@x.Id">
+                                                        <a asp-controller="Museum" asp-action="Details" asp-route-id="@x.Id">
                                                             <img src="@Url.Action("RenderImage", "Image", new { id = x.ImageId })" alt="@x.Name" style="height:300px;">
                                                         </a>
                                                         <div class="project-img-extra">
-                                                            <a class="link-detail" asp-controller="Artwork" asp-action="Details" asp-route-id="@x.Id"></a>
+                                                            <a class="link-detail" asp-controller="Museum" asp-action="Details" asp-route-id="@x.Id"></a>
                                                             <div class="project-img-extra-content">
                                                                 <h4>@x.Name</h4>
                                                                 <h5 style="color:#fff;">@x.Address </h5>

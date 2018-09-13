@@ -23,7 +23,7 @@ namespace artistry_Data.DAL
 
         public double AverageRating(int id)
         {
-            if (context.Reviews.Include(x => x.Museum).Where(x => x.Museum.UserId == id).Average(x => x.Rating) > 0)
+            if (context.Reviews.Include(x => x.Museum).Where(x => x.Museum.UserId == id).Count() > 0)
                 return context.Reviews.Include(x => x.Museum).Where(x => x.Museum.UserId == id).Average(x => x.Rating);
             return 0;
         }
@@ -33,6 +33,16 @@ namespace artistry_Data.DAL
             if (context.Reviews.Include(x => x.Museum).Where(x => x.Museum.UserId == id && x.Date.Month == DateTime.Now.Month).Count() > 0)
                 return context.Reviews.Include(x => x.Museum).Where(x => x.Museum.UserId == id && x.Date.Month == DateTime.Now.Month).Average(x => x.Rating);
             return 0;
+        }
+
+        public void AddReview(Reviews r)
+        {
+            context.Reviews.Add(r);
+        }
+
+        public void Save()
+        {
+            context.SaveChanges();
         }
 
         private bool disposed = false;

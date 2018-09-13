@@ -16,5 +16,8 @@ namespace artistry_Data.DAL
         double GetTotal(int id);
         double GetMonthTotal(int id);
         bool Scan(string code);
+
+        void Add(Tickets ticket);
+        void Save();
     }
 }

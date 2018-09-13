@@ -9,7 +9,7 @@ img {
 
 .sticky-wrapper.is-sticky #sp-header {
     background: rgb(68, 68, 68); /* IE */
-    background: rgba(0, 0, 0, 0.7); /* NON-IE */
+    background: rgba(0, 0, 0, 0.1); /* NON-IE */
     border-bottom: rgba(0, 0, 0, 0.7);
 }
 

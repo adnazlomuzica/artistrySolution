@@ -48,11 +48,11 @@ namespace artistry_Web.Helper
 
             Context db = (Context)filterContext.HttpContext.RequestServices.GetService(typeof(Context));
 
-            //if(_client && db.Clients.Any(c => c.UserId==u.Id))
-            //{
-            //    await next();
-            //    return;
-            //}
+            if (_client && db.Clients.Any(c => c.UserId == u.Id))
+            {
+                await next();
+                return;
+            }
 
             if (_museum && db.Museums.Any(m => m.UserId == u.Id))
             {
@@ -60,8 +60,8 @@ namespace artistry_Web.Helper
                 return;
             }
 
-            if (_admin && db.Administrators.Any(a => a.UserId == u.Id))
-            {
+            if (_admin && db.Administrators.Any(a => a.UserId == u.Id))            {
+
                 await next();
                 return;
             }

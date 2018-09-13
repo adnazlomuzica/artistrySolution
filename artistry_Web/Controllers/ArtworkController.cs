@@ -207,7 +207,7 @@ namespace artistry_Web.Controllers
         }
 
         [HttpGet]
-        public void Like(int id)
+        public IActionResult Like(int id)
         {
             if (Autentification.GetLoggedUser(HttpContext) != null)
             {
@@ -218,20 +218,28 @@ namespace artistry_Web.Controllers
 
                 likesRepository.InsertLike(like);
                 likesRepository.Save();
+                return RedirectToAction("Index", "Artwork");
 
             }
-
+            else
+                return RedirectToAction("Index", "Autentification");
         }
 
+      
         [HttpGet]
-        public void Unlike(int id)
+        public IActionResult Unlike(int id)
         {
             if (Autentification.GetLoggedUser(HttpContext) != null)
             {
                 Clients c = clientRepository.GetClientByUserId(Autentification.GetLoggedUser(HttpContext).Id);
                 likesRepository.DeleteLike(c.Id, id);
                 likesRepository.Save();
+
+                return RedirectToAction("Index", "Artwork");
             }
+
+            else
+                return RedirectToAction("Index", "Autentification");
         }
     }
 }

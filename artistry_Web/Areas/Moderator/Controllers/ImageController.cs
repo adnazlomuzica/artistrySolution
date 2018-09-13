@@ -65,7 +65,6 @@ namespace artistry_Web.Areas.Moderator.Controllers
         {
             Images model = new Images();
             model.MuseumId = id;
-
             
             return View(model);
         }

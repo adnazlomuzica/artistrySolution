@@ -88,9 +88,11 @@ namespace artistry_Web.Areas.Moderator.Controllers
         }
 
         [HttpGet("GetMuseum")]
-        public IActionResult GetMuseum(int id)
+        public IActionResult GetMuseum(int? id)
         {
-            Museums m = museumRepository.GetMuseum(id);
+            int userId = Autentification.GetLoggedUser(HttpContext).Id;
+            Museums m = museumRepository.GetMuseumByAccId(userId);
+            id = m.Id;
             MuseumVM model = new MuseumVM()
             {
                 Id = m.Id,

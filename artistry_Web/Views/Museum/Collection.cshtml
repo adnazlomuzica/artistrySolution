@@ -1,4 +1,4 @@
-﻿@model artistry_Web.ViewModels.ArtistVM
+﻿@model artistry_Web.ViewModels.CollectionVM
 
 <style>
     .liked {
@@ -42,7 +42,7 @@
                                         <li class="sp-menu-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
                                         <li class="sp-menu-item"><a asp-controller="Museum" asp-action="Index">Museums</a>
                                         <li class="sp-menu-item"><a asp-controller="Artwork" asp-action="Index">Artworks</a>
-                                        <li class="sp-menu-item current-item active"><a asp-controller="Artist" asp-action="Index">Artists</a></li>
+                                        <li class="sp-menu-item"><a asp-controller="Artist" asp-action="Index">Artists</a></li>
                                         <li class="sp-menu-item"><a asp-controller="News" asp-action="Index">News</a></li>
                                         <li class="sp-menu-item"><a asp-controller="Autentification" asp-action="Index">Login</a></li>
                                     </ul>
@@ -62,8 +62,8 @@
                                 <h2>Artist</h2>
                                 <ol class="breadcrumb">
                                     <li><a asp-controller="Home" asp-action="Index" class="pathway">Home</a></li>
-                                    <li><a asp-controller="Artist" asp-action="Index" class="pathway">Artist</a></li>
-                                    <li class="active">Details</li>
+                                    <li><a asp-controller="Museum" asp-action="Index" class="pathway">Museum</a></li>
+                                    <li class="active">Collection</li>
                                 </ol>
                             </div>
                         </div>
@@ -89,47 +89,22 @@
                                                     <img src="@Url.Action("RenderImage", "Image", new { id = Model.ImageId })" alt="" style="width:400px;height:300px;">
                                                 </div>
 
-                                                @if (Model.Images.Count() > 1)
-                                                {
-                                                    @foreach (var x in Model.Images)
-                                                    {
-                                                        <div class="item">
-                                                            <a href="@Url.Action("RenderImage", "Image", new { id = x.Id })" rel="group1"><img src="@Url.Action("RenderImage", "Image", new { id = x.Id })" alt="" style="width:400px;height:300px;"></a>
-                                                        </div>
-                                                    }
-                                                }
+                                               
                                             </div>
-                                            @if (Model.Images.Count() > 1)
-                                            {
-                                                <a class="carousel-left" href="#carousel-gallery-74" role="button" data-slide="prev">
-                                                    <span class="fa fa-angle-left" aria-hidden="true"></span>
-                                                    <span class="sr-only">Previous</span>
-                                                </a>
-                                                <a class="carousel-right" href="#carousel-gallery-74" role="button" data-slide="next">
-                                                    <span class="fa fa-angle-right" aria-hidden="true"></span>
-                                                    <span class="sr-only">Next</span>
-                                                </a>
-                                            }
+                                          
                                         </div>
                                     </div>
                                     <div class="col-md-8">
-                                        <div class="entry-header has-post-format" style="margin-top:120px;">
+                                        <div class="entry-header has-post-format" style="margin-top:20px;">
                                             <span class="post-format"><i class="fa fa-thumb-tack"></i></span>
                                             <h2 itemprop="name">
                                                 @Model.Name
                                             </h2>
-                                            <h4 itemprop="name">
-                                                @Model.Born - @Model.Died (@Model.Country)
-                                            </h4>
-                                            @foreach (var x in Model.Styles)
-                                            {
-                                                <h6>@x</h6>
-                                            }
                                         </div>
                                     </div>
                                 </div>
                                 <div itemprop="articleBody">
-                                    <p>@Model.Biography</p>
+                                    <p>@Model.Description</p>
                                 </div>
 
                                 <div>
@@ -141,23 +116,14 @@
                                                     <div class="isotope-item column-4" style="width: 285px; margin: 0px 0px 10px; position: relative; left: 0px; top: 0px;">
                                                         <div class="project-img">
                                                             <a asp-controller="Artwork" asp-action="Details" asp-route-id="@x.Id">
-                                                                <img src="@Url.Action("RenderImage", "Image", new { id = x.ImageId })" alt="@x.Name" style="height:300px;">
+                                                                @if (x.Image != null)
+                                                                {
+                                                                    <img src="@Url.Action("RenderImage", "Image", new { id = x.ImageId })" alt="@x.Name" style="height:300px;">
+                                                                }
                                                             </a>
                                                             <div class="project-img-extra">
                                                                 <a class="link-detail" asp-controller="Artwork" asp-action="Details" asp-route-id="@x.Id"></a>
                                                                 <div class="project-img-extra-content">
-                                                                    @if (x.Liked)
-                                                                    {
-                                                                        <a class="project-icon unlike" data-id="@x.Id" title="Unlike" id="unlike">
-                                                                            <i class="icon-heart5 liked" id="unlike-a" style="font-size:42px;"></i>
-                                                                        </a>
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        <a class="project-icon like" data-id="@x.Id" title="Like" id="like">
-                                                                            <i class="icon-heart5 unliked" id="like-a" style="font-size:42px;"></i>
-                                                                        </a>
-                                                                    }
                                                                     <h4>@x.Name</h4>
                                                                 </div>
                                                             </div>
