@@ -1,4 +1,5 @@
-﻿using artistry_Data.Models;
+﻿using artistry_Data.Dbo;
+using artistry_Data.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,11 @@ namespace artistry_Data.DAL
         public MuseumRepository(Context.Context context)
         {
             this.context = context;
+        }
+
+        public List<MuseumInfoVM> GetShortDescription()
+        {
+            return context.MuseumInfoVM.FromSql("sp_GetMuseumsClientShortList").ToList();
         }
 
         public List<Museums> GetMuseums()

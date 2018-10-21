@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using artistry_Data.Context;
 using artistry_Data.DAL;
+using artistry_Data.Dbo;
 using artistry_Data.Models;
 using artistry_Web.Helper;
 using artistry_Web.ViewModels;
@@ -51,8 +52,7 @@ namespace artistry_Web.Controllers
         [HttpGet]
         public IActionResult Index(int page = 1)
         {
-            List<Museums> list = museumRepository.GetMuseums();
-            List<MuseumVM> model = new List<MuseumVM>();
+            List<MuseumInfoVM> list = museumRepository.GetShortDescription();
 
             const int PageSize = 12;
             var count = list.Count();
@@ -78,20 +78,16 @@ namespace artistry_Web.Controllers
             ViewBag.Page = page;
             ViewBag.NextPage = page + 1;
 
-            foreach (Museums x in list)
+            foreach (MuseumInfoVM x in list)
             {
-                MuseumVM vm = new MuseumVM();
-                vm.Id = x.Id;
-                vm.Address = x.Address;
-                vm.Name = x.Name;
-                vm.Image = imageRepository.GetMuseumImage(x.Id);
-                if (vm.Image != null)
+                x.Image = imageRepository.GetMuseumImage(x.Id);
+                if (x.Image != null)
                 {
-                    vm.ImageId = vm.Image.Id;
+                    x.ImageId = x.Image.Id;
                 }
-                model.Add(vm);
+
             }
-            return View(model);
+            return View(list);
         }
 
         [HttpGet]
@@ -221,7 +217,7 @@ namespace artistry_Web.Controllers
             return View("Details", model);
         }
 
-       [HttpPost]
+        [HttpPost]
         public IActionResult Review(Reviews review)
         {
             if (Autentification.GetLoggedUser(HttpContext) != null)
@@ -278,7 +274,7 @@ namespace artistry_Web.Controllers
             model.Id = c.Id;
             model.MuseumId = c.MuseumId;
             model.Name = c.Name;
-            
+
             return View("Collection", model);
         }
 
@@ -286,11 +282,11 @@ namespace artistry_Web.Controllers
         [Authorization(false, false, true)]
         public IActionResult Charge(string stripeEmail, string stripeToken, Tickets ticket)
         {
-           
+
             var myCharge = new StripeChargeCreateOptions();
 
             // always set these properties
-            myCharge.Amount = (int)ticket.Total*100;
+            myCharge.Amount = (int)ticket.Total * 100;
             myCharge.Currency = "eur";
 
             myCharge.ReceiptEmail = stripeEmail;
@@ -324,7 +320,7 @@ namespace artistry_Web.Controllers
         {
             UserAccounts u = Autentification.GetLoggedUser(HttpContext);
 
-            if(u==null)
+            if (u == null)
                 return RedirectToAction("Index", "Autentification");
 
             else
@@ -339,14 +335,14 @@ namespace artistry_Web.Controllers
                 ticket.Seen = false;
                 ticket.Active = false;
                 ticket.Code = "";
-                ticket.ClientId =clientRepository.GetClientByUserId(u.Id).Id;
+                ticket.ClientId = clientRepository.GetClientByUserId(u.Id).Id;
                 ticket.Quantity = 1;
                 ticket.Total = type.Price;
 
                 ViewData["type"] = type.Type;
                 ViewData["total"] = ticket.Total * 100;
 
-               
+
                 return View("Buy", ticket);
             }
         }

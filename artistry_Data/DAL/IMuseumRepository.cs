@@ -1,4 +1,5 @@
-﻿using artistry_Data.Models;
+﻿using artistry_Data.Dbo;
+using artistry_Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,5 +20,8 @@ namespace artistry_Data.DAL
         void InsertMuseum(Museums museum);
         void UpdateMuseum(Museums museum);
         void Save();
+
+        List<MuseumInfoVM> GetShortDescription();
+
     }
 }

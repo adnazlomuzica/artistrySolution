@@ -14,6 +14,7 @@ namespace artistry_Data.DAL
         List<Artworks> GetArtworksByType(int id);
         List<Artworks> Search(string search, int? id);
         List<Artworks> GetTop6();
+        Artworks ScanTickets(int code);
         Artworks GetArtworkById(int id);
         void InsertArtwork(Artworks artwork);
         void UpdateArtwork(Artworks artwork);

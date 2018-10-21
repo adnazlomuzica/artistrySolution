@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using artistry_Data.Dbo;
 
 namespace artistry_Data.Context
 {
@@ -61,5 +63,8 @@ namespace artistry_Data.Context
         public DbSet<TicketTypes> TicketTypes { get; set; }
         public DbSet<UserAccounts> UserAccounts { get; set; }
         public DbSet<WorkingHours> WorkingHours { get; set; }
+
+
+        public DbSet<MuseumInfoVM> MuseumInfoVM { get; set; }
     }
 }

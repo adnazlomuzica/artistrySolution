@@ -44,6 +44,13 @@ namespace artistry_Data.DAL
 
         }
 
+        public Artworks ScanTickets(int code)
+        {
+            return context.Artworks.Where(x => x.AccessionNumber == code).Include(x=>x.Artist)
+                .Include(x=>x.ArtworkType).Include(x=>x.Material).Include(x=>x.Style).SingleOrDefault();
+        }
+        
+
         public Artworks GetArtworkById(int id)
         {
             return context.Artworks.Include(x => x.Artist).Include(x => x.ArtworkType).Include(x => x.Country).Include(x => x.Material).Include(x => x.Museum).Include(x => x.Style).Where(x=>x.Id==id).SingleOrDefault();

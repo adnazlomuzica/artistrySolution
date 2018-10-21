@@ -1,4 +1,4 @@
-﻿@model List<artistry_Web.ViewModels.MuseumVM>
+﻿@model List<artistry_Data.Dbo.MuseumInfoVM>
 
 @{
     string search = "";
@@ -86,9 +86,19 @@
                                             <div class="col-md-3">
                                                 <div class="isotope-item column-4" style="width: 285px;margin: 0px 0px 10px; position: relative; left: 0px; top: 0px;">
                                                     <div class="project-img">
-                                                        <a asp-controller="Museum" asp-action="Details" asp-route-id="@x.Id">
-                                                            <img src="@Url.Action("RenderImage", "Image", new { id = x.ImageId })" alt="@x.Name" style="height:300px;">
-                                                        </a>
+
+                                                        @if (x.ImageId > 0)
+                                                        {
+                                                            <a asp-controller="Museum" asp-action="Details" asp-route-id="@x.Id">
+                                                                <img src="@Url.Action("RenderImage", "Image", new { id = x.ImageId })" alt="@x.Name" style="height:300px;">
+                                                            </a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a asp-controller="Museum" asp-action="Details" asp-route-id="@x.Id">
+                                                                <img src="" alt="@x.Name" style="height:300px;">
+                                                            </a>
+                                                        }
                                                         <div class="project-img-extra">
                                                             <a class="link-detail" asp-controller="Museum" asp-action="Details" asp-route-id="@x.Id"></a>
                                                             <div class="project-img-extra-content">

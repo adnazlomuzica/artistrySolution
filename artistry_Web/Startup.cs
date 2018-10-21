@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using artistry_Data.Context;
+using artistry_Data.DAL;
 using artistry_Web.Helper;
 using artistry_Web.ViewModels;
 using Microsoft.AspNetCore.Builder;
@@ -39,7 +40,8 @@ namespace artistry_Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<Context>(options=>options.UseSqlServer("Data Source =localhost; Initial Catalog = DB_A3C9B6_artistry; Integrated Security=True;"));
+            services.AddDbContext<Context>(options=>options.UseSqlServer
+            ("Data Source=den1.mssql1.gear.host; Initial Catalog = artistry; Integrated Security=False;User ID=artistry;Password=Adna1!;"));
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -52,6 +54,8 @@ namespace artistry_Web
             services.AddMvc();
 
             services.AddScoped<LogFilter>();
+            services.AddScoped<IMuseumRepository, MuseumRepository>();
+
 
             services.AddDistributedMemoryCache();
             services.AddSession();
@@ -62,7 +66,7 @@ namespace artistry_Web
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             GlobalDiagnosticsContext.Set("configDir", "Nlog.log");
-            GlobalDiagnosticsContext.Set("connectionString", "Data Source = localhost; Initial Catalog = DB_A3C9B6_artistry; Integrated Security=true;");
+            GlobalDiagnosticsContext.Set("connectionString", "Data Source=den1.mssql1.gear.host; Initial Catalog = artistry; Integrated Security=False;User ID=artistry;Password=Adna1!;");
 
             StripeConfiguration.SetApiKey("sk_test_3RYpHa2Dsbr6Q3HDXb6KVfGj");
 
