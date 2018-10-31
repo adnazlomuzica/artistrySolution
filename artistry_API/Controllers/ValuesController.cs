@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace artistry_API.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
     public class ValuesController : ControllerBase
     {
         private readonly IArtworkRepository artworkRepository;
@@ -21,7 +20,7 @@ namespace artistry_API.Controllers
             this.artworkRepository = new ArtworkRepository(context);
         }
         // GET api/values
-        [HttpGet]
+        [HttpGet("{id}")]
         [Route("Get")]
         public IActionResult Get(int id)
         {
